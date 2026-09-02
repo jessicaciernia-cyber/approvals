@@ -112,6 +112,13 @@ header p{max-width:64ch;margin:0;color:var(--header-dim)}
   padding:9px 13px;border:1px solid var(--ink);background:var(--ink);color:var(--ground);
   cursor:pointer}
 .copy:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.wkhead{display:flex;align-items:baseline;gap:13px;margin:14px 0 -8px}
+.wkhead h3{font-family:var(--disp);font-size:19px;text-transform:uppercase;
+  letter-spacing:-.01em;margin:0}
+.wkhead span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted)}
+.f.wk i{display:block;font-style:normal;font-size:9.5px;opacity:.62;
+  margin-top:3px;letter-spacing:.06em}
 #empty{display:none;padding:44px 0;color:var(--muted)}
 footer{border-top:2px solid var(--ink);padding:22px 0 70px;color:var(--muted);font-size:13.5px}
 footer p{max-width:76ch;margin:0 0 9px}
@@ -184,16 +191,18 @@ footer p{max-width:76ch;margin:0 0 9px}
   <button class="f" data-f="stop" aria-pressed="false">Has a blocker</button>
   <button class="f" data-f="check" aria-pressed="false">Check a claim</button>
   <button class="f" data-f="ok" aria-pressed="false">Ready</button>
+  <button class="f wk" data-f="w1" aria-pressed="false">Week 1<i>Sep 2–4</i></button><button class="f wk" data-f="w2" aria-pressed="false">Week 2<i>Sep 7–11</i></button><button class="f wk" data-f="w3" aria-pressed="false">Week 3<i>Sep 14</i></button>
   <a class="f" href="../welliemd-posts/">The 40 single posts</a>
 </div></div>
 
 <main class="wrap">
-  <div class="decks" id="decks">
+  <div class="decks" id="decks"><div class="wkhead" data-week="1"><h3>Week 1</h3><span>Sep 2–4</span></div>
 <article class="deck" style="--accent:#FF4F3D" data-status="check"
-  data-fresh="y"
+  data-week="1"
   data-text="every telehealth brand you admire runs on the same four systems intake, providers, pharmacy, compliance, walked one at a time and closed on the stack being the brand.">
   <div class="head">
-    <div class="num">C9<span class="dt">7 slides</span></div>
+    <div class="num">C9<span class="dt">Wed Sep 2</span>
+      <span class="dt">7 slides</span></div>
     <div class="hgroup">
       <h2>Every telehealth brand you admire runs on the same four systems</h2>
       <div class="tags"><span class="tag check">Check a claim</span>
@@ -214,10 +223,11 @@ The stack is not the thing you sell. It is the thing that lets you sell anything
   </div>
 </article>
 <article class="deck" style="--accent:#FF4F3D" data-status="ok"
-  data-fresh="y"
+  data-week="1"
   data-text="5 signs you&#x27;re ready to launch a telehealth brand a readiness checklist aimed at practitioners with an audience. no numbers, no timeframes, nothing to source.">
   <div class="head">
-    <div class="num">C10<span class="dt">7 slides</span></div>
+    <div class="num">C10<span class="dt">Thu Sep 3</span>
+      <span class="dt">7 slides</span></div>
     <div class="hgroup">
       <h2>5 signs you&#x27;re ready to launch a telehealth brand</h2>
       <div class="tags"><span class="tag ok">Ready</span>
@@ -242,10 +252,11 @@ Nobody hands out healthcare brands. Founders take the step.">Copy caption</butto
   </div>
 </article>
 <article class="deck" style="--accent:#FFE800" data-status="check"
-  data-fresh="y"
+  data-week="1"
   data-text="why one-drug brands die: the retention math weight-loss-only against multi-protocol, argued on lifetime value rather than on clinical claims.">
   <div class="head">
-    <div class="num">C11<span class="dt">7 slides</span></div>
+    <div class="num">C11<span class="dt">Fri Sep 4</span>
+      <span class="dt">7 slides</span></div>
     <div class="hgroup">
       <h2>Why one-drug brands die: the retention math</h2>
       <div class="tags"><span class="tag check">Check a claim</span>
@@ -266,12 +277,13 @@ Smart brands use one door and many rooms. Weight care in front, hormones and lon
 
 Retention isn&#x27;t a marketing trick. It&#x27;s an infrastructure choice, made before the first patient arrives.">Copy caption</button></div></details></div>
   </div>
-</article>
+</article><div class="wkhead" data-week="2"><h3>Week 2</h3><span>Sep 7–11</span></div>
 <article class="deck" style="--accent:#FF4F3D" data-status="stop"
-  data-fresh="y"
+  data-week="2"
   data-text="you&#x27;ve made healthcare money for everyone but yourself aimed at nurses, pts, pas and health coaches. the strongest deck of the four and the one carrying a blocker.">
   <div class="head">
-    <div class="num">C12<span class="dt">7 slides</span></div>
+    <div class="num">C12<span class="dt">Mon Sep 7</span>
+      <span class="dt">7 slides</span></div>
     <div class="hgroup">
       <h2>You&#x27;ve made healthcare money for everyone but yourself</h2>
       <div class="tags"><span class="tag stop">One slide cannot ship</span>
@@ -294,10 +306,11 @@ The next wave of healthcare brands will be founded by people who&#x27;ve done th
   </div>
 </article>
 <article class="deck" style="--accent:#FF4F3D" data-status="stop"
-  data-fresh="y"
+  data-week="2"
   data-text="from idea to live patients: the actual timeline a week-by-week launch sequence, brand and offer through to first prescriptions. the timeline is the whole deck.">
   <div class="head">
-    <div class="num">C13<span class="dt">8 slides</span></div>
+    <div class="num">C13<span class="dt">Tue Sep 8</span>
+      <span class="dt">8 slides</span></div>
     <div class="hgroup">
       <h2>From idea to live patients: the actual timeline</h2>
       <div class="tags"><span class="tag stop">One slide cannot ship</span>
@@ -322,10 +335,11 @@ Most founders spend a year getting this order wrong before they learn the shortc
   </div>
 </article>
 <article class="deck" style="--accent:#FFE800" data-status="stop"
-  data-fresh="y"
+  data-week="2"
   data-text="peptides 101: one category, five customer types a primer on the peptide categories, each one framed as a product line rather than a treatment claim.">
   <div class="head">
-    <div class="num">C14<span class="dt">9 slides</span></div>
+    <div class="num">C14<span class="dt">Wed Sep 9</span>
+      <span class="dt">9 slides</span></div>
     <div class="hgroup">
       <h2>Peptides 101: one category, five customer types</h2>
       <div class="tags"><span class="tag stop">One slide cannot ship</span>
@@ -352,10 +366,11 @@ Five entry points. One record, one intake, one brand behind all of them. That is
   </div>
 </article>
 <article class="deck" style="--accent:#FFE800" data-status="check"
-  data-fresh="y"
+  data-week="2"
   data-text="pharmacies are running out of estrogen. why that&#x27;s a founder story. supply pressure in menopause care, argued toward direct pharmacy access as the defensible position.">
   <div class="head">
-    <div class="num">C15<span class="dt">7 slides</span></div>
+    <div class="num">C15<span class="dt">Thu Sep 10</span>
+      <span class="dt">7 slides</span></div>
     <div class="hgroup">
       <h2>Pharmacies are running out of estrogen. Why that&#x27;s a founder story.</h2>
       <div class="tags"><span class="tag check">Check a claim</span>
@@ -376,10 +391,11 @@ Menopause care needs more builders. Not more waiting lists.">Copy caption</butto
   </div>
 </article>
 <article class="deck" style="--accent:#FF4F3D" data-status="stop"
-  data-fresh="y"
+  data-week="2"
   data-text="5 myths keeping smart founders out of telehealth myth-and-answer format aimed at practitioners. two of the five answers restate claims the brief bars.">
   <div class="head">
-    <div class="num">C16<span class="dt">8 slides</span></div>
+    <div class="num">C16<span class="dt">Fri Sep 11</span>
+      <span class="dt">8 slides</span></div>
     <div class="hgroup">
       <h2>5 myths keeping smart founders out of telehealth</h2>
       <div class="tags"><span class="tag stop">One slide cannot ship</span>
@@ -404,12 +420,13 @@ Every myth survives because it used to be true. Infrastructure changed the rules
 
 The only real barrier left is starting.">Copy caption</button></div></details></div>
   </div>
-</article>
+</article><div class="wkhead" data-week="3"><h3>Week 3</h3><span>Sep 14</span></div>
 <article class="deck" style="--accent:#EC0F7E" data-status="check"
-  data-fresh="y"
+  data-week="3"
   data-text="how big an audience do you actually need to launch a health brand? answers the objection that stops most practitioners: that they need reach before they can start. argues trust over size.">
   <div class="head">
-    <div class="num">C17<span class="dt">7 slides</span></div>
+    <div class="num">C17<span class="dt">Mon Sep 14</span>
+      <span class="dt">7 slides</span></div>
     <div class="hgroup">
       <h2>How big an audience do you actually need to launch a health brand?</h2>
       <div class="tags"><span class="tag check">Check a claim</span>
@@ -464,11 +481,20 @@ Turn trust into a brand.">Copy caption</button></div></details></div>
     var term=q.value.trim().toLowerCase(), shown=0;
     decks.forEach(function(d){
       var okS = filter==='all' || d.dataset.status===filter ||
-                (filter==='new' && d.dataset.fresh==='y');
+                (filter.charAt(0)==='w' && d.dataset.week===filter.slice(1));
       var okT = !term || d.dataset.text.indexOf(term)>-1;
       var on = okS && okT;
       d.style.display = on ? '' : 'none';
       if(on) shown++;
+    });
+    // a week heading is only worth showing while a deck under it is
+    [].slice.call(wrapEl.querySelectorAll('.wkhead')).forEach(function(h){
+      var any=false, n=h.nextElementSibling;
+      while(n && !n.classList.contains('wkhead')){
+        if(n.classList.contains('deck') && n.style.display!=='none') any=true;
+        n=n.nextElementSibling;
+      }
+      h.style.display = any ? '' : 'none';
     });
     empty.style.display = shown ? 'none' : 'block';
   }
