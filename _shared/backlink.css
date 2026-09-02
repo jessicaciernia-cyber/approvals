@@ -1,0 +1,7 @@
+/* a way back to the index from any approval page */
+.backlink{position:fixed;left:14px;bottom:14px;z-index:99;font:500 12px/1
+  ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;
+  padding:10px 14px;border-radius:999px;text-decoration:none;
+  background:#12141C;color:#fff;box-shadow:0 2px 14px rgba(0,0,0,.28)}
+.backlink:hover{background:#000}
+@media print{.backlink{display:none}}

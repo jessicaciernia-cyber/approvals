@@ -1,0 +1,1635 @@
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../_shared/backlink.css">
+<title>Zen Jessica Content Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#FBFAFD; --surface:#FFFFFF; --deep:#1B2338;
+  --ink:#12141C; --body:#5A5A66; --muted:#757585; --line:#E4E2EF;
+  --accent:#6B54C6; --accent-soft:#EAE6F9; --on-accent:#FFFFFF;
+  --ok:#1F7A3D; --ok-soft:#E4F5E9;
+  --warn:#8A6415; --warn-soft:#FDF3D9;
+  --hold:#A32B22; --hold-soft:#FBE4E2;
+  --on-deep:#F2F0FA; --on-deep-muted:#A9B0C4;
+  --disp:"Plus Jakarta Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --radius:12px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#111320; --surface:#181B29; --deep:#0D0F19;
+    --ink:#F2F0FA; --body:#B9BACB; --muted:#8A8B9E; --line:#2B3050;
+    --accent:#A99BE4; --accent-soft:#272149; --on-accent:#12141C;
+    --ok:#7BD69B; --ok-soft:#16301F;
+    --warn:#E8B44A; --warn-soft:#33260C;
+    --hold:#F0938A; --hold-soft:#3A1815;
+    --on-deep:#F2F0FA; --on-deep-muted:#9AA2BA;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#111320; --surface:#181B29; --deep:#0D0F19;
+  --ink:#F2F0FA; --body:#B9BACB; --muted:#8A8B9E; --line:#2B3050;
+  --accent:#A99BE4; --accent-soft:#272149; --on-accent:#12141C;
+  --ok:#7BD69B; --ok-soft:#16301F;
+  --warn:#E8B44A; --warn-soft:#33260C;
+  --hold:#F0938A; --hold-soft:#3A1815;
+  --on-deep:#F2F0FA; --on-deep-muted:#9AA2BA;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--disp);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+header.top{background:var(--deep);color:var(--on-deep);padding:44px 0 38px}
+header.top h1{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.03em;
+  margin:10px 0 8px;text-wrap:balance}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:#A99BE4}
+header.top p{color:var(--on-deep-muted);max-width:62ch;margin:0}
+.counts{display:flex;flex-wrap:wrap;gap:28px;margin-top:26px;
+  border-top:1px solid #2B3450;padding-top:20px}
+.counts div{display:flex;flex-direction:column;gap:2px}
+.counts b{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.counts span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--on-deep-muted)}
+
+.open{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:34px 0 8px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px}
+.panel h2{font-size:13px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px;font-weight:500}
+.panel ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.panel li{font-size:14px;display:flex;flex-direction:column;gap:1px;
+  padding-left:13px;border-left:2px solid var(--accent-soft)}
+.panel li b{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--accent)}
+.panel li span{color:var(--body);font-size:13px}
+.panel p{margin:0;font-size:14px;color:var(--body)}
+
+.bar{position:sticky;top:0;z-index:5;background:var(--ground);
+  border-bottom:1px solid var(--line);padding:14px 0;margin-top:30px}
+.bar .wrap{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input[type=search]{flex:1;min-width:200px;font:inherit;font-size:15px;padding:9px 13px;
+  border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+input[type=search]:focus-visible,.f:focus-visible,.btn:focus-visible{outline:none;
+  box-shadow:0 0 0 3px var(--ground),0 0 0 5px var(--accent)}
+.f{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:8px 13px;border:1px solid var(--line);background:var(--surface);color:var(--body);
+  border-radius:999px;cursor:pointer}
+.f[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+.list{display:flex;flex-direction:column;gap:16px;padding:26px 0 60px}
+.post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;display:grid;gap:20px;
+  grid-template-columns:104px 148px minmax(0,1fr);align-items:start}
+.post.hidden{display:none}
+.post.is-done{opacity:.5}
+.when{display:flex;flex-direction:column;gap:5px;padding-top:2px}
+.date{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.02em;
+  color:var(--ink)}
+.ch{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted)}
+.cover{width:148px;height:185px;object-fit:cover;object-position:top;border-radius:8px;
+  border:1px solid var(--line);display:block}
+.meat{min-width:0}
+.topline{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:4px}
+.topline h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:0;
+  text-wrap:balance}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 9px;border-radius:6px;white-space:nowrap}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.hold{background:var(--hold-soft);color:var(--hold)}
+.chip.kw{background:var(--accent-soft);color:var(--accent)}
+.chapline{font-size:13px;color:var(--muted);margin:0 0 12px}
+.caption{background:var(--ground);border:1px solid var(--line);border-radius:8px;
+  padding:14px 16px;font-size:14.5px;line-height:1.6;color:var(--body);max-width:64ch}
+.caption p{margin:0}
+.caption p.gap{height:.7em}
+.caption .tags{margin-top:.9em;font-family:var(--mono);font-size:12px;color:var(--accent)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 13px;border:1px solid var(--line);background:var(--surface);color:var(--body);
+  border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{filter:brightness(.92);color:var(--on-accent)}
+.done{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer;margin-left:4px}
+.sheet{margin-top:14px}
+.sheet img{width:100%;border-radius:8px;border:1px solid var(--line);display:block}
+.files{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin:8px 0 0}
+.files code{font-family:var(--mono)}
+.empty{padding:40px 0;color:var(--muted);text-align:center;display:none}
+footer{border-top:1px solid var(--line);padding:26px 0 60px;color:var(--muted);font-size:13.5px}
+footer code{font-family:var(--mono);font-size:12.5px;color:var(--body)}
+footer p{max-width:70ch}
+@media (max-width:820px){
+  .post{grid-template-columns:1fr;gap:14px}
+  .cover{width:130px;height:163px}
+  .when{flex-direction:row;gap:12px;align-items:baseline}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="kicker">@therealzenjessica &nbsp;·&nbsp; September &amp; October 2026</div>
+    <h1>Content Hub</h1>
+    <p>Every built carousel, its caption, its hashtags and the day it runs. Copy a caption
+    straight from here; the image files are on this machine and in Drive.</p>
+    <div class="counts">
+      <div><b>24</b><span>carousels</span></div>
+      <div><b>192</b><span>slides</span></div>
+      <div><b>10</b><span>in September</span></div>
+      <div><b>14</b><span>in October</span></div>
+      <div><b>2</b><span>waiting on her</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="open">
+    <div class="panel">
+      <h2>Waiting on Jessica</h2>
+      <ul><li><b>Tue Oct 6</b> — There are two of us<span>Needs her sister&#x27;s yes</span></li><li><b>Mon Oct 12</b> — It was called Celly Smellys<span>Confirm the spelling</span></li></ul>
+    </div>
+    <div class="panel">
+      <h2>Keyword DMs that must exist</h2>
+      <ul><li><b>GETUP</b> — Tue Sep 8<span>The fall</span></li><li><b>SLIDE</b> — Fri Sep 18<span>A slider on my story</span></li><li><b>PLAIN</b> — Tue Sep 22<span>The walker</span></li><li><b>TWO</b> — Thu Oct 15<span>Two steps ahead</span></li></ul>
+    </div>
+    <div class="panel">
+      <h2>The November decision</h2>
+      <p>October empties the anchor shelf and spends the last unused beat in the episode.
+      November needs a new research round, the episode master for clips, a format other than
+      carousels, or a filming day. Worth choosing in week one of October.</p>
+    </div>
+  </section>
+</div>
+
+<div class="bar">
+  <div class="wrap">
+    <input type="search" id="q" placeholder="Search captions and titles" aria-label="Search posts">
+    <button class="f" data-f="all" aria-pressed="true">All</button>
+    <button class="f" data-f="sep" aria-pressed="false">September</button>
+    <button class="f" data-f="oct" aria-pressed="false">October</button>
+    <button class="f" data-f="hold" aria-pressed="false">Needs a yes</button>
+    <button class="f" data-f="kw" aria-pressed="false">Has a keyword</button>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="list" id="list">
+<article class="post" data-month="sep" data-status="ready"
+         data-kw="n"
+         data-text="the oven we slept in the kitchen with the oven open.
+
+that was the heat. there wasn&#x27;t other heat.
+
+when we couldn&#x27;t afford the laundromat my mom stayed up all night and sewed me and my twin sister brand new dresses to wear to school the next day.
+
+she made miracles out of nothing.
+
+people ask me where the resourcefulness comes from like it&#x27;s a personality trait.
+it isn&#x27;t. it&#x27;s inherited. my mother taught me there is always a way.
+
+so when a platform goes down, or a merchant account gets pulled, or an ad account gets restricted, and everybody&#x27;s panicking?
+
+there&#x27;s always a way. i learned that at six. we slept in the kitchen with the oven open.">
+  <div class="when">
+    <span class="date">Wed Sep 2</span>
+    <span class="ch">Ch 1</span>
+  </div>
+  <img class="cover" src="img/044b76f33582174f.jpg" alt="Cover slide: The oven" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>The oven</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">Little but mighty &nbsp;·&nbsp; 05:18 to 05:51</p>
+    <div class="caption" id="cap0"><p>We slept in the kitchen with the oven open.</p><p class="gap"></p><p>That was the heat. There wasn&#x27;t other heat.</p><p class="gap"></p><p>When we couldn&#x27;t afford the laundromat my mom stayed up all night and sewed me and my twin sister brand new dresses to wear to school the next day.</p><p class="gap"></p><p>She made miracles out of nothing.</p><p class="gap"></p><p>People ask me where the resourcefulness comes from like it&#x27;s a personality trait.</p><p>It isn&#x27;t. It&#x27;s inherited. My mother taught me there is always a way.</p><p class="gap"></p><p>So when a platform goes down, or a merchant account gets pulled, or an ad account gets restricted, and everybody&#x27;s panicking?</p><p class="gap"></p><p>There&#x27;s always a way. I learned that at six.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="We slept in the kitchen with the oven open.
+
+That was the heat. There wasn&#x27;t other heat.
+
+When we couldn&#x27;t afford the laundromat my mom stayed up all night and sewed me and my twin sister brand new dresses to wear to school the next day.
+
+She made miracles out of nothing.
+
+People ask me where the resourcefulness comes from like it&#x27;s a personality trait.
+It isn&#x27;t. It&#x27;s inherited. My mother taught me there is always a way.
+
+So when a platform goes down, or a merchant account gets pulled, or an ad account gets restricted, and everybody&#x27;s panicking?
+
+There&#x27;s always a way. I learned that at six.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet0">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch01a"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet0" hidden>
+      <img src="img/ac66b06d6f07e58d.jpg" alt="All eight slides of The oven" loading="lazy">
+      <p class="files"><code>zj-ch01a-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-02 Ch1 We slept in the kitchen with the oven open</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="ready"
+         data-kw="n"
+         data-text="they put me on a plane i was four when my mom put me and my twin sister on a plane by ourselves.
+
+she couldn&#x27;t afford a ticket to come with us.
+
+i still remember the man sitting next to us. he cut up apples and gave them to us the whole flight. i hope he knows.
+
+we lived with my grandparents in ohio for two years.
+
+for a long time i carried that as abandoned and not good enough.
+
+then i became a mother of two and i understood something i could not have understood at four. my parents did the best they could with what they had.
+
+i forgave them. that took longer than building any of these companies. i was four when my mom put us on a plane by ourselves.">
+  <div class="when">
+    <span class="date">Fri Sep 4</span>
+    <span class="ch">Ch 1</span>
+  </div>
+  <img class="cover" src="img/324588595ac76649.jpg" alt="Cover slide: They put me on a plane" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>They put me on a plane</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">Little but mighty &nbsp;·&nbsp; 04:00 to 04:46</p>
+    <div class="caption" id="cap1"><p>I was four when my mom put me and my twin sister on a plane by ourselves.</p><p class="gap"></p><p>She couldn&#x27;t afford a ticket to come with us.</p><p class="gap"></p><p>I still remember the man sitting next to us. He cut up apples and gave them to us the whole flight. I hope he knows.</p><p class="gap"></p><p>We lived with my grandparents in Ohio for two years.</p><p class="gap"></p><p>For a long time I carried that as abandoned and not good enough.</p><p class="gap"></p><p>Then I became a mother of two and I understood something I could not have understood at four. My parents did the best they could with what they had.</p><p class="gap"></p><p>I forgave them. That took longer than building any of these companies.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I was four when my mom put me and my twin sister on a plane by ourselves.
+
+She couldn&#x27;t afford a ticket to come with us.
+
+I still remember the man sitting next to us. He cut up apples and gave them to us the whole flight. I hope he knows.
+
+We lived with my grandparents in Ohio for two years.
+
+For a long time I carried that as abandoned and not good enough.
+
+Then I became a mother of two and I understood something I could not have understood at four. My parents did the best they could with what they had.
+
+I forgave them. That took longer than building any of these companies.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet1">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch01b"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet1" hidden>
+      <img src="img/c19835a9d271df05.jpg" alt="All eight slides of They put me on a plane" loading="lazy">
+      <p class="files"><code>zj-ch01b-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-04 Ch1 They put me on a plane by ourselves</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="dm"
+         data-kw="y"
+         data-text="the fall i fell at the state finals in front of my entire family.
+and i stayed down.
+
+not because i was hurt.
+because i had never fallen before, so i didn&#x27;t know i was allowed to get up.
+
+if i had gotten up i still would have been top six. i still would have been all american. i was on my hands and knees watching girls pass me.
+
+that one haunted me for most of my adult life.
+
+here&#x27;s the part nobody sees. the official walked me down the infield, and right at the finish line she put me back on the track and let me cross it.
+
+even if you don&#x27;t finish the race the right way, you can still finish the race.
+
+you are allowed to get up. somebody just has to tell you.
+
+comment &quot;getup&quot; and i&#x27;ll dm you the full episode 🏃‍♀️ i fell at the state finals in front of my entire family. and i stayed down.">
+  <div class="when">
+    <span class="date">Tue Sep 8</span>
+    <span class="ch">Ch 2</span>
+  </div>
+  <img class="cover" src="img/e7fcabd62a22e4ee.jpg" alt="Cover slide: The fall" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>The fall</h3>
+      <span class="chip warn">DM must exist first</span>
+      <span class="chip kw">GETUP</span>
+    </div>
+    <p class="chapline">I didn&#x27;t know I was allowed to get up &nbsp;·&nbsp; 07:15 to 08:40</p>
+    <div class="caption" id="cap2"><p>I fell at the state finals in front of my entire family.</p><p>And I stayed down.</p><p class="gap"></p><p>Not because I was hurt.</p><p>Because I had never fallen before, so I didn&#x27;t know I was allowed to get up.</p><p class="gap"></p><p>If I had gotten up I still would have been top six. I still would have been all American. I was on my hands and knees watching girls pass me.</p><p class="gap"></p><p>That one haunted me for most of my adult life.</p><p class="gap"></p><p>Here&#x27;s the part nobody sees. The official walked me down the infield, and right at the finish line she put me back on the track and let me cross it.</p><p class="gap"></p><p>Even if you don&#x27;t finish the race the right way, you can still finish the race.</p><p class="gap"></p><p>You are allowed to get up. Somebody just has to tell you.</p><p class="gap"></p><p>COMMENT &quot;GETUP&quot; and I&#x27;ll DM you the full episode 🏃‍♀️</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I fell at the state finals in front of my entire family.
+And I stayed down.
+
+Not because I was hurt.
+Because I had never fallen before, so I didn&#x27;t know I was allowed to get up.
+
+If I had gotten up I still would have been top six. I still would have been all American. I was on my hands and knees watching girls pass me.
+
+That one haunted me for most of my adult life.
+
+Here&#x27;s the part nobody sees. The official walked me down the infield, and right at the finish line she put me back on the track and let me cross it.
+
+Even if you don&#x27;t finish the race the right way, you can still finish the race.
+
+You are allowed to get up. Somebody just has to tell you.
+
+COMMENT &quot;GETUP&quot; and I&#x27;ll DM you the full episode 🏃‍♀️
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet2">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch02a"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet2" hidden>
+      <img src="img/236d409784d1fdaa.jpg" alt="All eight slides of The fall" loading="lazy">
+      <p class="files"><code>zj-ch02a-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-08 Ch2 I fell at the state finals - GETUP</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="ready"
+         data-kw="n"
+         data-text="five years to pay it off my first business failed.
+
+flip phone era. i looked at my screen and it was covered in makeup and i thought somebody should make a wipe for this.
+
+nobody had. so i did.
+
+then i found out that having product is not the same as having a business. no marketing plan. no way to sell it. i liquidated the whole thing to two stores for pennies on the dollar.
+
+five years to pay the manufacturer back. five.
+
+and here&#x27;s what i got for my money.
+
+proof that a thing in my head could become a thing in the world.
+
+that receipt is why i can look at a founder in month two and tell them it isn&#x27;t over. my first business failed and it took me five years to pay it off.">
+  <div class="when">
+    <span class="date">Thu Sep 10</span>
+    <span class="ch">Ch 3</span>
+  </div>
+  <img class="cover" src="img/5c91faf7545d7bac.jpg" alt="Cover slide: Five years to pay it off" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Five years to pay it off</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">The failure that paid &nbsp;·&nbsp; 09:04 to 10:03</p>
+    <div class="caption" id="cap3"><p>My first business failed.</p><p class="gap"></p><p>Flip phone era. I looked at my screen and it was covered in makeup and I thought somebody should make a wipe for this.</p><p class="gap"></p><p>Nobody had. So I did.</p><p class="gap"></p><p>Then I found out that having product is not the same as having a business. No marketing plan. No way to sell it. I liquidated the whole thing to two stores for pennies on the dollar.</p><p class="gap"></p><p>Five years to pay the manufacturer back. Five.</p><p class="gap"></p><p>And here&#x27;s what I got for my money.</p><p class="gap"></p><p>Proof that a thing in my head could become a thing in the world.</p><p class="gap"></p><p>That receipt is why I can look at a founder in month two and tell them it isn&#x27;t over.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="My first business failed.
+
+Flip phone era. I looked at my screen and it was covered in makeup and I thought somebody should make a wipe for this.
+
+Nobody had. So I did.
+
+Then I found out that having product is not the same as having a business. No marketing plan. No way to sell it. I liquidated the whole thing to two stores for pennies on the dollar.
+
+Five years to pay the manufacturer back. Five.
+
+And here&#x27;s what I got for my money.
+
+Proof that a thing in my head could become a thing in the world.
+
+That receipt is why I can look at a founder in month two and tell them it isn&#x27;t over.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet3">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch03a"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet3" hidden>
+      <img src="img/d22414a02e822e4c.jpg" alt="All eight slides of Five years to pay it off" loading="lazy">
+      <p class="files"><code>zj-ch03a-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-10 Ch3 Five years to pay it off</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="ready"
+         data-kw="n"
+         data-text="the manufacturer who taught me i had a house full of product and no idea how to ship it.
+
+not &quot;no logistics strategy.&quot; i mean i did not know how shipping worked.
+
+the person who taught me was a local manufacturer who agreed to drop ship for me. he walked me through things i did not know i did not know.
+
+he was not my mentor. he was a vendor. he had no reason to do that.
+
+i think about him every time somebody tells me they are waiting to find a mentor.
+
+your education is already in the room. it&#x27;s the pharmacy rep. it&#x27;s whoever runs your merchant account. it&#x27;s the person who answers when you call support at 9pm.
+
+ask them the question you think is too dumb to ask. i did that for years.
+
+who taught you something they were never paid to teach you? say their name below. my first business education came from a manufacturer who had no reason to teach me anything.">
+  <div class="when">
+    <span class="date">Mon Sep 14</span>
+    <span class="ch">Ch 3</span>
+  </div>
+  <img class="cover" src="img/b8b02169e6ebb265.jpg" alt="Cover slide: The manufacturer who taught me" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>The manufacturer who taught me</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">The failure that paid &nbsp;·&nbsp; 09:44</p>
+    <div class="caption" id="cap4"><p>I had a house full of product and no idea how to ship it.</p><p class="gap"></p><p>Not &quot;no logistics strategy.&quot; I mean I did not know how shipping worked.</p><p class="gap"></p><p>The person who taught me was a local manufacturer who agreed to drop ship for me. He walked me through things I did not know I did not know.</p><p class="gap"></p><p>He was not my mentor. He was a vendor. He had no reason to do that.</p><p class="gap"></p><p>I think about him every time somebody tells me they are waiting to find a mentor.</p><p class="gap"></p><p>Your education is already in the room. It&#x27;s the pharmacy rep. It&#x27;s whoever runs your merchant account. It&#x27;s the person who answers when you call support at 9pm.</p><p class="gap"></p><p>Ask them the question you think is too dumb to ask. I did that for years.</p><p class="gap"></p><p>Who taught you something they were never paid to teach you? Say their name below.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I had a house full of product and no idea how to ship it.
+
+Not &quot;no logistics strategy.&quot; I mean I did not know how shipping worked.
+
+The person who taught me was a local manufacturer who agreed to drop ship for me. He walked me through things I did not know I did not know.
+
+He was not my mentor. He was a vendor. He had no reason to do that.
+
+I think about him every time somebody tells me they are waiting to find a mentor.
+
+Your education is already in the room. It&#x27;s the pharmacy rep. It&#x27;s whoever runs your merchant account. It&#x27;s the person who answers when you call support at 9pm.
+
+Ask them the question you think is too dumb to ask. I did that for years.
+
+Who taught you something they were never paid to teach you? Say their name below.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet4">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch03b"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet4" hidden>
+      <img src="img/29fa57c5bcc88a22.jpg" alt="All eight slides of The manufacturer who taught me" loading="lazy">
+      <p class="files"><code>zj-ch03b-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-14 Ch3 The manufacturer who taught me</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="ready"
+         data-kw="n"
+         data-text="kickstart was an accident kickstart social was an accident.
+
+a nurse practitioner in georgia said &quot;i hate doing social media.&quot;
+i said &quot;that&#x27;s what i do for a living.&quot;
+
+it was not what i did for a living.
+
+she was my first client.
+
+then a dentist in santa monica asked me to find her an influencer and i told her the truth, which is that she didn&#x27;t need an influencer. she needed better content.
+
+two women. 90 days. 30 nurse practitioners.
+
+first website we sold for 400 bucks. then 600. then a thousand.
+
+nobody hands you a business. you notice one.
+
+what did you say yes to before you were ready? tell me below 👇 i never woke up and said i want a marketing agency.">
+  <div class="when">
+    <span class="date">Wed Sep 16</span>
+    <span class="ch">Ch 4</span>
+  </div>
+  <img class="cover" src="img/3b99ae3da548e828.jpg" alt="Cover slide: Kickstart was an accident" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Kickstart was an accident</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">Two steps ahead &nbsp;·&nbsp; 12:32 to 14:40</p>
+    <div class="caption" id="cap5"><p>Kickstart Social was an accident.</p><p class="gap"></p><p>A nurse practitioner in Georgia said &quot;I hate doing social media.&quot;</p><p>I said &quot;that&#x27;s what I do for a living.&quot;</p><p class="gap"></p><p>It was not what I did for a living.</p><p class="gap"></p><p>She was my first client.</p><p class="gap"></p><p>Then a dentist in Santa Monica asked me to find her an influencer and I told her the truth, which is that she didn&#x27;t need an influencer. She needed better content.</p><p class="gap"></p><p>Two women. 90 days. 30 nurse practitioners.</p><p class="gap"></p><p>First website we sold for 400 bucks. Then 600. Then a thousand.</p><p class="gap"></p><p>Nobody hands you a business. You notice one.</p><p class="gap"></p><p>What did you say yes to before you were ready? Tell me below 👇</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="Kickstart Social was an accident.
+
+A nurse practitioner in Georgia said &quot;I hate doing social media.&quot;
+I said &quot;that&#x27;s what I do for a living.&quot;
+
+It was not what I did for a living.
+
+She was my first client.
+
+Then a dentist in Santa Monica asked me to find her an influencer and I told her the truth, which is that she didn&#x27;t need an influencer. She needed better content.
+
+Two women. 90 days. 30 nurse practitioners.
+
+First website we sold for 400 bucks. Then 600. Then a thousand.
+
+Nobody hands you a business. You notice one.
+
+What did you say yes to before you were ready? Tell me below 👇
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet5">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch04a"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet5" hidden>
+      <img src="img/6d9564759f166b85.jpg" alt="All eight slides of Kickstart was an accident" loading="lazy">
+      <p class="files"><code>zj-ch04a-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-16 Ch4 Kickstart Social was an accident</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="dm"
+         data-kw="y"
+         data-text="a slider on my story my first client came from a sticker on my instagram story.
+
+it said &quot;slide here to learn how to be an influencer.&quot;
+
+that&#x27;s it. that&#x27;s the funnel.
+
+she paid me $1,600 a month and that was the moment it went from a hobby to a life.
+
+everybody is waiting on a website. a brand kit. a logo. a niche statement.
+
+i had a slider.
+
+comment &quot;slide&quot; and i&#x27;ll dm you exactly how i&#x27;d set it up today. ">
+  <div class="when">
+    <span class="date">Fri Sep 18</span>
+    <span class="ch">Ch 4</span>
+  </div>
+  <img class="cover" src="img/74a353aa52e5bbfa.jpg" alt="Cover slide: A slider on my story" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>A slider on my story</h3>
+      <span class="chip warn">DM must exist first</span>
+      <span class="chip kw">SLIDE</span>
+    </div>
+    <p class="chapline">Two steps ahead &nbsp;·&nbsp; 11:58 to 12:12</p>
+    <div class="caption" id="cap6"><p>My first client came from a sticker on my Instagram story.</p><p class="gap"></p><p>It said &quot;slide here to learn how to be an influencer.&quot;</p><p class="gap"></p><p>That&#x27;s it. That&#x27;s the funnel.</p><p class="gap"></p><p>She paid me $1,600 a month and that was the moment it went from a hobby to a life.</p><p class="gap"></p><p>Everybody is waiting on a website. A brand kit. A logo. A niche statement.</p><p class="gap"></p><p>I had a slider.</p><p class="gap"></p><p>COMMENT &quot;SLIDE&quot; and I&#x27;ll DM you exactly how I&#x27;d set it up today.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="My first client came from a sticker on my Instagram story.
+
+It said &quot;slide here to learn how to be an influencer.&quot;
+
+That&#x27;s it. That&#x27;s the funnel.
+
+She paid me $1,600 a month and that was the moment it went from a hobby to a life.
+
+Everybody is waiting on a website. A brand kit. A logo. A niche statement.
+
+I had a slider.
+
+COMMENT &quot;SLIDE&quot; and I&#x27;ll DM you exactly how I&#x27;d set it up today.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet6">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch04c"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet6" hidden>
+      <img src="img/ba836011b597362d.jpg" alt="All eight slides of A slider on my story" loading="lazy">
+      <p class="files"><code>zj-ch04c-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-18 Ch4 A slider on my story - SLIDE</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="dm"
+         data-kw="y"
+         data-text="the walker i was eight when my grandfather had his heart attacks.
+
+i was in the room when the doctor came in and said a wall of words none of us understood. not one of us. and nobody stopped to fix that.
+
+i made three promises that day. help people. go into healthcare. and make sure anybody i talk to actually understands what i said.
+
+here&#x27;s what that looks like 26 years into being a pt.
+
+i can say: your hamstring tightness is contributing to decreased step length in your gait, which is altering your multidirectional stability.
+
+or i can say: stay closer to your walker and you won&#x27;t fall.
+
+same message. completely different delivery.
+
+your website is doing the first one. that&#x27;s why it isn&#x27;t converting.
+
+comment &quot;plain&quot; and i&#x27;ll dm you the rewrite checklist. ">
+  <div class="when">
+    <span class="date">Tue Sep 22</span>
+    <span class="ch">Ch 5</span>
+  </div>
+  <img class="cover" src="img/0891391c38d2aaca.jpg" alt="Cover slide: The walker" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>The walker</h3>
+      <span class="chip warn">DM must exist first</span>
+      <span class="chip kw">PLAIN</span>
+    </div>
+    <p class="chapline">The woman running it now &nbsp;·&nbsp; 18:03 to 18:44</p>
+    <div class="caption" id="cap7"><p>I was eight when my grandfather had his heart attacks.</p><p class="gap"></p><p>I was in the room when the doctor came in and said a wall of words none of us understood. Not one of us. And nobody stopped to fix that.</p><p class="gap"></p><p>I made three promises that day. Help people. Go into healthcare. And make sure anybody I talk to actually understands what I said.</p><p class="gap"></p><p>Here&#x27;s what that looks like 26 years into being a PT.</p><p class="gap"></p><p>I can say: your hamstring tightness is contributing to decreased step length in your gait, which is altering your multidirectional stability.</p><p class="gap"></p><p>Or I can say: stay closer to your walker and you won&#x27;t fall.</p><p class="gap"></p><p>Same message. Completely different delivery.</p><p class="gap"></p><p>Your website is doing the first one. That&#x27;s why it isn&#x27;t converting.</p><p class="gap"></p><p>COMMENT &quot;PLAIN&quot; and I&#x27;ll DM you the rewrite checklist.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I was eight when my grandfather had his heart attacks.
+
+I was in the room when the doctor came in and said a wall of words none of us understood. Not one of us. And nobody stopped to fix that.
+
+I made three promises that day. Help people. Go into healthcare. And make sure anybody I talk to actually understands what I said.
+
+Here&#x27;s what that looks like 26 years into being a PT.
+
+I can say: your hamstring tightness is contributing to decreased step length in your gait, which is altering your multidirectional stability.
+
+Or I can say: stay closer to your walker and you won&#x27;t fall.
+
+Same message. Completely different delivery.
+
+Your website is doing the first one. That&#x27;s why it isn&#x27;t converting.
+
+COMMENT &quot;PLAIN&quot; and I&#x27;ll DM you the rewrite checklist.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet7">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch05b"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet7" hidden>
+      <img src="img/35705c9ef847e793.jpg" alt="All eight slides of The walker" loading="lazy">
+      <p class="files"><code>zj-ch05b-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-22 Ch5 The walker line - PLAIN</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="ready"
+         data-kw="n"
+         data-text="do not apologize for your kids stop apologizing for your kids being loud on our zoom.
+
+i get on calls with nurse practitioners and women founders all day and every single one of them says &quot;i&#x27;m so sorry&quot; the second a kid walks in.
+
+don&#x27;t. ever.
+
+i&#x27;ve had women tell me that meant a lot, because they thought they had to keep their kids behind a closed door to be taken seriously.
+
+being a mom is one of my superpowers. it&#x27;s the superpower of most of the women i work with.
+
+you are not a professional who happens to have children. you are running two companies.
+
+tag the mom who needs to hear this 💕 stop apologizing for your kids being loud on our zoom.">
+  <div class="when">
+    <span class="date">Thu Sep 24</span>
+    <span class="ch">Ch 5</span>
+  </div>
+  <img class="cover" src="img/f139dc17ad2571c5.jpg" alt="Cover slide: Do not apologize for your kids" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Do not apologize for your kids</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">The woman running it now &nbsp;·&nbsp; 20:41 to 20:57</p>
+    <div class="caption" id="cap8"><p>Stop apologizing for your kids being loud on our Zoom.</p><p class="gap"></p><p>I get on calls with nurse practitioners and women founders all day and every single one of them says &quot;I&#x27;m so sorry&quot; the second a kid walks in.</p><p class="gap"></p><p>Don&#x27;t. Ever.</p><p class="gap"></p><p>I&#x27;ve had women tell me that meant a lot, because they thought they had to keep their kids behind a closed door to be taken seriously.</p><p class="gap"></p><p>Being a mom is one of my superpowers. It&#x27;s the superpower of most of the women I work with.</p><p class="gap"></p><p>You are not a professional who happens to have children. You are running two companies.</p><p class="gap"></p><p>Tag the mom who needs to hear this 💕</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="Stop apologizing for your kids being loud on our Zoom.
+
+I get on calls with nurse practitioners and women founders all day and every single one of them says &quot;I&#x27;m so sorry&quot; the second a kid walks in.
+
+Don&#x27;t. Ever.
+
+I&#x27;ve had women tell me that meant a lot, because they thought they had to keep their kids behind a closed door to be taken seriously.
+
+Being a mom is one of my superpowers. It&#x27;s the superpower of most of the women I work with.
+
+You are not a professional who happens to have children. You are running two companies.
+
+Tag the mom who needs to hear this 💕
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet8">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch05c"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet8" hidden>
+      <img src="img/30c4ea032ae84e98.jpg" alt="All eight slides of Do not apologize for your kids" loading="lazy">
+      <p class="files"><code>zj-ch05c-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-24 Ch5 Stop apologising for your kids</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="sep" data-status="ready"
+         data-kw="n"
+         data-text="i had her six weeks before i turned 49 i had my son at 43.
+i had my daughter six weeks before my 49th birthday.
+
+do i feel guilty? constantly. right now, probably.
+
+i still walked away from a full time director of rehab job and went all in on this, because half in was making me worse at both.
+
+here&#x27;s the trade i made.
+
+when i&#x27;m with my kids, i&#x27;m with my kids. fully. present. not answering dms under the table.
+
+and when they&#x27;re older, i want them to see me win. not the money. the drive. what vision plus work actually turns into.
+
+fifty this year and just getting started 🫡 i had my son at 43 and my daughter six weeks before my 49th birthday.">
+  <div class="when">
+    <span class="date">Mon Sep 28</span>
+    <span class="ch">Ch 5</span>
+  </div>
+  <img class="cover" src="img/1cb1ff4d761eb185.jpg" alt="Cover slide: I had her six weeks before I turned 49" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>I had her six weeks before I turned 49</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">The woman running it now &nbsp;·&nbsp; 19:28 to 20:21</p>
+    <div class="caption" id="cap9"><p>I had my son at 43.</p><p>I had my daughter six weeks before my 49th birthday.</p><p class="gap"></p><p>Do I feel guilty? Constantly. Right now, probably.</p><p class="gap"></p><p>I still walked away from a full time director of rehab job and went all in on this, because half in was making me worse at both.</p><p class="gap"></p><p>Here&#x27;s the trade I made.</p><p class="gap"></p><p>When I&#x27;m with my kids, I&#x27;m with my kids. Fully. Present. Not answering DMs under the table.</p><p class="gap"></p><p>And when they&#x27;re older, I want them to see me win. Not the money. The drive. What vision plus work actually turns into.</p><p class="gap"></p><p>Fifty this year and just getting started 🫡</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I had my son at 43.
+I had my daughter six weeks before my 49th birthday.
+
+Do I feel guilty? Constantly. Right now, probably.
+
+I still walked away from a full time director of rehab job and went all in on this, because half in was making me worse at both.
+
+Here&#x27;s the trade I made.
+
+When I&#x27;m with my kids, I&#x27;m with my kids. Fully. Present. Not answering DMs under the table.
+
+And when they&#x27;re older, I want them to see me win. Not the money. The drive. What vision plus work actually turns into.
+
+Fifty this year and just getting started 🫡
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet9">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-ch05a"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet9" hidden>
+      <img src="img/5a1ab79457eb8377.jpg" alt="All eight slides of I had her six weeks before I turned 49" loading="lazy">
+      <p class="files"><code>zj-ch05a-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-09-28 Ch5 Six weeks before I turned 49</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="little but mighty coach harvey brown.
+
+i did not aspire to run track. i don&#x27;t think i even knew what track was. i walked into that gym for no reason i can explain.
+
+and for four years that man said the same six words to me.
+
+jesse, you&#x27;re little, but you&#x27;re mighty.
+
+i&#x27;m 5 foot nothing and i have launched national telehealth brands for founders in almost every state.
+
+somebody said something to you once that you&#x27;re still running on. say their name below. ">
+  <div class="when">
+    <span class="date">Thu Oct 1</span>
+    <span class="ch">Ch 1</span>
+  </div>
+  <img class="cover" src="img/0416bde563d6d24c.jpg" alt="Cover slide: Little but mighty" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Little but mighty</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">Little but mighty &nbsp;·&nbsp; 06:28</p>
+    <div class="caption" id="cap10"><p>Coach Harvey Brown.</p><p class="gap"></p><p>I did not aspire to run track. I don&#x27;t think I even knew what track was. I walked into that gym for no reason I can explain.</p><p class="gap"></p><p>And for four years that man said the same six words to me.</p><p class="gap"></p><p>Jesse, you&#x27;re little, but you&#x27;re mighty.</p><p class="gap"></p><p>I&#x27;m 5 foot nothing and I have launched national telehealth brands for founders in almost every state.</p><p class="gap"></p><p>Somebody said something to you once that you&#x27;re still running on. Say their name below.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="Coach Harvey Brown.
+
+I did not aspire to run track. I don&#x27;t think I even knew what track was. I walked into that gym for no reason I can explain.
+
+And for four years that man said the same six words to me.
+
+Jesse, you&#x27;re little, but you&#x27;re mighty.
+
+I&#x27;m 5 foot nothing and I have launched national telehealth brands for founders in almost every state.
+
+Somebody said something to you once that you&#x27;re still running on. Say their name below.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet10">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s11-mighty"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet10" hidden>
+      <img src="img/7977520ad466753a.jpg" alt="All eight slides of Little but mighty" loading="lazy">
+      <p class="files"><code>zj-oct-s11-mighty-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-01 Ch1 Little but mighty</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="two years at my grandparents&#x27; after the plane, my twin sister and i lived with my grandparents in ohio for two years. four to six years old.
+
+my grandfather was a devout baptist. my grandmother was a teacher&#x27;s aide.
+
+there was a lot of structure and there was a lot of love, and i have amazing memories of that house.
+
+i spent years framing those two years as the time i was given away.
+
+they were also the two years somebody put a floor under me.
+
+both things are true and it took me most of my adult life to hold them at the same time.
+
+if somebody steadied you when you were small, say their name below. the two years i was sent away are the two i&#x27;d keep.">
+  <div class="when">
+    <span class="date">Fri Oct 2</span>
+    <span class="ch">Ch 1</span>
+  </div>
+  <img class="cover" src="img/71d655ffcca6cd9e.jpg" alt="Cover slide: Two years at my grandparents&#x27;" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Two years at my grandparents&#x27;</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">Little but mighty &nbsp;·&nbsp; 04:46 to 05:16</p>
+    <div class="caption" id="cap11"><p>After the plane, my twin sister and I lived with my grandparents in Ohio for two years. Four to six years old.</p><p class="gap"></p><p>My grandfather was a devout Baptist. My grandmother was a teacher&#x27;s aide.</p><p class="gap"></p><p>There was a lot of structure and there was a lot of love, and I have amazing memories of that house.</p><p class="gap"></p><p>I spent years framing those two years as the time I was given away.</p><p class="gap"></p><p>They were also the two years somebody put a floor under me.</p><p class="gap"></p><p>Both things are true and it took me most of my adult life to hold them at the same time.</p><p class="gap"></p><p>If somebody steadied you when you were small, say their name below.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="After the plane, my twin sister and I lived with my grandparents in Ohio for two years. Four to six years old.
+
+My grandfather was a devout Baptist. My grandmother was a teacher&#x27;s aide.
+
+There was a lot of structure and there was a lot of love, and I have amazing memories of that house.
+
+I spent years framing those two years as the time I was given away.
+
+They were also the two years somebody put a floor under me.
+
+Both things are true and it took me most of my adult life to hold them at the same time.
+
+If somebody steadied you when you were small, say their name below.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet11">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s23-grandparents"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet11" hidden>
+      <img src="img/b7f52255fee2ac70.jpg" alt="All eight slides of Two years at my grandparents&#x27;" loading="lazy">
+      <p class="files"><code>zj-oct-s23-grandparents-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-02 Ch1 Two years at my grandparents</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="consent"
+         data-kw="n"
+         data-text="there are two of us i have a twin sister.
+
+every hard thing in this story has a second person standing in it that you don&#x27;t see.
+
+two of us on the plane. two of us at my grandparents&#x27;. two dresses sewn overnight, not one.
+
+i have never in my life had to be the only one something was happening to.
+
+i think that is most of where the nerve comes from. not courage. company.
+
+if you are building something alone right now, that is the part to fix first. not the funnel.
+
+who is the second person in your story? tell me below. everything in my childhood, there were two of us for.">
+  <div class="when">
+    <span class="date">Tue Oct 6</span>
+    <span class="ch">Ch 1</span>
+  </div>
+  <img class="cover" src="img/d5aec9cecc4e8f3f.jpg" alt="Cover slide: There are two of us" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>There are two of us</h3>
+      <span class="chip hold">Needs her sister&#x27;s yes</span>
+      
+    </div>
+    <p class="chapline">Little but mighty &nbsp;·&nbsp; 03:04, 04:00, 05:37</p>
+    <div class="caption" id="cap12"><p>I have a twin sister.</p><p class="gap"></p><p>Every hard thing in this story has a second person standing in it that you don&#x27;t see.</p><p class="gap"></p><p>Two of us on the plane. Two of us at my grandparents&#x27;. Two dresses sewn overnight, not one.</p><p class="gap"></p><p>I have never in my life had to be the only one something was happening to.</p><p class="gap"></p><p>I think that is most of where the nerve comes from. Not courage. Company.</p><p class="gap"></p><p>If you are building something alone right now, that is the part to fix first. Not the funnel.</p><p class="gap"></p><p>Who is the second person in your story? Tell me below.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I have a twin sister.
+
+Every hard thing in this story has a second person standing in it that you don&#x27;t see.
+
+Two of us on the plane. Two of us at my grandparents&#x27;. Two dresses sewn overnight, not one.
+
+I have never in my life had to be the only one something was happening to.
+
+I think that is most of where the nerve comes from. Not courage. Company.
+
+If you are building something alone right now, that is the part to fix first. Not the funnel.
+
+Who is the second person in your story? Tell me below.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet12">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s24-twin"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet12" hidden>
+      <img src="img/f4e3f0896c5cbf8d.jpg" alt="All eight slides of There are two of us" loading="lazy">
+      <p class="files"><code>zj-oct-s24-twin-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-06 Ch1 There are two of us - NEEDS CONSENT</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="i walked into that gym for no reason track and field was nothing i aspired to do.
+
+i don&#x27;t think i even knew what track and field was. i have no idea what possessed me to walk into that gym and try out.
+
+i went. and a man named coach harvey brown spent four years telling me the same six words.
+
+jesse, you&#x27;re little, but you&#x27;re mighty.
+
+everything i know about myself under pressure came out of a sport i joined for no reason at all, from a coach whose name i will say out loud for the rest of my life.
+
+kickstart social was an accident too. so was the first client. so was the business partner.
+
+i have started to think the accidents are the plan.
+
+what did you walk into by accident that ended up mattering? tell me below. the thing that shaped me most, i walked into by accident.">
+  <div class="when">
+    <span class="date">Wed Oct 7</span>
+    <span class="ch">Ch 2</span>
+  </div>
+  <img class="cover" src="img/ea36c91648435211.jpg" alt="Cover slide: I walked into that gym for no reason" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>I walked into that gym for no reason</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">I didn&#x27;t know I was allowed to get up &nbsp;·&nbsp; 06:10 to 06:28</p>
+    <div class="caption" id="cap13"><p>Track and field was nothing I aspired to do.</p><p class="gap"></p><p>I don&#x27;t think I even knew what track and field was. I have no idea what possessed me to walk into that gym and try out.</p><p class="gap"></p><p>I went. And a man named Coach Harvey Brown spent four years telling me the same six words.</p><p class="gap"></p><p>Jesse, you&#x27;re little, but you&#x27;re mighty.</p><p class="gap"></p><p>Everything I know about myself under pressure came out of a sport I joined for no reason at all, from a coach whose name I will say out loud for the rest of my life.</p><p class="gap"></p><p>Kickstart Social was an accident too. So was the first client. So was the business partner.</p><p class="gap"></p><p>I have started to think the accidents are the plan.</p><p class="gap"></p><p>What did you walk into by accident that ended up mattering? Tell me below.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="Track and field was nothing I aspired to do.
+
+I don&#x27;t think I even knew what track and field was. I have no idea what possessed me to walk into that gym and try out.
+
+I went. And a man named Coach Harvey Brown spent four years telling me the same six words.
+
+Jesse, you&#x27;re little, but you&#x27;re mighty.
+
+Everything I know about myself under pressure came out of a sport I joined for no reason at all, from a coach whose name I will say out loud for the rest of my life.
+
+Kickstart Social was an accident too. So was the first client. So was the business partner.
+
+I have started to think the accidents are the plan.
+
+What did you walk into by accident that ended up mattering? Tell me below.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet13">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s17-gym"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet13" hidden>
+      <img src="img/1b5f8536a02f3f5c.jpg" alt="All eight slides of I walked into that gym for no reason" loading="lazy">
+      <p class="files"><code>zj-oct-s17-gym-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-07 Ch2 I walked into that gym for no reason</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="flip them the bird my family thought the $400 course was a ponzi scheme.
+they told me so.
+
+here is my entire piece of advice for anybody thinking about starting.
+
+get out there and try.
+
+you will never regret trying to bring something into the world that came out of your own head. never. not once.
+
+and nobody is ever going to shame you for chasing your dreams.
+
+and if they do? flip them the bird 🖕 nobody is ever going to shame you for trying.">
+  <div class="when">
+    <span class="date">Fri Oct 9</span>
+    <span class="ch">Ch 2</span>
+  </div>
+  <img class="cover" src="img/42101e3de87597eb.jpg" alt="Cover slide: Flip them the bird" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Flip them the bird</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">I didn&#x27;t know I was allowed to get up &nbsp;·&nbsp; 18:47 to 19:06</p>
+    <div class="caption" id="cap14"><p>My family thought the $400 course was a Ponzi scheme.</p><p>They told me so.</p><p class="gap"></p><p>Here is my entire piece of advice for anybody thinking about starting.</p><p class="gap"></p><p>Get out there and try.</p><p class="gap"></p><p>You will never regret trying to bring something into the world that came out of your own head. Never. Not once.</p><p class="gap"></p><p>And nobody is ever going to shame you for chasing your dreams.</p><p class="gap"></p><p>And if they do? Flip them the bird 🖕</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="My family thought the $400 course was a Ponzi scheme.
+They told me so.
+
+Here is my entire piece of advice for anybody thinking about starting.
+
+Get out there and try.
+
+You will never regret trying to bring something into the world that came out of your own head. Never. Not once.
+
+And nobody is ever going to shame you for chasing your dreams.
+
+And if they do? Flip them the bird 🖕
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet14">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s13-bird"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet14" hidden>
+      <img src="img/6c628713f52645dd.jpg" alt="All eight slides of Flip them the bird" loading="lazy">
+      <p class="files"><code>zj-oct-s13-bird-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-09 Ch2 Flip them the bird</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="confirm"
+         data-kw="n"
+         data-text="it was called celly smellys the business that failed had a name.
+
+celly smellys. cell phone wipes that didn&#x27;t wreck your screen and smelled good.
+
+i say the name out loud now because for about five years i couldn&#x27;t.
+
+that is the thing nobody warns you about. it isn&#x27;t the debt, and it isn&#x27;t the liquidation. it is that you stop being able to say the name of the thing you made.
+
+five years paying the manufacturer back, and somewhere in there it turned back into a story instead of a wound.
+
+say the name of yours below. out loud, spelled right, no apology attached. my failed company had a name. it was celly smellys.">
+  <div class="when">
+    <span class="date">Mon Oct 12</span>
+    <span class="ch">Ch 3</span>
+  </div>
+  <img class="cover" src="img/9d857d9e4a7ce3a0.jpg" alt="Cover slide: It was called Celly Smellys" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>It was called Celly Smellys</h3>
+      <span class="chip hold">Confirm the spelling</span>
+      
+    </div>
+    <p class="chapline">The failure that paid &nbsp;·&nbsp; 09:04 to 10:03 plus the episode page synopsis</p>
+    <div class="caption" id="cap15"><p>The business that failed had a name.</p><p class="gap"></p><p>Celly Smellys. Cell phone wipes that didn&#x27;t wreck your screen and smelled good.</p><p class="gap"></p><p>I say the name out loud now because for about five years I couldn&#x27;t.</p><p class="gap"></p><p>That is the thing nobody warns you about. It isn&#x27;t the debt, and it isn&#x27;t the liquidation. It is that you stop being able to say the name of the thing you made.</p><p class="gap"></p><p>Five years paying the manufacturer back, and somewhere in there it turned back into a story instead of a wound.</p><p class="gap"></p><p>Say the name of yours below. Out loud, spelled right, no apology attached.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="The business that failed had a name.
+
+Celly Smellys. Cell phone wipes that didn&#x27;t wreck your screen and smelled good.
+
+I say the name out loud now because for about five years I couldn&#x27;t.
+
+That is the thing nobody warns you about. It isn&#x27;t the debt, and it isn&#x27;t the liquidation. It is that you stop being able to say the name of the thing you made.
+
+Five years paying the manufacturer back, and somewhere in there it turned back into a story instead of a wound.
+
+Say the name of yours below. Out loud, spelled right, no apology attached.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet15">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s25-celly"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet15" hidden>
+      <img src="img/59c66e64ed44a28c.jpg" alt="All eight slides of It was called Celly Smellys" loading="lazy">
+      <p class="files"><code>zj-oct-s25-celly-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-12 Ch3 It was called Celly Smellys - CHECK SPELLING</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="i dreamed it into existence i lost money on my first business. real money, for five years.
+
+and i would still tell you it worked.
+
+because something came out of my mind and into reality. a thing that did not exist, existed. and it existed because i dreamed it into existence.
+
+nobody can take that back. not the liquidation. not the debt. not the five years.
+
+every single thing i have built since is downstream of proving that once.
+
+that is a win. it just isn&#x27;t a win a p&amp;l can see.
+
+what have you made that never made you a dollar? tell me below. ">
+  <div class="when">
+    <span class="date">Wed Oct 14</span>
+    <span class="ch">Ch 3</span>
+  </div>
+  <img class="cover" src="img/d15f06f132fee3f7.jpg" alt="Cover slide: I dreamed it into existence" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>I dreamed it into existence</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">The failure that paid &nbsp;·&nbsp; 10:03</p>
+    <div class="caption" id="cap16"><p>I lost money on my first business. Real money, for five years.</p><p class="gap"></p><p>And I would still tell you it worked.</p><p class="gap"></p><p>Because something came out of my mind and into reality. A thing that did not exist, existed. And it existed because I dreamed it into existence.</p><p class="gap"></p><p>Nobody can take that back. Not the liquidation. Not the debt. Not the five years.</p><p class="gap"></p><p>Every single thing I have built since is downstream of proving that once.</p><p class="gap"></p><p>That is a win. It just isn&#x27;t a win a P&amp;L can see.</p><p class="gap"></p><p>What have you made that never made you a dollar? Tell me below.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I lost money on my first business. Real money, for five years.
+
+And I would still tell you it worked.
+
+Because something came out of my mind and into reality. A thing that did not exist, existed. And it existed because I dreamed it into existence.
+
+Nobody can take that back. Not the liquidation. Not the debt. Not the five years.
+
+Every single thing I have built since is downstream of proving that once.
+
+That is a win. It just isn&#x27;t a win a P&amp;L can see.
+
+What have you made that never made you a dollar? Tell me below.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet16">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s16-dreamed"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet16" hidden>
+      <img src="img/fe9b51e368a8863c.jpg" alt="All eight slides of I dreamed it into existence" loading="lazy">
+      <p class="files"><code>zj-oct-s16-dreamed-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-14 Ch3 I dreamed it into existence</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="dm"
+         data-kw="y"
+         data-text="two steps ahead i took a $400 course on how to be an influencer.
+my family thought i had joined a ponzi scheme.
+
+then i messaged a woman named kate who took the exact same course, and who was already selling coaching off it.
+
+i said kate, you just took the same course i did.
+
+and she said the thing that rearranged my life.
+
+&quot;jessica, you only have to be two steps ahead of somebody that needs you to be valuable.&quot;
+
+two steps. not ten years. not a certification. not permission.
+
+you are already two steps ahead of somebody right now. you just haven&#x27;t priced it.
+
+comment &quot;two&quot; and i&#x27;ll dm you the exercise i use to find those two steps. ">
+  <div class="when">
+    <span class="date">Thu Oct 15</span>
+    <span class="ch">Ch 4</span>
+  </div>
+  <img class="cover" src="img/c6299227656ef529.jpg" alt="Cover slide: Two steps ahead" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Two steps ahead</h3>
+      <span class="chip warn">DM must exist first</span>
+      <span class="chip kw">TWO</span>
+    </div>
+    <p class="chapline">Two steps ahead &nbsp;·&nbsp; 11:41</p>
+    <div class="caption" id="cap17"><p>I took a $400 course on how to be an influencer.</p><p>My family thought I had joined a Ponzi scheme.</p><p class="gap"></p><p>Then I messaged a woman named Kate who took the exact same course, and who was already selling coaching off it.</p><p class="gap"></p><p>I said Kate, you just took the same course I did.</p><p class="gap"></p><p>And she said the thing that rearranged my life.</p><p class="gap"></p><p>&quot;Jessica, you only have to be two steps ahead of somebody that needs you to be valuable.&quot;</p><p class="gap"></p><p>Two steps. Not ten years. Not a certification. Not permission.</p><p class="gap"></p><p>You are already two steps ahead of somebody right now. You just haven&#x27;t priced it.</p><p class="gap"></p><p>COMMENT &quot;TWO&quot; and I&#x27;ll DM you the exercise I use to find those two steps.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I took a $400 course on how to be an influencer.
+My family thought I had joined a Ponzi scheme.
+
+Then I messaged a woman named Kate who took the exact same course, and who was already selling coaching off it.
+
+I said Kate, you just took the same course I did.
+
+And she said the thing that rearranged my life.
+
+&quot;Jessica, you only have to be two steps ahead of somebody that needs you to be valuable.&quot;
+
+Two steps. Not ten years. Not a certification. Not permission.
+
+You are already two steps ahead of somebody right now. You just haven&#x27;t priced it.
+
+COMMENT &quot;TWO&quot; and I&#x27;ll DM you the exercise I use to find those two steps.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet17">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s03-twosteps"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet17" hidden>
+      <img src="img/e1ce3e1e4326869f.jpg" alt="All eight slides of Two steps ahead" loading="lazy">
+      <p class="files"><code>zj-oct-s03-twosteps-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-15 Ch4 Two steps ahead - TWO</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="i just wanted free skincare i took a $400 course on how to be an influencer while i was pregnant.
+
+my family and friends thought i had lost my mind. like it was a huge ponzi scheme. what is she doing.
+
+and their instinct was not completely wrong, because my actual goal was not a business.
+
+i wanted free skincare. i wanted free stuff for the nursery.
+
+that&#x27;s it. that was the whole ambition.
+
+it grew into a calculated, very intentional way of making money on instagram, and then into an agency, and then into launching brands in almost every state.
+
+but it started as free moisturiser.
+
+start with the small embarrassing reason. the big one shows up later. i did not start this to build a company. i wanted free skincare.">
+  <div class="when">
+    <span class="date">Mon Oct 19</span>
+    <span class="ch">Ch 4</span>
+  </div>
+  <img class="cover" src="img/9983b644f4fd416a.jpg" alt="Cover slide: I just wanted free skincare" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>I just wanted free skincare</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">Two steps ahead &nbsp;·&nbsp; 11:03 to 11:20</p>
+    <div class="caption" id="cap18"><p>I took a $400 course on how to be an influencer while I was pregnant.</p><p class="gap"></p><p>My family and friends thought I had lost my mind. Like it was a huge Ponzi scheme. What is she doing.</p><p class="gap"></p><p>And their instinct was not completely wrong, because my actual goal was not a business.</p><p class="gap"></p><p>I wanted free skincare. I wanted free stuff for the nursery.</p><p class="gap"></p><p>That&#x27;s it. That was the whole ambition.</p><p class="gap"></p><p>It grew into a calculated, very intentional way of making money on Instagram, and then into an agency, and then into launching brands in almost every state.</p><p class="gap"></p><p>But it started as free moisturiser.</p><p class="gap"></p><p>Start with the small embarrassing reason. The big one shows up later.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I took a $400 course on how to be an influencer while I was pregnant.
+
+My family and friends thought I had lost my mind. Like it was a huge Ponzi scheme. What is she doing.
+
+And their instinct was not completely wrong, because my actual goal was not a business.
+
+I wanted free skincare. I wanted free stuff for the nursery.
+
+That&#x27;s it. That was the whole ambition.
+
+It grew into a calculated, very intentional way of making money on Instagram, and then into an agency, and then into launching brands in almost every state.
+
+But it started as free moisturiser.
+
+Start with the small embarrassing reason. The big one shows up later.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet18">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s19-skincare"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet18" hidden>
+      <img src="img/125ef86f903561f6.jpg" alt="All eight slides of I just wanted free skincare" loading="lazy">
+      <p class="files"><code>zj-oct-s19-skincare-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-19 Ch4 I just wanted free skincare</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="they let me learn on their business i pushed back on running ads for the longest time. meta is a beast and i knew it.
+
+then a couple who did ads found me through an email funnel and said, we do ads, we don&#x27;t do social. i bit the bullet and hired them to teach me the ropes.
+
+and here is the part i still think about.
+
+my very first client, the iv hydration nurse practitioner, let me use her business account as a dummy account while i learned.
+
+her account. her money. her patients.
+
+because of the trust i had with those women, they let me learn how to grow my business.
+
+i have never forgotten who paid for my education. it was not me.
+
+who let you learn on their thing before you were good at it? tell me below. my first client let me practise on her business.">
+  <div class="when">
+    <span class="date">Tue Oct 20</span>
+    <span class="ch">Ch 4</span>
+  </div>
+  <img class="cover" src="img/4dbceb8ca3869089.jpg" alt="Cover slide: They let me learn on their business" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>They let me learn on their business</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">Two steps ahead &nbsp;·&nbsp; 15:24 to 15:39</p>
+    <div class="caption" id="cap19"><p>I pushed back on running ads for the longest time. Meta is a beast and I knew it.</p><p class="gap"></p><p>Then a couple who did ads found me through an email funnel and said, we do ads, we don&#x27;t do social. I bit the bullet and hired them to teach me the ropes.</p><p class="gap"></p><p>And here is the part I still think about.</p><p class="gap"></p><p>My very first client, the IV hydration nurse practitioner, let me use her business account as a dummy account while I learned.</p><p class="gap"></p><p>Her account. Her money. Her patients.</p><p class="gap"></p><p>Because of the trust I had with those women, they let me learn how to grow my business.</p><p class="gap"></p><p>I have never forgotten who paid for my education. It was not me.</p><p class="gap"></p><p>Who let you learn on their thing before you were good at it? Tell me below.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I pushed back on running ads for the longest time. Meta is a beast and I knew it.
+
+Then a couple who did ads found me through an email funnel and said, we do ads, we don&#x27;t do social. I bit the bullet and hired them to teach me the ropes.
+
+And here is the part I still think about.
+
+My very first client, the IV hydration nurse practitioner, let me use her business account as a dummy account while I learned.
+
+Her account. Her money. Her patients.
+
+Because of the trust I had with those women, they let me learn how to grow my business.
+
+I have never forgotten who paid for my education. It was not me.
+
+Who let you learn on their thing before you were good at it? Tell me below.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet19">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s18-trust"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet19" hidden>
+      <img src="img/9852fefd9e868078.jpg" alt="All eight slides of They let me learn on their business" loading="lazy">
+      <p class="files"><code>zj-oct-s18-trust-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-20 Ch4 They let me learn on their business</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="soup to dessert when i came into this space it was an exercise in learning how to do it soup to dessert.
+
+not the fun half. all of it.
+
+how do you actually build the email funnel. how do you make the website better. where exactly does the conversion leak. what happens on the back end after somebody clicks.
+
+i could have stayed a consultant who talks about the front end. plenty of people do, and it pays.
+
+but you cannot fix a thing you have only ever seen from the outside, and you certainly cannot tell somebody else to bet a year of their life on it.
+
+front end and back end. soup to dessert. then you get to have an opinion. i learned this soup to dessert.">
+  <div class="when">
+    <span class="date">Thu Oct 22</span>
+    <span class="ch">Ch 4</span>
+  </div>
+  <img class="cover" src="img/b86aa22165794cc0.jpg" alt="Cover slide: Soup to dessert" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Soup to dessert</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">Two steps ahead &nbsp;·&nbsp; 16:32 to 16:51</p>
+    <div class="caption" id="cap20"><p>When I came into this space it was an exercise in learning how to do it soup to dessert.</p><p class="gap"></p><p>Not the fun half. All of it.</p><p class="gap"></p><p>How do you actually build the email funnel. How do you make the website better. Where exactly does the conversion leak. What happens on the back end after somebody clicks.</p><p class="gap"></p><p>I could have stayed a consultant who talks about the front end. Plenty of people do, and it pays.</p><p class="gap"></p><p>But you cannot fix a thing you have only ever seen from the outside, and you certainly cannot tell somebody else to bet a year of their life on it.</p><p class="gap"></p><p>Front end and back end. Soup to dessert. Then you get to have an opinion.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="When I came into this space it was an exercise in learning how to do it soup to dessert.
+
+Not the fun half. All of it.
+
+How do you actually build the email funnel. How do you make the website better. Where exactly does the conversion leak. What happens on the back end after somebody clicks.
+
+I could have stayed a consultant who talks about the front end. Plenty of people do, and it pays.
+
+But you cannot fix a thing you have only ever seen from the outside, and you certainly cannot tell somebody else to bet a year of their life on it.
+
+Front end and back end. Soup to dessert. Then you get to have an opinion.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet20">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s21-soup"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet20" hidden>
+      <img src="img/18ba518b41ac9321.jpg" alt="All eight slides of Soup to dessert" loading="lazy">
+      <p class="files"><code>zj-oct-s21-soup-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-22 Ch4 Soup to dessert</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="i know all of them i know every creator on the brands i run. all of them. by name.
+
+i know which one had bariatric surgery that didn&#x27;t hold.
+i know which one has hashimoto&#x27;s.
+i know which one has pcos and spent nine years being told to just try harder.
+
+i came into this space to learn the funnels. front end, back end, soup to dessert.
+
+i did not expect to end up knowing everybody&#x27;s story.
+
+that changed what i&#x27;m willing to build. and who i&#x27;m willing to build it for.
+
+if you&#x27;re launching in this space and your patients are a spreadsheet to you, we&#x27;re not going to get along 🙂 i know every influencer on the brands i run. all of them.">
+  <div class="when">
+    <span class="date">Fri Oct 23</span>
+    <span class="ch">Ch 5</span>
+  </div>
+  <img class="cover" src="img/34d439c30c18501d.jpg" alt="Cover slide: I know all of them" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>I know all of them</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">The woman running it now &nbsp;·&nbsp; 17:06 to 17:59</p>
+    <div class="caption" id="cap21"><p>I know every creator on the brands I run. All of them. By name.</p><p class="gap"></p><p>I know which one had bariatric surgery that didn&#x27;t hold.</p><p>I know which one has Hashimoto&#x27;s.</p><p>I know which one has PCOS and spent nine years being told to just try harder.</p><p class="gap"></p><p>I came into this space to learn the funnels. Front end, back end, soup to dessert.</p><p class="gap"></p><p>I did not expect to end up knowing everybody&#x27;s story.</p><p class="gap"></p><p>That changed what I&#x27;m willing to build. And who I&#x27;m willing to build it for.</p><p class="gap"></p><p>If you&#x27;re launching in this space and your patients are a spreadsheet to you, we&#x27;re not going to get along 🙂</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="I know every creator on the brands I run. All of them. By name.
+
+I know which one had bariatric surgery that didn&#x27;t hold.
+I know which one has Hashimoto&#x27;s.
+I know which one has PCOS and spent nine years being told to just try harder.
+
+I came into this space to learn the funnels. Front end, back end, soup to dessert.
+
+I did not expect to end up knowing everybody&#x27;s story.
+
+That changed what I&#x27;m willing to build. And who I&#x27;m willing to build it for.
+
+If you&#x27;re launching in this space and your patients are a spreadsheet to you, we&#x27;re not going to get along 🙂
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet21">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s12-knowthem"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet21" hidden>
+      <img src="img/79b7c44fee271f7f.jpg" alt="All eight slides of I know all of them" loading="lazy">
+      <p class="files"><code>zj-oct-s12-knowthem-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-23 Ch5 I know all of them by name</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="spaghetti against the wall being a mom and an entrepreneur has been an exercise in throwing spaghetti against the wall and seeing what sticks.
+
+that is not humility. that is the actual method.
+
+nobody hands you a system for running a company and two small children at the same time, because there isn&#x27;t one. there are only things you try, and the two or three that hold.
+
+the mistake is thinking everybody else got the manual and you didn&#x27;t.
+
+they are throwing spaghetti too. they are just not filming it.
+
+what stuck for you that you did not expect to? tell me below. being a mom and an entrepreneur is throwing spaghetti at the wall.">
+  <div class="when">
+    <span class="date">Mon Oct 27</span>
+    <span class="ch">Ch 5</span>
+  </div>
+  <img class="cover" src="img/6bfb18c6f816b57b.jpg" alt="Cover slide: Spaghetti against the wall" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>Spaghetti against the wall</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">The woman running it now &nbsp;·&nbsp; 19:17</p>
+    <div class="caption" id="cap22"><p>Being a mom and an entrepreneur has been an exercise in throwing spaghetti against the wall and seeing what sticks.</p><p class="gap"></p><p>That is not humility. That is the actual method.</p><p class="gap"></p><p>Nobody hands you a system for running a company and two small children at the same time, because there isn&#x27;t one. There are only things you try, and the two or three that hold.</p><p class="gap"></p><p>The mistake is thinking everybody else got the manual and you didn&#x27;t.</p><p class="gap"></p><p>They are throwing spaghetti too. They are just not filming it.</p><p class="gap"></p><p>What stuck for you that you did not expect to? Tell me below.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="Being a mom and an entrepreneur has been an exercise in throwing spaghetti against the wall and seeing what sticks.
+
+That is not humility. That is the actual method.
+
+Nobody hands you a system for running a company and two small children at the same time, because there isn&#x27;t one. There are only things you try, and the two or three that hold.
+
+The mistake is thinking everybody else got the manual and you didn&#x27;t.
+
+They are throwing spaghetti too. They are just not filming it.
+
+What stuck for you that you did not expect to? Tell me below.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet22">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s20-spaghetti"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet22" hidden>
+      <img src="img/cf72d9fb3d6401b8.jpg" alt="All eight slides of Spaghetti against the wall" loading="lazy">
+      <p class="files"><code>zj-oct-s20-spaghetti-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-27 Ch5 Spaghetti against the wall</code></p>
+    </div>
+  </div>
+</article>
+<article class="post" data-month="oct" data-status="ready"
+         data-kw="n"
+         data-text="you did it, girl people ask what legacy means and expect me to say money.
+
+it&#x27;s what i&#x27;m bringing to the table. what i&#x27;m teaching my children. what i&#x27;m teaching myself.
+
+and it&#x27;s that admission, the quiet one, the one nobody else is in the room for.
+
+you did it, girl. you did it.
+
+that&#x27;s the part nobody hands you. there is no ceremony for the year you kept a company alive with two small kids in the house. nobody claps.
+
+so you say it to yourself, out loud, and you mean it.
+
+say yours below. whatever you did this year that nobody clapped for. i&#x27;ll go first. nobody is going to say it to you, so say it to yourself.">
+  <div class="when">
+    <span class="date">Wed Oct 28</span>
+    <span class="ch">Ch 5</span>
+  </div>
+  <img class="cover" src="img/566ade148c272034.jpg" alt="Cover slide: You did it, girl" loading="lazy">
+  <div class="meat">
+    <div class="topline">
+      <h3>You did it, girl</h3>
+      <span class="chip ok">Ready</span>
+      
+    </div>
+    <p class="chapline">The woman running it now &nbsp;·&nbsp; 21:11 to 21:28</p>
+    <div class="caption" id="cap23"><p>People ask what legacy means and expect me to say money.</p><p class="gap"></p><p>It&#x27;s what I&#x27;m bringing to the table. What I&#x27;m teaching my children. What I&#x27;m teaching myself.</p><p class="gap"></p><p>And it&#x27;s that admission, the quiet one, the one nobody else is in the room for.</p><p class="gap"></p><p>You did it, girl. You did it.</p><p class="gap"></p><p>That&#x27;s the part nobody hands you. There is no ceremony for the year you kept a company alive with two small kids in the house. Nobody claps.</p><p class="gap"></p><p>So you say it to yourself, out loud, and you mean it.</p><p class="gap"></p><p>Say yours below. Whatever you did this year that nobody clapped for. I&#x27;ll go first.</p><p class="tags">#welliemd #therealzenjessica #growpro</p></div>
+    <div class="acts">
+      <button class="btn primary" data-copy="People ask what legacy means and expect me to say money.
+
+It&#x27;s what I&#x27;m bringing to the table. What I&#x27;m teaching my children. What I&#x27;m teaching myself.
+
+And it&#x27;s that admission, the quiet one, the one nobody else is in the room for.
+
+You did it, girl. You did it.
+
+That&#x27;s the part nobody hands you. There is no ceremony for the year you kept a company alive with two small kids in the house. Nobody claps.
+
+So you say it to yourself, out loud, and you mean it.
+
+Say yours below. Whatever you did this year that nobody clapped for. I&#x27;ll go first.
+
+#welliemd #therealzenjessica #growpro">Copy caption</button>
+      <button class="btn" data-sheet="sheet23">All 8 slides</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">Drive</a>
+      <label class="done"><input type="checkbox" data-done="zj-oct-s22-youdidit"> Posted</label>
+    </div>
+    <div class="sheet" id="sheet23" hidden>
+      <img src="img/bacf658206570da8.jpg" alt="All eight slides of You did it, girl" loading="lazy">
+      <p class="files"><code>zj-oct-s22-youdidit-01.png</code> &hellip; <code>-08.png</code>
+         &nbsp;·&nbsp; Drive folder <code>2026-10-28 Ch5 You did it girl</code></p>
+    </div>
+  </div>
+</article></div>
+  <p class="empty" id="empty">Nothing matches that.</p>
+</main>
+
+<footer class="wrap">
+  <p><b>Where the files are.</b> Slides and sources live in
+  <code>Downloads\zenjessica-carousel-example</code>. Plans, calendars and the full caption
+  library live in <code>Downloads\zenjessica-planner</code>. Every deck is also in
+  <a href="https://drive.google.com/drive/folders/13KMGlLH5YaSIwHJSRep6JORklhjV5XQU" target="_blank" rel="noopener">the Drive folder</a>, one subfolder per
+  carousel, named by its posting date.</p>
+  <p style="margin-top:12px">Story source: <em>Legacy Makers, "The Finish Line Moves"</em>,
+  22:32. Captions are quoted from the episode; timestamps are on each post.</p>
+</footer>
+
+<script>
+(function(){
+  var q=document.getElementById('q'), list=document.getElementById('list'),
+      empty=document.getElementById('empty'),
+      posts=[].slice.call(list.querySelectorAll('.post')),
+      filter='all';
+
+  function apply(){
+    var t=(q.value||'').trim().toLowerCase(), shown=0;
+    posts.forEach(function(p){
+      var okF = filter==='all'
+        || (filter==='sep'&&p.dataset.month==='sep')
+        || (filter==='oct'&&p.dataset.month==='oct')
+        || (filter==='hold'&&(p.dataset.status==='consent'||p.dataset.status==='confirm'))
+        || (filter==='kw'&&p.dataset.kw==='y');
+      var okT = !t || p.dataset.text.indexOf(t)>-1;
+      var vis = okF&&okT;
+      p.classList.toggle('hidden', !vis);
+      if(vis) shown++;
+    });
+    empty.style.display = shown ? 'none' : 'block';
+  }
+  q.addEventListener('input', apply);
+  [].forEach.call(document.querySelectorAll('.f'), function(b){
+    b.addEventListener('click', function(){
+      filter=b.dataset.f;
+      [].forEach.call(document.querySelectorAll('.f'), function(o){
+        o.setAttribute('aria-pressed', String(o===b)); });
+      apply();
+    });
+  });
+
+  list.addEventListener('click', function(e){
+    var c=e.target.closest('[data-copy]');
+    if(c){
+      var text=c.getAttribute('data-copy'), done=function(){
+        var was=c.textContent; c.textContent='Copied';
+        setTimeout(function(){c.textContent=was;},1400); };
+      try{
+        if(navigator.clipboard&&navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } else fallback();
+      }catch(err){ fallback(); }
+      function fallback(){
+        var ta=document.createElement('textarea');
+        ta.value=text; ta.setAttribute('readonly','');
+        ta.style.cssText='position:fixed;left:-9999px';
+        document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); done(); }
+        catch(e2){ c.textContent='Select and copy'; }
+        document.body.removeChild(ta);
+      }
+      return;
+    }
+    var s=e.target.closest('[data-sheet]');
+    if(s){
+      var el=document.getElementById(s.getAttribute('data-sheet'));
+      el.hidden=!el.hidden;
+      s.textContent = el.hidden ? 'All 8 slides' : 'Hide slides';
+    }
+  });
+
+  // "Posted" ticks are remembered in this browser only.
+  var KEY='zj-hub-posted';
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }
+                    catch(e){ return {}; } }
+  var state=read();
+  [].forEach.call(document.querySelectorAll('[data-done]'), function(cb){
+    var id=cb.getAttribute('data-done');
+    if(state[id]){ cb.checked=true; cb.closest('.post').classList.add('is-done'); }
+    cb.addEventListener('change', function(){
+      cb.closest('.post').classList.toggle('is-done', cb.checked);
+      state[id]=cb.checked;
+      try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+    });
+  });
+})();
+</script>
+
+<a class="backlink" href="../">&larr; All approval pages</a>

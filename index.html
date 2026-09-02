@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Approval pages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--ground:#F3F3F0;--surface:#fff;--ink:#0A0A0A;--body:#3E3E3C;--muted:#77776F;
+  --line:#DEDEDA;--accent:#EC0F7E}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --ground:#0B0B0B;--surface:#151515;--ink:#F3F3F0;--body:#C2C2BC;--muted:#8B8B84;
+  --line:#2A2A28}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:Archivo,system-ui,sans-serif;font-size:16px;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:0 26px}
+header{background:#0A0A0A;color:#F3F3F0;padding:56px 0 44px}
+.kick{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent)}
+h1{font-family:"Archivo Black",Impact,sans-serif;font-size:clamp(32px,6vw,56px);
+  line-height:.98;margin:14px 0 12px;text-transform:uppercase;letter-spacing:-.02em}
+header p{max-width:58ch;margin:0;color:#C9C9C2}
+.grid{display:grid;gap:18px;padding:38px 0 60px}
+.card{display:block;background:var(--surface);border:2px solid var(--ink);
+  padding:24px 26px;text-decoration:none;color:inherit}
+.card:hover{border-color:var(--accent)}
+.card h2{font-family:"Archivo Black",Impact,sans-serif;font-size:22px;margin:0 0 8px;
+  letter-spacing:-.01em}
+.card p{margin:0 0 14px;color:var(--body);font-size:14.5px;max-width:62ch}
+.go{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent)}
+footer{border-top:2px solid var(--ink);padding:22px 0 60px;color:var(--muted);
+  font-size:13px}
+footer p{max-width:70ch;margin:0}
+</style></head><body>
+<header><div class="wrap">
+  <div class="kick">Kickstart Social &nbsp;·&nbsp; for review</div>
+  <h1>Approval pages</h1>
+  <p>Each page holds the artwork, the caption and the posting date for one batch of content.
+  Nothing here is approved or scheduled until you say so.</p>
+</div></header>
+<main class="wrap"><div class="grid">
+    <a class="card" href="welliemd/">
+      <h2>WellieMD carousels</h2>
+      <p>September 2026. Twenty carousels, one a day Monday to Friday, grouped by week with captions and DM keywords.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <a class="card" href="welliemd-statics/">
+      <h2>WellieMD post library</h2>
+      <p>Forty single static posts with captions, DM keywords and compliance status, including the three that must not ship.</p>
+      <span class="go">Open &rarr;</span>
+    </a>
+    <a class="card" href="zenjessica/">
+      <h2>Zen Jessica carousels</h2>
+      <p>September and October 2026. Twenty-four story carousels with captions and hashtags, in posting order.</p>
+      <span class="go">Open &rarr;</span>
+    </a></div></main>
+<footer class="wrap"><p>These pages are reachable by link only and are excluded from search
+engines. They are a review surface, not a publication.</p></footer>
+</body></html>

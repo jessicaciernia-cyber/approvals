@@ -1,0 +1,1293 @@
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../_shared/backlink.css">
+<title>WellieMD Post Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F3F3F0; --surface:#FFFFFF; --ink:#0A0A0A; --body:#3E3E3C; --muted:#77776F;
+  --line:#DEDEDA; --amber:#FDC903; --coral:#FF6052; --on-amber:#0A0A0A;
+  --header-bg:#0A0A0A; --header-fg:#F3F3F0; --header-dim:#CFCFC8; --header-rule:#2A2A28;
+  --stop:#C0261B; --stop-bg:#FFE7E4; --fix:#8A5B00; --fix-bg:#FFF3D1;
+  --clear:#166534; --clear-bg:#E3F5E8;
+  --disp:"Archivo Black","Archivo Black Fallback",Impact,sans-serif;
+  --body-f:"Archivo",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B0B0B; --surface:#161616; --ink:#F3F3F0; --body:#C2C2BC; --muted:#8B8B84;
+    --line:#2A2A28; --stop:#FF8478; --stop-bg:#3A1512; --fix:#F2C14E; --fix-bg:#332708;
+    --clear:#84D9A2; --clear-bg:#0F2C1A;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B0B0B; --surface:#161616; --ink:#F3F3F0; --body:#C2C2BC; --muted:#8B8B84;
+  --line:#2A2A28; --stop:#FF8478; --stop-bg:#3A1512; --fix:#F2C14E; --fix-bg:#332708;
+  --clear:#84D9A2; --clear-bg:#0F2C1A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body-f);
+  font-size:16px;line-height:1.55}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+header{background:var(--header-bg);color:var(--header-fg);padding:48px 0 40px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber)}
+h1{font-family:var(--disp);font-size:clamp(34px,6vw,64px);line-height:.95;margin:14px 0 14px;
+  letter-spacing:-.02em;text-transform:uppercase}
+h1 mark{background:var(--amber);color:#0A0A0A;padding:0 .12em}
+header p{max-width:60ch;margin:0;color:var(--header-dim);font-size:17px}
+.nums{display:flex;gap:32px;flex-wrap:wrap;margin-top:30px;border-top:2px solid var(--header-rule);
+  padding-top:20px}
+.nums div{display:flex;flex-direction:column}
+.nums b{font-family:var(--disp);font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.nums span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--header-dim);opacity:.72;margin-top:5px}
+.nums .a b{color:var(--amber)} .nums .c b{color:var(--coral)}
+
+.panels{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+  margin:36px 0 4px}
+.panel{background:var(--surface);border:2px solid var(--ink);padding:20px 22px}
+.panel h2{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  margin:0 0 14px;font-weight:500}
+.panel.danger{border-color:var(--coral)}
+.panel.danger h2{color:var(--coral)}
+.panel ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.panel li{display:flex;flex-direction:column;font-size:14px}
+.panel li b{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em}
+.panel li span{color:var(--body);font-size:13.5px}
+.panel p{margin:0 0 10px;font-size:14px;color:var(--body)}
+.panel p:last-child{margin-bottom:0}
+.panel strong{color:var(--ink)}
+
+.bar{position:sticky;top:0;z-index:5;background:var(--ground);border-bottom:2px solid var(--ink);
+  padding:14px 0;margin-top:34px}
+.bar .wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input[type=search]{flex:1;min-width:210px;font:inherit;font-size:15px;padding:9px 12px;
+  border:2px solid var(--ink);background:var(--surface);color:var(--ink)}
+.f{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  padding:8px 12px;border:2px solid var(--line);background:var(--surface);color:var(--body);
+  cursor:pointer}
+.f[aria-pressed=true]{background:var(--amber);border-color:var(--ink);color:var(--on-amber)}
+input:focus-visible,.f:focus-visible,.btn:focus-visible,.shot:focus-visible{outline:3px solid var(--coral);
+  outline-offset:2px}
+
+.grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  padding:30px 0 70px}
+.card{background:var(--surface);border:2px solid var(--ink);display:flex;flex-direction:column}
+.card.hidden{display:none}
+.card.done{opacity:.45}
+.shot{position:relative;padding:0;border:0;background:var(--line);cursor:zoom-in;display:block;
+  border-bottom:2px solid var(--ink)}
+.shot img{width:100%;display:block;aspect-ratio:1744/2336;object-fit:cover}
+.badge{position:absolute;left:0;top:0;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 9px}
+.badge.stop{background:var(--coral);color:#0A0A0A}
+.badge.fix{background:var(--amber);color:var(--on-amber)}
+.badge.clear{background:var(--ink);color:var(--ground)}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.idline{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fid{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted)}
+.kw{font-family:var(--mono);font-size:11px;letter-spacing:.08em;background:var(--amber);
+  color:var(--on-amber);padding:3px 7px}
+.cap{margin:0;font-size:14.5px;line-height:1.5;color:var(--body)}
+.note{margin:0;font-size:12.5px;line-height:1.45;padding:9px 11px;border-left:4px solid}
+.note b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;display:block;
+  margin-bottom:3px}
+.note.high{background:var(--stop-bg);border-color:var(--stop);color:var(--stop)}
+.note.medium{background:var(--fix-bg);border-color:var(--fix);color:var(--fix)}
+.note.low{background:var(--fix-bg);border-color:var(--fix);color:var(--fix)}
+.note.sub{background:transparent;border-color:var(--line);color:var(--muted)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:4px}
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 11px;border:2px solid var(--ink);background:var(--surface);color:var(--ink);
+  cursor:pointer;text-decoration:none}
+.btn.go{background:var(--ink);color:var(--ground)}
+.btn:hover{background:var(--amber);color:var(--on-amber);border-color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);display:flex;gap:6px;align-items:center;cursor:pointer}
+.lightbox{border:2px solid var(--ink);padding:0;background:var(--surface);max-width:min(760px,92vw)}
+.lightbox::backdrop{background:rgba(10,10,10,.86)}
+.lightbox img{display:block;width:100%;height:auto}
+.x{position:absolute;right:10px;top:10px;font-size:22px;line-height:1;border:2px solid var(--ink);
+  background:var(--amber);color:var(--on-amber);width:38px;height:38px;cursor:pointer}
+.empty{display:none;padding:50px 0;text-align:center;color:var(--muted);
+  font-family:var(--mono);font-size:13px}
+footer{border-top:2px solid var(--ink);padding:26px 0 60px;color:var(--muted);font-size:13.5px}
+footer code{font-family:var(--mono);font-size:12.5px;color:var(--body)}
+footer p{max-width:74ch;margin:0 0 10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">@joinwelliemd &nbsp;·&nbsp; 40 static posts &nbsp;·&nbsp; B2B, non-Rx</div>
+    <h1>Post <mark>library</mark></h1>
+    <p>Every graphic, its caption, its DM keyword and its compliance status. Captions are written
+    to the paid-safe bar, so the same copy runs organic or paid.</p>
+    <div class="nums">
+      <div><b>40</b><span>assets</span></div>
+      <div class="a"><b>33</b><span>clear to run</span></div>
+      <div class="a"><b>4</b><span>fix first</span></div>
+      <div class="c"><b>3</b><span>do not schedule</span></div>
+      <div><b>3</b><span>DM keywords</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="panels">
+    <div class="panel danger">
+      <h2>Do not schedule — on-graphic problems</h2>
+      <ul><li><b>post_12</b><span>BPC-157 — &quot;Prescribed on platforms like this one.&quot;</span></li><li><b>post_21</b><span>GHK-Cu — &quot;Now it&#x27;s clinical.&quot;</span></li><li><b>post_22</b><span>DSIP — &quot;DSIP is being studied for exactly that. Sleep is a telehealth category now.&quot;</span></li></ul>
+      <p style="margin-top:12px">A caption cannot fix any of these. The artwork has to change.</p>
+    </div>
+    <div class="panel">
+      <h2>Numbers needing a source on file</h2>
+      <ul><li><b>post_01</b><span>$294B by 2033, 9.65% CAGR</span></li><li><b>post_02</b><span>GLP-1 searches down 90% from peak</span></li><li><b>post_19</b><span>Perimenopause searches tripled in two years</span></li><li><b>post_22</b><span>$65B on bad sleep</span></li></ul>
+      <p style="margin-top:12px">Not compliance flags. Substantiation risk if a competitor or a
+      platform reviewer pushes.</p>
+    </div>
+    <div class="panel">
+      <h2>Two calls worth making</h2>
+      <p><strong>The founder set is fighting the offer.</strong> Ten full-length fashion images
+      selling compliance infrastructure. Recommendation: run <code>founder_02</code>,
+      <code>founder_04</code> and <code>founder_07</code>, backfill with typographic posts, and
+      brief an operator-register reshoot for the next cycle.</p>
+      <p><strong>The peptide posts have a shelf life.</strong> Six are pegged to a July 2026
+      advisory vote where nothing is final. Re-audit quarterly and never schedule them more than
+      eight weeks out.</p>
+    </div>
+  </section>
+</div>
+
+<div class="bar">
+  <div class="wrap">
+    <input type="search" id="q" placeholder="Search captions" aria-label="Search captions">
+    <button class="f" data-g="all" aria-pressed="true">All</button>
+    <button class="f" data-g="Market and category timing" aria-pressed="false">Market and category timing</button><button class="f" data-g="Retention and business model" aria-pressed="false">Retention and business model</button><button class="f" data-g="Peptide protocols" aria-pressed="false">Peptide protocols</button><button class="f" data-g="Infrastructure and compliance" aria-pressed="false">Infrastructure and compliance</button><button class="f" data-g="Founder set" aria-pressed="false">Founder set</button><button class="f" data-g="Pulled" aria-pressed="false">Pulled</button>
+    <button class="f" data-s="stop" aria-pressed="false">Blocked</button>
+    <button class="f" data-s="fix" aria-pressed="false">Fix first</button>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="grid" id="grid">
+<article class="card" data-group="Market and category timing" data-status="clear"
+  data-kw="STACK" data-sub="y"
+  data-text="welliemd_post_01 the peptide market is projected to reach $294b by 2033, growing about 9.65% a year. almost none of that growth has infrastructure behind it yet: compliant intake, licensed prescribers, real pharmacy fulfillment. founders who build the rails now can add protocols later without rebuilding. dm stack to see the buildout.">
+  <button class="shot" data-big="big0" aria-label="Enlarge welliemd_post_01">
+    <img src="img/adf5335a5e2ed7df.jpg" alt="welliemd_post_01" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_01</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">The peptide market is projected to reach $294B by 2033, growing about 9.65% a year. Almost none of that growth has infrastructure behind it yet: compliant intake, licensed prescribers, real pharmacy fulfillment. Founders who build the rails now can add protocols later without rebuilding. DM STACK to see the buildout.</p>
+    
+    <p class="note sub"><b>SOURCE ON FILE</b> $294B by 2033, 9.65% CAGR</p>
+    <div class="acts">
+      <button class="btn go" data-copy="The peptide market is projected to reach $294B by 2033, growing about 9.65% a year. Almost none of that growth has infrastructure behind it yet: compliant intake, licensed prescribers, real pharmacy fulfillment. Founders who build the rails now can add protocols later without rebuilding. DM STACK to see the buildout.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_01"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big0">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/a36340d8fa65f744.jpg" alt="welliemd_post_01 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Market and category timing" data-status="clear"
+  data-kw="STACK" data-sub="y"
+  data-text="welliemd_post_02 search interest in glp-1s has cooled hard off its peak. that isn&#x27;t the end of the category, it&#x27;s the end of the easy part. the brands still growing added hormone and recovery protocols to the same patient base. dm stack to see how a multi-protocol platform is structured.">
+  <button class="shot" data-big="big1" aria-label="Enlarge welliemd_post_02">
+    <img src="img/daad25a4447687ea.jpg" alt="welliemd_post_02" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_02</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Search interest in GLP-1s has cooled hard off its peak. That isn&#x27;t the end of the category, it&#x27;s the end of the easy part. The brands still growing added hormone and recovery protocols to the same patient base. DM STACK to see how a multi-protocol platform is structured.</p>
+    
+    <p class="note sub"><b>SOURCE ON FILE</b> GLP-1 searches down 90% from peak</p>
+    <div class="acts">
+      <button class="btn go" data-copy="Search interest in GLP-1s has cooled hard off its peak. That isn&#x27;t the end of the category, it&#x27;s the end of the easy part. The brands still growing added hormone and recovery protocols to the same patient base. DM STACK to see how a multi-protocol platform is structured.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_02"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big1">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/e780ac6f1fb79a9c.jpg" alt="welliemd_post_02 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Market and category timing" data-status="fix"
+  data-kw="HORMONE" data-sub="n"
+  data-text="welliemd_post_03 on november 10, 2025 the fda initiated removal of the boxed warnings for cardiovascular disease, breast cancer and dementia from menopausal hormone therapy products. the endometrial cancer warning stays on systemic estrogen-alone products, so this is a labeling change and not a clean slate. it still reopened a category two decades of fear had frozen. dm hormone for the menopause buildout.">
+  <button class="shot" data-big="big2" aria-label="Enlarge welliemd_post_03">
+    <img src="img/81d4e36291c63611.jpg" alt="welliemd_post_03" loading="lazy">
+    <span class="badge fix">Fix first</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_03</span>
+      <span class="kw">DM HORMONE</span>
+    </div>
+    <p class="cap">On November 10, 2025 the FDA initiated removal of the boxed warnings for cardiovascular disease, breast cancer and dementia from menopausal hormone therapy products. The endometrial cancer warning stays on systemic estrogen-alone products, so this is a labeling change and not a clean slate. It still reopened a category two decades of fear had frozen. DM HORMONE for the menopause buildout.</p>
+    <p class="note medium"><b>MEDIUM</b> Overstated. FDA *initiated removal* on November 10, 2025 for the cardiovascular, breast cancer and dementia warnings. The **endometrial cancer boxed warning stays** on systemic estrogen-alone products. Headline is close enough to survive if the caption carries the precision, which mine does. Your call whether Mariel softens &quot;gone&quot; to &quot;lifted.&quot;</p>
+    
+    <div class="acts">
+      <button class="btn go" data-copy="On November 10, 2025 the FDA initiated removal of the boxed warnings for cardiovascular disease, breast cancer and dementia from menopausal hormone therapy products. The endometrial cancer warning stays on systemic estrogen-alone products, so this is a labeling change and not a clean slate. It still reopened a category two decades of fear had frozen. DM HORMONE for the menopause buildout.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_03"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big2">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/42e1ff6cd6c9d00f.jpg" alt="welliemd_post_03 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Market and category timing" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_04 men&#x27;s hormone care moved from locker room joke to a standard telehealth line item. demand is steady, patients stay for years, and the clinical pathway is well established. what most founders lack is a platform that runs provider evaluation, prescribing and fulfillment across all fifty states. dm stack to see ours.">
+  <button class="shot" data-big="big3" aria-label="Enlarge welliemd_post_04">
+    <img src="img/83379657ee5e5fc8.jpg" alt="welliemd_post_04" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_04</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Men&#x27;s hormone care moved from locker room joke to a standard telehealth line item. Demand is steady, patients stay for years, and the clinical pathway is well established. What most founders lack is a platform that runs provider evaluation, prescribing and fulfillment across all fifty states. DM STACK to see ours.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Men&#x27;s hormone care moved from locker room joke to a standard telehealth line item. Demand is steady, patients stay for years, and the clinical pathway is well established. What most founders lack is a platform that runs provider evaluation, prescribing and fulfillment across all fifty states. DM STACK to see ours.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_04"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big3">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/18d3bc15a3692f6c.jpg" alt="welliemd_post_04 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Market and category timing" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_05 billions of dollars of peptides move through channels with no prescriber, no pharmacy and no accountability. that demand doesn&#x27;t vanish when regulation tightens, it moves to whoever is licensed. being the compliant option is a positioning advantage, not a cost line. dm stack for the compliance architecture.">
+  <button class="shot" data-big="big4" aria-label="Enlarge welliemd_post_05">
+    <img src="img/852ea60e16c67e64.jpg" alt="welliemd_post_05" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_05</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Billions of dollars of peptides move through channels with no prescriber, no pharmacy and no accountability. That demand doesn&#x27;t vanish when regulation tightens, it moves to whoever is licensed. Being the compliant option is a positioning advantage, not a cost line. DM STACK for the compliance architecture.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Billions of dollars of peptides move through channels with no prescriber, no pharmacy and no accountability. That demand doesn&#x27;t vanish when regulation tightens, it moves to whoever is licensed. Being the compliant option is a positioning advantage, not a cost line. DM STACK for the compliance architecture.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_05"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big4">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/66e3508142515576.jpg" alt="welliemd_post_05 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Market and category timing" data-status="fix"
+  data-kw="PEPTIDE" data-sub="n"
+  data-text="welliemd_post_06 in july 2026 the fda&#x27;s pharmacy compounding advisory committee reviewed seven peptides and gave favorable recommendations to six, overriding fda&#x27;s own reviewers. the votes are advisory only. nothing is approved, nothing is on the 503a bulks list, and formal rulemaking takes well over a year. build for the regulated version of this category, not the headline. dm peptide for the current state of play.">
+  <button class="shot" data-big="big5" aria-label="Enlarge welliemd_post_06">
+    <img src="img/427ae41fc7b2676e.jpg" alt="welliemd_post_06" loading="lazy">
+    <span class="badge fix">Fix first</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_06</span>
+      <span class="kw">DM PEPTIDE</span>
+    </div>
+    <p class="cap">In July 2026 the FDA&#x27;s Pharmacy Compounding Advisory Committee reviewed seven peptides and gave favorable recommendations to six, overriding FDA&#x27;s own reviewers. The votes are advisory only. Nothing is approved, nothing is on the 503A Bulks List, and formal rulemaking takes well over a year. Build for the regulated version of this category, not the headline. DM PEPTIDE for the current state of play.</p>
+    <p class="note low"><b>LOW</b> It was the Pharmacy Compounding Advisory Committee, not FDA, and the panel voted **against FDA&#x27;s own reviewers**, who recommended rejecting all seven. Caption corrects it. Graphic can stand.</p>
+    
+    <div class="acts">
+      <button class="btn go" data-copy="In July 2026 the FDA&#x27;s Pharmacy Compounding Advisory Committee reviewed seven peptides and gave favorable recommendations to six, overriding FDA&#x27;s own reviewers. The votes are advisory only. Nothing is approved, nothing is on the 503A Bulks List, and formal rulemaking takes well over a year. Build for the regulated version of this category, not the headline. DM PEPTIDE for the current state of play.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_06"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big5">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/4cc34232ba8a48db.jpg" alt="welliemd_post_06 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Market and category timing" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_10 women&#x27;s recovery, skin and longevity demand is running ahead of the products built to serve it. the founders who move first will define what the category looks like. you don&#x27;t have to guess at the infrastructure, it already exists. dm stack for the women&#x27;s protocol buildout.">
+  <button class="shot" data-big="big6" aria-label="Enlarge welliemd_post_10">
+    <img src="img/157dc8e086f2ec61.jpg" alt="welliemd_post_10" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_10</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Women&#x27;s recovery, skin and longevity demand is running ahead of the products built to serve it. The founders who move first will define what the category looks like. You don&#x27;t have to guess at the infrastructure, it already exists. DM STACK for the women&#x27;s protocol buildout.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Women&#x27;s recovery, skin and longevity demand is running ahead of the products built to serve it. The founders who move first will define what the category looks like. You don&#x27;t have to guess at the infrastructure, it already exists. DM STACK for the women&#x27;s protocol buildout.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_10"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big6">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/2db567d3ef4c50ec.jpg" alt="welliemd_post_10 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Market and category timing" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_15 when a category jumps from niche to mainstream conversation, the winners are rarely the loudest brands. they&#x27;re the ones with licensed providers, pharmacy access and compliant intake already standing when demand arrives. infrastructure is the unglamorous part that decides who scales. dm stack for the build.">
+  <button class="shot" data-big="big7" aria-label="Enlarge welliemd_post_15">
+    <img src="img/be712566c1f3a7e4.jpg" alt="welliemd_post_15" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_15</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">When a category jumps from niche to mainstream conversation, the winners are rarely the loudest brands. They&#x27;re the ones with licensed providers, pharmacy access and compliant intake already standing when demand arrives. Infrastructure is the unglamorous part that decides who scales. DM STACK for the build.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="When a category jumps from niche to mainstream conversation, the winners are rarely the loudest brands. They&#x27;re the ones with licensed providers, pharmacy access and compliant intake already standing when demand arrives. Infrastructure is the unglamorous part that decides who scales. DM STACK for the build.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_15"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big7">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/2a3f7af9c9448bc8.jpg" alt="welliemd_post_15 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Market and category timing" data-status="clear"
+  data-kw="HORMONE" data-sub="y"
+  data-text="welliemd_post_19 perimenopause went from an unnamed experience to a search term with real volume behind it. most of those women aren&#x27;t looking for content, they&#x27;re looking for a provider who will actually evaluate them. build the clinical pathway and the demand is already waiting. dm hormone for the launch map.">
+  <button class="shot" data-big="big8" aria-label="Enlarge welliemd_post_19">
+    <img src="img/0fdac0da106c4441.jpg" alt="welliemd_post_19" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_19</span>
+      <span class="kw">DM HORMONE</span>
+    </div>
+    <p class="cap">Perimenopause went from an unnamed experience to a search term with real volume behind it. Most of those women aren&#x27;t looking for content, they&#x27;re looking for a provider who will actually evaluate them. Build the clinical pathway and the demand is already waiting. DM HORMONE for the launch map.</p>
+    
+    <p class="note sub"><b>SOURCE ON FILE</b> Perimenopause searches tripled in two years</p>
+    <div class="acts">
+      <button class="btn go" data-copy="Perimenopause went from an unnamed experience to a search term with real volume behind it. Most of those women aren&#x27;t looking for content, they&#x27;re looking for a provider who will actually evaluate them. Build the clinical pathway and the demand is already waiting. DM HORMONE for the launch map.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_19"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big8">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/6d8916200e0b6ea4.jpg" alt="welliemd_post_19 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Retention and business model" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_07 one drug is a promotion. a care platform is a business. glp-1-only brands hit a wall when the patient finishes their protocol and there&#x27;s nowhere to move them. dm stack to see how multi-protocol brands hold patients longer.">
+  <button class="shot" data-big="big9" aria-label="Enlarge welliemd_post_07">
+    <img src="img/e442aaabfee37be1.jpg" alt="welliemd_post_07" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_07</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">One drug is a promotion. A care platform is a business. GLP-1-only brands hit a wall when the patient finishes their protocol and there&#x27;s nowhere to move them. DM STACK to see how multi-protocol brands hold patients longer.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="One drug is a promotion. A care platform is a business. GLP-1-only brands hit a wall when the patient finishes their protocol and there&#x27;s nowhere to move them. DM STACK to see how multi-protocol brands hold patients longer.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_07"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big9">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/eaac56a8217e16aa.jpg" alt="welliemd_post_07 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Retention and business model" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_09 hormone care is ongoing care. that shifts your economics from a single conversion to a recurring relationship, which is what most telehealth models are actually missing. it only works if refills, monitoring and provider check-ins are automated instead of manual. dm stack to see the retention build.">
+  <button class="shot" data-big="big10" aria-label="Enlarge welliemd_post_09">
+    <img src="img/d2dcaedaefbba52e.jpg" alt="welliemd_post_09" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_09</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Hormone care is ongoing care. That shifts your economics from a single conversion to a recurring relationship, which is what most telehealth models are actually missing. It only works if refills, monitoring and provider check-ins are automated instead of manual. DM STACK to see the retention build.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Hormone care is ongoing care. That shifts your economics from a single conversion to a recurring relationship, which is what most telehealth models are actually missing. It only works if refills, monitoring and provider check-ins are automated instead of manual. DM STACK to see the retention build.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_09"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big10">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/92e0e3f6bc68ea54.jpg" alt="welliemd_post_09 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Retention and business model" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_14 weight management brings the patient in. hormone and recovery protocols are what keep them. running both on one platform means one intake, one provider network, one pharmacy relationship and one compliance layer. dm stack to see how it&#x27;s wired.">
+  <button class="shot" data-big="big11" aria-label="Enlarge welliemd_post_14">
+    <img src="img/a59834f8a47aad5b.jpg" alt="welliemd_post_14" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_14</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Weight management brings the patient in. Hormone and recovery protocols are what keep them. Running both on one platform means one intake, one provider network, one pharmacy relationship and one compliance layer. DM STACK to see how it&#x27;s wired.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Weight management brings the patient in. Hormone and recovery protocols are what keep them. Running both on one platform means one intake, one provider network, one pharmacy relationship and one compliance layer. DM STACK to see how it&#x27;s wired.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_14"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big11">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/143fd339f65a902f.jpg" alt="welliemd_post_14 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Retention and business model" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_17 the compounded semaglutide window closed once the shortage ended, and plenty of brands had built their entire model on it. those same patients are still here, still asking about hormone, recovery and longevity protocols. that&#x27;s the sequel, and it needs a platform that carries more than one category. dm stack for the multi-protocol build.">
+  <button class="shot" data-big="big12" aria-label="Enlarge welliemd_post_17">
+    <img src="img/3eee91b71349819e.jpg" alt="welliemd_post_17" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_17</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">The compounded semaglutide window closed once the shortage ended, and plenty of brands had built their entire model on it. Those same patients are still here, still asking about hormone, recovery and longevity protocols. That&#x27;s the sequel, and it needs a platform that carries more than one category. DM STACK for the multi-protocol build.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="The compounded semaglutide window closed once the shortage ended, and plenty of brands had built their entire model on it. Those same patients are still here, still asking about hormone, recovery and longevity protocols. That&#x27;s the sequel, and it needs a platform that carries more than one category. DM STACK for the multi-protocol build.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_17"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big12">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/fe05a9f429abf27a.jpg" alt="welliemd_post_17 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Retention and business model" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_25 acquisition and lifetime value are two different problems. weight loss solves the first one cheaply and most brands never solve the second. hormone health is where the recurring relationship actually lives. dm stack to see the retention model.">
+  <button class="shot" data-big="big13" aria-label="Enlarge welliemd_post_25">
+    <img src="img/a98f13d6cf14523c.jpg" alt="welliemd_post_25" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_25</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Acquisition and lifetime value are two different problems. Weight loss solves the first one cheaply and most brands never solve the second. Hormone health is where the recurring relationship actually lives. DM STACK to see the retention model.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Acquisition and lifetime value are two different problems. Weight loss solves the first one cheaply and most brands never solve the second. Hormone health is where the recurring relationship actually lives. DM STACK to see the retention model.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_25"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big13">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/94adc84c986fbd93.jpg" alt="welliemd_post_25 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Retention and business model" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_26 undifferentiated brands compete on price. differentiated ones compete on protocol depth. sermorelin, glutathione and hormone care are harder to stand up, which is exactly why fewer brands offer them. dm stack to see the differentiated stack.">
+  <button class="shot" data-big="big14" aria-label="Enlarge welliemd_post_26">
+    <img src="img/08978b9cfa3c9a73.jpg" alt="welliemd_post_26" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_26</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Undifferentiated brands compete on price. Differentiated ones compete on protocol depth. Sermorelin, glutathione and hormone care are harder to stand up, which is exactly why fewer brands offer them. DM STACK to see the differentiated stack.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Undifferentiated brands compete on price. Differentiated ones compete on protocol depth. Sermorelin, glutathione and hormone care are harder to stand up, which is exactly why fewer brands offer them. DM STACK to see the differentiated stack.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_26"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big14">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/9e364db63faf68b9.jpg" alt="welliemd_post_26 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Peptide protocols" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_11 recovery, sleep, skin and cognition are four different patient intents, four different protocols and four different retention curves. treating peptides as one sku leaves most of the revenue on the table. a platform built for a menu lets you add protocols without a rebuild. dm stack to see the full menu.">
+  <button class="shot" data-big="big15" aria-label="Enlarge welliemd_post_11">
+    <img src="img/f28d4135fe291574.jpg" alt="welliemd_post_11" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_11</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Recovery, sleep, skin and cognition are four different patient intents, four different protocols and four different retention curves. Treating peptides as one SKU leaves most of the revenue on the table. A platform built for a menu lets you add protocols without a rebuild. DM STACK to see the full menu.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Recovery, sleep, skin and cognition are four different patient intents, four different protocols and four different retention curves. Treating peptides as one SKU leaves most of the revenue on the table. A platform built for a menu lets you add protocols without a rebuild. DM STACK to see the full menu.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_11"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big15">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/5de5256aa2a87a74.jpg" alt="welliemd_post_11 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Peptide protocols" data-status="stop"
+  data-kw="PEPTIDE" data-sub="n"
+  data-text="welliemd_post_12 bpc-157 is the most searched peptide in the us, and in july 2026 an fda advisory committee gave it a favorable recommendation for the 503a bulks list. that&#x27;s a recommendation, not approval, and it isn&#x27;t legally compoundable today. the founders building compliant intake and prescriber infrastructure now are the ones ready if the rulemaking lands. dm peptide for where this actually stands.">
+  <button class="shot" data-big="big16" aria-label="Enlarge welliemd_post_12">
+    <img src="img/5d11c02e1f1f8d89.jpg" alt="welliemd_post_12" loading="lazy">
+    <span class="badge stop">Do not schedule</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_12</span>
+      <span class="kw">DM PEPTIDE</span>
+    </div>
+    <p class="cap">BPC-157 is the most searched peptide in the US, and in July 2026 an FDA advisory committee gave it a favorable recommendation for the 503A Bulks List. That&#x27;s a recommendation, not approval, and it isn&#x27;t legally compoundable today. The founders building compliant intake and prescriber infrastructure now are the ones ready if the rulemaking lands. DM PEPTIDE for where this actually stands.</p>
+    <p class="note high"><b>HIGH</b> BPC-157 is not FDA approved and is not on the 503A Bulks List. The July 2026 advisory vote was a recommendation only, and legal compounding still requires rulemaking that takes well over a year. A Wellie MD graphic stating it is prescribed on your platform asserts current access to a substance that is not legally compoundable. This is the single highest-exposure asset in the batch.  FIX: Mariel replaces the subline with: *&quot;Favorable FDA advisory vote, July 2026. Not approved. Not yet compoundable.&quot;*</p>
+    
+    <div class="acts">
+      <button class="btn go" data-copy="BPC-157 is the most searched peptide in the US, and in July 2026 an FDA advisory committee gave it a favorable recommendation for the 503A Bulks List. That&#x27;s a recommendation, not approval, and it isn&#x27;t legally compoundable today. The founders building compliant intake and prescriber infrastructure now are the ones ready if the rulemaking lands. DM PEPTIDE for where this actually stands.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_12"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big16">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/673241b26401b808.jpg" alt="welliemd_post_12 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Peptide protocols" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_18 patients are arriving with specific asks, and a single-protocol platform has to say no. every no is a patient who finds a brand that says yes. which protocols you can support is a platform decision, not a marketing one. dm stack to see what&#x27;s supported.">
+  <button class="shot" data-big="big17" aria-label="Enlarge welliemd_post_18">
+    <img src="img/bc4c69cd65e33d8e.jpg" alt="welliemd_post_18" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_18</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Patients are arriving with specific asks, and a single-protocol platform has to say no. Every no is a patient who finds a brand that says yes. Which protocols you can support is a platform decision, not a marketing one. DM STACK to see what&#x27;s supported.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Patients are arriving with specific asks, and a single-protocol platform has to say no. Every no is a patient who finds a brand that says yes. Which protocols you can support is a platform decision, not a marketing one. DM STACK to see what&#x27;s supported.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_18"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big17">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/a09499ad5a007ec1.jpg" alt="welliemd_post_18 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Peptide protocols" data-status="stop"
+  data-kw="PEPTIDE" data-sub="n"
+  data-text="welliemd_post_21 ghk-cu has a large consumer skincare following and a much thinner regulatory record. fda has it queued for advisory review before the end of february 2027, and it isn&#x27;t compoundable today. watch the category, build the infrastructure, don&#x27;t front-run the rulemaking. dm peptide for current status.">
+  <button class="shot" data-big="big18" aria-label="Enlarge welliemd_post_21">
+    <img src="img/bc9e1647d03a3aab.jpg" alt="welliemd_post_21" loading="lazy">
+    <span class="badge stop">Do not schedule</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_21</span>
+      <span class="kw">DM PEPTIDE</span>
+    </div>
+    <p class="cap">GHK-Cu has a large consumer skincare following and a much thinner regulatory record. FDA has it queued for advisory review before the end of February 2027, and it isn&#x27;t compoundable today. Watch the category, build the infrastructure, don&#x27;t front-run the rulemaking. DM PEPTIDE for current status.</p>
+    <p class="note medium"><b>MEDIUM</b> GHK-Cu has not been reviewed. FDA has it queued for an advisory meeting before the end of February 2027. It has a consumer skincare following and no regulatory standing, so &quot;now it&#x27;s clinical&quot; is not supportable.  FIX: Change the accent block to *&quot;Still not clinical.&quot;* The tension works better and it&#x27;s true.</p>
+    
+    <div class="acts">
+      <button class="btn go" data-copy="GHK-Cu has a large consumer skincare following and a much thinner regulatory record. FDA has it queued for advisory review before the end of February 2027, and it isn&#x27;t compoundable today. Watch the category, build the infrastructure, don&#x27;t front-run the rulemaking. DM PEPTIDE for current status.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_21"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big18">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/140991428b4648da.jpg" alt="welliemd_post_21 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Peptide protocols" data-status="clear"
+  data-kw="PEPTIDE" data-sub="n"
+  data-text="welliemd_post_23 bpc-157 and tb-500 both received favorable advisory recommendations from fda&#x27;s compounding committee in july 2026. neither is approved or legally compoundable yet and the rulemaking will take time. athletes and patients are already asking, so founders with compliant infrastructure are first in line if the door opens. dm peptide for where this stands.">
+  <button class="shot" data-big="big19" aria-label="Enlarge welliemd_post_23">
+    <img src="img/12249663b53bb365.jpg" alt="welliemd_post_23" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_23</span>
+      <span class="kw">DM PEPTIDE</span>
+    </div>
+    <p class="cap">BPC-157 and TB-500 both received favorable advisory recommendations from FDA&#x27;s compounding committee in July 2026. Neither is approved or legally compoundable yet and the rulemaking will take time. Athletes and patients are already asking, so founders with compliant infrastructure are first in line if the door opens. DM PEPTIDE for where this stands.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="BPC-157 and TB-500 both received favorable advisory recommendations from FDA&#x27;s compounding committee in July 2026. Neither is approved or legally compoundable yet and the rulemaking will take time. Athletes and patients are already asking, so founders with compliant infrastructure are first in line if the door opens. DM PEPTIDE for where this stands.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_23"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big19">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/716cbc53f82adfa1.jpg" alt="welliemd_post_23 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Peptide protocols" data-status="clear"
+  data-kw="PEPTIDE" data-sub="n"
+  data-text="welliemd_post_24 epitalon and mots-c received favorable advisory recommendations in july 2026, nad+ sits in a different regulatory lane, and none of it is approved for treating aging. what&#x27;s real is patient demand and a category forming in public. build the platform and let the rulemaking catch up. dm peptide for the longevity protocol map.">
+  <button class="shot" data-big="big20" aria-label="Enlarge welliemd_post_24">
+    <img src="img/90b9818fff65528b.jpg" alt="welliemd_post_24" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_24</span>
+      <span class="kw">DM PEPTIDE</span>
+    </div>
+    <p class="cap">Epitalon and MOTS-c received favorable advisory recommendations in July 2026, NAD+ sits in a different regulatory lane, and none of it is approved for treating aging. What&#x27;s real is patient demand and a category forming in public. Build the platform and let the rulemaking catch up. DM PEPTIDE for the longevity protocol map.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Epitalon and MOTS-c received favorable advisory recommendations in July 2026, NAD+ sits in a different regulatory lane, and none of it is approved for treating aging. What&#x27;s real is patient demand and a category forming in public. Build the platform and let the rulemaking catch up. DM PEPTIDE for the longevity protocol map.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_24"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big20">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/0e6027e468a56c4c.jpg" alt="welliemd_post_24 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Peptide protocols" data-status="clear"
+  data-kw="PEPTIDE" data-sub="n"
+  data-text="welliemd_post_28 semax received a favorable advisory recommendation from fda&#x27;s compounding committee in july 2026 and is not approved or compoundable today. cognitive protocols moved from biohacker forums to mainstream patient demand faster than most platforms adapted. build for it, don&#x27;t promise it. dm peptide for current status.">
+  <button class="shot" data-big="big21" aria-label="Enlarge welliemd_post_28">
+    <img src="img/116b49d6c3c6bd2e.jpg" alt="welliemd_post_28" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_28</span>
+      <span class="kw">DM PEPTIDE</span>
+    </div>
+    <p class="cap">Semax received a favorable advisory recommendation from FDA&#x27;s compounding committee in July 2026 and is not approved or compoundable today. Cognitive protocols moved from biohacker forums to mainstream patient demand faster than most platforms adapted. Build for it, don&#x27;t promise it. DM PEPTIDE for current status.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Semax received a favorable advisory recommendation from FDA&#x27;s compounding committee in July 2026 and is not approved or compoundable today. Cognitive protocols moved from biohacker forums to mainstream patient demand faster than most platforms adapted. Build for it, don&#x27;t promise it. DM PEPTIDE for current status.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_28"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big21">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/566b6955188281d9.jpg" alt="welliemd_post_28 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Infrastructure and compliance" data-status="clear"
+  data-kw="HORMONE" data-sub="n"
+  data-text="welliemd_post_08 roughly fifty million us women are at or past menopause, and the category has been underbuilt for decades. after the labeling change, the brands with a real clinical pathway are the ones patients will find. that pathway is intake, licensed providers, pharmacy access and documentation, built as one system. dm hormone for the menopause launch map.">
+  <button class="shot" data-big="big22" aria-label="Enlarge welliemd_post_08">
+    <img src="img/7c78cd456730f969.jpg" alt="welliemd_post_08" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_08</span>
+      <span class="kw">DM HORMONE</span>
+    </div>
+    <p class="cap">Roughly fifty million US women are at or past menopause, and the category has been underbuilt for decades. After the labeling change, the brands with a real clinical pathway are the ones patients will find. That pathway is intake, licensed providers, pharmacy access and documentation, built as one system. DM HORMONE for the menopause launch map.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Roughly fifty million US women are at or past menopause, and the category has been underbuilt for decades. After the labeling change, the brands with a real clinical pathway are the ones patients will find. That pathway is intake, licensed providers, pharmacy access and documentation, built as one system. DM HORMONE for the menopause launch map.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_08"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big22">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/e4e5daa226b92bf7.jpg" alt="welliemd_post_08 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Infrastructure and compliance" data-status="clear"
+  data-kw="HORMONE" data-sub="n"
+  data-text="welliemd_post_13 demand for menopause care is outpacing the supply of brands that treat it seriously. the women searching are specific about what they want and quick to leave anything that feels dismissive. build the clinical pathway first and the brand voice second. dm hormone for the buildout.">
+  <button class="shot" data-big="big23" aria-label="Enlarge welliemd_post_13">
+    <img src="img/ca2513cb8301fbca.jpg" alt="welliemd_post_13" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_13</span>
+      <span class="kw">DM HORMONE</span>
+    </div>
+    <p class="cap">Demand for menopause care is outpacing the supply of brands that treat it seriously. The women searching are specific about what they want and quick to leave anything that feels dismissive. Build the clinical pathway first and the brand voice second. DM HORMONE for the buildout.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Demand for menopause care is outpacing the supply of brands that treat it seriously. The women searching are specific about what they want and quick to leave anything that feels dismissive. Build the clinical pathway first and the brand voice second. DM HORMONE for the buildout.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_13"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big23">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/7500ffb52d4cf739.jpg" alt="welliemd_post_13 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Infrastructure and compliance" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_16 hormone patients rarely need one thing. if your intake splits into three separate flows you lose people at every handoff and your providers work three times as hard. one intake that branches by protocol is the difference between a clinic and a platform. dm stack to see the flow.">
+  <button class="shot" data-big="big24" aria-label="Enlarge welliemd_post_16">
+    <img src="img/89f2fef38264530e.jpg" alt="welliemd_post_16" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_16</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Hormone patients rarely need one thing. If your intake splits into three separate flows you lose people at every handoff and your providers work three times as hard. One intake that branches by protocol is the difference between a clinic and a platform. DM STACK to see the flow.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Hormone patients rarely need one thing. If your intake splits into three separate flows you lose people at every handoff and your providers work three times as hard. One intake that branches by protocol is the difference between a clinic and a platform. DM STACK to see the flow.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_16"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big24">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/bcfce7fe5b29e1fc.jpg" alt="welliemd_post_16 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Infrastructure and compliance" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_20 almost no telehealth brand dies from lack of demand. they die when intake leaks, prescriptions stall, pharmacy fulfillment slips or a compliance gap shuts the ad account down. those four have to be engineered as one system, not stitched from four vendors. dm stack to see how it&#x27;s built.">
+  <button class="shot" data-big="big25" aria-label="Enlarge welliemd_post_20">
+    <img src="img/8830d22637ab7dcd.jpg" alt="welliemd_post_20" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_20</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Almost no telehealth brand dies from lack of demand. They die when intake leaks, prescriptions stall, pharmacy fulfillment slips or a compliance gap shuts the ad account down. Those four have to be engineered as one system, not stitched from four vendors. DM STACK to see how it&#x27;s built.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Almost no telehealth brand dies from lack of demand. They die when intake leaks, prescriptions stall, pharmacy fulfillment slips or a compliance gap shuts the ad account down. Those four have to be engineered as one system, not stitched from four vendors. DM STACK to see how it&#x27;s built.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_20"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big25">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/a2b9e6217473ca1a.jpg" alt="welliemd_post_20 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Infrastructure and compliance" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_27 men&#x27;s health converts on speed. if intake, provider evaluation and prescription happen in the same session, you capture the patient at the moment of intent. if it takes four days and three emails, you don&#x27;t. dm stack for the same-day intake build.">
+  <button class="shot" data-big="big26" aria-label="Enlarge welliemd_post_27">
+    <img src="img/894e464c7e6bc2e4.jpg" alt="welliemd_post_27" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_27</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Men&#x27;s health converts on speed. If intake, provider evaluation and prescription happen in the same session, you capture the patient at the moment of intent. If it takes four days and three emails, you don&#x27;t. DM STACK for the same-day intake build.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Men&#x27;s health converts on speed. If intake, provider evaluation and prescription happen in the same session, you capture the patient at the moment of intent. If it takes four days and three emails, you don&#x27;t. DM STACK for the same-day intake build.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_27"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big26">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/0570518a4d05e23f.jpg" alt="welliemd_post_27 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Infrastructure and compliance" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_29 fifty-state licensure, credentialed providers, legitimate pharmacy partners and documented workflows are slow to build and hard to copy. that&#x27;s what makes them a moat instead of overhead. built in from day one costs a fraction of bolted on after a shutdown. dm stack for the compliance architecture.">
+  <button class="shot" data-big="big27" aria-label="Enlarge welliemd_post_29">
+    <img src="img/999891f6c1528ecf.jpg" alt="welliemd_post_29" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_29</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Fifty-state licensure, credentialed providers, legitimate pharmacy partners and documented workflows are slow to build and hard to copy. That&#x27;s what makes them a moat instead of overhead. Built in from day one costs a fraction of bolted on after a shutdown. DM STACK for the compliance architecture.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Fifty-state licensure, credentialed providers, legitimate pharmacy partners and documented workflows are slow to build and hard to copy. That&#x27;s what makes them a moat instead of overhead. Built in from day one costs a fraction of bolted on after a shutdown. DM STACK for the compliance architecture.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_29"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big27">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/8453d9a720710a0c.jpg" alt="welliemd_post_29 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Infrastructure and compliance" data-status="fix"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_post_30 most founders launch one category and rebuild when they add the next. one platform with one provider network, one pharmacy layer and one compliance framework lets you launch all three at once. that&#x27;s the difference between three launches and one. dm stack to see it.">
+  <button class="shot" data-big="big28" aria-label="Enlarge welliemd_post_30">
+    <img src="img/2ba6cd5b22a1d863.jpg" alt="welliemd_post_30" loading="lazy">
+    <span class="badge fix">Fix first</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_30</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Most founders launch one category and rebuild when they add the next. One platform with one provider network, one pharmacy layer and one compliance framework lets you launch all three at once. That&#x27;s the difference between three launches and one. DM STACK to see it.</p>
+    <p class="note medium"><b>MEDIUM</b> factual inconsistency. post_30 says **100+ healthcare brands**. founder_01, founder_02 and founder_10 all say **80+**. Same batch, same grid. Pick one number and have Mariel align. I used 80+ in captions since three assets carry it.</p>
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Most founders launch one category and rebuild when they add the next. One platform with one provider network, one pharmacy layer and one compliance framework lets you launch all three at once. That&#x27;s the difference between three launches and one. DM STACK to see it.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_30"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big28">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/5f3f3f444016d4a8.jpg" alt="welliemd_post_30 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_01 after launching more than eighty healthcare brands, the pattern is consistent. the ones that lasted built infrastructure before marketing. the ones that stalled did it backwards. hype gets you a launch week, infrastructure gets you a business. dm stack for the buildout.">
+  <button class="shot" data-big="big29" aria-label="Enlarge welliemd_founder_01">
+    <img src="img/0f7f6db2a139ad31.jpg" alt="welliemd_founder_01" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_01</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">After launching more than eighty healthcare brands, the pattern is consistent. The ones that lasted built infrastructure before marketing. The ones that stalled did it backwards. Hype gets you a launch week, infrastructure gets you a business. DM STACK for the buildout.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="After launching more than eighty healthcare brands, the pattern is consistent. The ones that lasted built infrastructure before marketing. The ones that stalled did it backwards. Hype gets you a launch week, infrastructure gets you a business. DM STACK for the buildout.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_01"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big29">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/c1d19f248ba58ab7.jpg" alt="welliemd_founder_01 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_02 i came to this from patient care, not from software. that&#x27;s why the platform is built around what providers and patients actually need to happen, in order, without workarounds. eighty-plus brands later, the sequence hasn&#x27;t changed. dm stack for the walkthrough.">
+  <button class="shot" data-big="big30" aria-label="Enlarge welliemd_founder_02">
+    <img src="img/3ab6c5429d636bb0.jpg" alt="welliemd_founder_02" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_02</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">I came to this from patient care, not from software. That&#x27;s why the platform is built around what providers and patients actually need to happen, in order, without workarounds. Eighty-plus brands later, the sequence hasn&#x27;t changed. DM STACK for the walkthrough.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="I came to this from patient care, not from software. That&#x27;s why the platform is built around what providers and patients actually need to happen, in order, without workarounds. Eighty-plus brands later, the sequence hasn&#x27;t changed. DM STACK for the walkthrough.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_02"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big30">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/e733d27d1e214112.jpg" alt="welliemd_founder_02 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_03 the easy weight loss money is gone and the hormone category is just opening. positioning ahead of a wave is a completely different exercise than chasing one. if you want to be early, the infrastructure decision comes first. dm stack to talk timing.">
+  <button class="shot" data-big="big31" aria-label="Enlarge welliemd_founder_03">
+    <img src="img/b0dd01b84637bcc7.jpg" alt="welliemd_founder_03" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_03</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">The easy weight loss money is gone and the hormone category is just opening. Positioning ahead of a wave is a completely different exercise than chasing one. If you want to be early, the infrastructure decision comes first. DM STACK to talk timing.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="The easy weight loss money is gone and the hormone category is just opening. Positioning ahead of a wave is a completely different exercise than chasing one. If you want to be early, the infrastructure decision comes first. DM STACK to talk timing.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_03"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big31">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/e7d28fb652a0287c.jpg" alt="welliemd_founder_03 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_04 most telehealth brands with a growth problem don&#x27;t have an ad problem. they have intake that leaks, prescribing that stalls and a compliance gap they&#x27;re hoping nobody audits. fix the system and the same spend performs differently. dm stack for the audit.">
+  <button class="shot" data-big="big32" aria-label="Enlarge welliemd_founder_04">
+    <img src="img/ae08d487d979217d.jpg" alt="welliemd_founder_04" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_04</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Most telehealth brands with a growth problem don&#x27;t have an ad problem. They have intake that leaks, prescribing that stalls and a compliance gap they&#x27;re hoping nobody audits. Fix the system and the same spend performs differently. DM STACK for the audit.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Most telehealth brands with a growth problem don&#x27;t have an ad problem. They have intake that leaks, prescribing that stalls and a compliance gap they&#x27;re hoping nobody audits. Fix the system and the same spend performs differently. DM STACK for the audit.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_04"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big32">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/fa8e327fe258f4d0.jpg" alt="welliemd_founder_04 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="fix"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_05 every brand we&#x27;ve launched has cleared legitscript certification. that isn&#x27;t luck, it&#x27;s compliance designed into the workflow instead of retrofitted before an audit. it&#x27;s also why those ad accounts stay open. dm stack to see how.">
+  <button class="shot" data-big="big33" aria-label="Enlarge welliemd_founder_05">
+    <img src="img/03af6fd6f2379a92.jpg" alt="welliemd_founder_05" loading="lazy">
+    <span class="badge fix">Fix first</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_05</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Every brand we&#x27;ve launched has cleared LegitScript certification. That isn&#x27;t luck, it&#x27;s compliance designed into the workflow instead of retrofitted before an audit. It&#x27;s also why those ad accounts stay open. DM STACK to see how.</p>
+    <p class="note low"><b>LOW</b> Absolute performance claim. Fine to run, but make sure the documentation exists before it goes up. If any brand ever failed or withdrew, change to &quot;every brand we&#x27;ve launched.&quot;</p>
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Every brand we&#x27;ve launched has cleared LegitScript certification. That isn&#x27;t luck, it&#x27;s compliance designed into the workflow instead of retrofitted before an audit. It&#x27;s also why those ad accounts stay open. DM STACK to see how.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_05"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big33">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/afbb78bdc68b5b3f.jpg" alt="welliemd_founder_05 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_06 building a telehealth brand from zero means sourcing providers, pharmacy, platform and compliance separately, then hoping they integrate. when the stack already exists, launch becomes configuration instead of construction. dm stack for the timeline.">
+  <button class="shot" data-big="big34" aria-label="Enlarge welliemd_founder_06">
+    <img src="img/edf9d52f0ae9c6a5.jpg" alt="welliemd_founder_06" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_06</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Building a telehealth brand from zero means sourcing providers, pharmacy, platform and compliance separately, then hoping they integrate. When the stack already exists, launch becomes configuration instead of construction. DM STACK for the timeline.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Building a telehealth brand from zero means sourcing providers, pharmacy, platform and compliance separately, then hoping they integrate. When the stack already exists, launch becomes configuration instead of construction. DM STACK for the timeline.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_06"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big34">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/faaf559ff9c79c1d.jpg" alt="welliemd_founder_06 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_07 federal and state requirements are the first thing most founders treat as a hurdle and the last thing they design around. engineered in from the start, compliance stops slowing you down and starts keeping competitors out. dm stack for the framework.">
+  <button class="shot" data-big="big35" aria-label="Enlarge welliemd_founder_07">
+    <img src="img/ea6cebd9394bf1a2.jpg" alt="welliemd_founder_07" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_07</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Federal and state requirements are the first thing most founders treat as a hurdle and the last thing they design around. Engineered in from the start, compliance stops slowing you down and starts keeping competitors out. DM STACK for the framework.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Federal and state requirements are the first thing most founders treat as a hurdle and the last thing they design around. Engineered in from the start, compliance stops slowing you down and starts keeping competitors out. DM STACK for the framework.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_07"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big35">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/a8f0ea02e00f82dd.jpg" alt="welliemd_founder_07 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_08 provider recruiting, credentialing and multi-state licensure is usually the slowest part of a launch and the easiest place to get it wrong. that network already exists, along with pharmacy access and the platform. you bring the brand. dm stack to see what&#x27;s included.">
+  <button class="shot" data-big="big36" aria-label="Enlarge welliemd_founder_08">
+    <img src="img/3e84ba8b245df6f8.jpg" alt="welliemd_founder_08" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_08</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">Provider recruiting, credentialing and multi-state licensure is usually the slowest part of a launch and the easiest place to get it wrong. That network already exists, along with pharmacy access and the platform. You bring the brand. DM STACK to see what&#x27;s included.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="Provider recruiting, credentialing and multi-state licensure is usually the slowest part of a launch and the easiest place to get it wrong. That network already exists, along with pharmacy access and the platform. You bring the brand. DM STACK to see what&#x27;s included.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_08"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big36">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/d7b925bee32d50d8.jpg" alt="welliemd_founder_08 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_09 the wellness market is enormous and most founders are still waiting for a signal that it&#x27;s safe to start. there is no permission slip. there&#x27;s a stack, a provider network and a compliance framework, available now. dm stack to start.">
+  <button class="shot" data-big="big37" aria-label="Enlarge welliemd_founder_09">
+    <img src="img/d6806d9128f2b3fe.jpg" alt="welliemd_founder_09" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_09</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">The wellness market is enormous and most founders are still waiting for a signal that it&#x27;s safe to start. There is no permission slip. There&#x27;s a stack, a provider network and a compliance framework, available now. DM STACK to start.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="The wellness market is enormous and most founders are still waiting for a signal that it&#x27;s safe to start. There is no permission slip. There&#x27;s a stack, a provider network and a compliance framework, available now. DM STACK to start.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_09"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big37">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/dafa592c89a46b9f.jpg" alt="welliemd_founder_09 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Founder set" data-status="clear"
+  data-kw="STACK" data-sub="n"
+  data-text="welliemd_founder_10 no telehealth brand launches overnight. the fast ones are standing on infrastructure someone else spent years building. eighty-plus brands, one platform, no guesswork. dm stack for the build.">
+  <button class="shot" data-big="big38" aria-label="Enlarge welliemd_founder_10">
+    <img src="img/f72eed8b2848c3f9.jpg" alt="welliemd_founder_10" loading="lazy">
+    <span class="badge clear">Clear</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">founder_10</span>
+      <span class="kw">DM STACK</span>
+    </div>
+    <p class="cap">No telehealth brand launches overnight. The fast ones are standing on infrastructure someone else spent years building. Eighty-plus brands, one platform, no guesswork. DM STACK for the build.</p>
+    
+    
+    <div class="acts">
+      <button class="btn go" data-copy="No telehealth brand launches overnight. The fast ones are standing on infrastructure someone else spent years building. Eighty-plus brands, one platform, no guesswork. DM STACK for the build.">Copy caption</button>
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_founder_10"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big38">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/4719bd066c18b3e0.jpg" alt="welliemd_founder_10 full size">
+  </dialog>
+</article>
+<article class="card" data-group="Pulled" data-status="stop"
+  data-kw="" data-sub="y"
+  data-text="welliemd_post_22 pulled. no caption written.">
+  <button class="shot" data-big="big39" aria-label="Enlarge welliemd_post_22">
+    <img src="img/eeacd43029e76cbd.jpg" alt="welliemd_post_22" loading="lazy">
+    <span class="badge stop">Do not schedule</span>
+  </button>
+  <div class="body">
+    <div class="idline">
+      <span class="fid">post_22</span>
+      
+    </div>
+    <p class="cap">Pulled. No caption written.</p>
+    <p class="note high"><b>HIGH</b> DSIP (emideltide) was the **only** peptide the July 2026 PCAC panel rejected, voted down 7-6. Six of seven got favorable recommendations and this one did not. The graphic argues the opposite of what happened, from a brand selling regulatory competence.  FIX: Pull it. The sleep angle is fine, the molecule is wrong. If you want sleep in the batch, have Mariel swap the headline to the $65B stat with no named compound.</p>
+    <p class="note sub"><b>SOURCE ON FILE</b> $65B on bad sleep</p>
+    <div class="acts">
+      
+      <a class="btn" href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">Drive</a>
+      <label class="tick"><input type="checkbox" data-done="welliemd_post_22"> Scheduled</label>
+    </div>
+  </div>
+  <dialog class="lightbox" id="big39">
+    <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+    <img src="img/4da99d9245d09d1f.jpg" alt="welliemd_post_22 full size">
+  </dialog>
+</article></div>
+  <p class="empty" id="empty">Nothing matches that.</p>
+</main>
+
+<footer class="wrap">
+  <p><b>Source of truth.</b> Captions, severities and fixes come from
+  <code>WellieMD-Captions-and-Compliance.md</code>. If this page and that file disagree, the file
+  is right. Graphics live in the Drive folder
+  <a href="https://drive.google.com/drive/folders/1Jda5ZvxEkOaKm3-owY2PPs6UDo-874IP" target="_blank" rel="noopener">WELLIE MD SOCIAL</a> and are cached here at
+  reading size.</p>
+  <p><b>The three keywords.</b> <code>STACK</code> the platform buildout ·
+  <code>HORMONE</code> the menopause launch map · <code>PEPTIDE</code> current regulatory status.
+  Each one needs a DM to exist behind it before the post runs.</p>
+  <p>"Scheduled" ticks are remembered in this browser only.</p>
+</footer>
+
+<script>
+(function(){
+  var q=document.getElementById('q'), grid=document.getElementById('grid'),
+      empty=document.getElementById('empty'),
+      cards=[].slice.call(grid.querySelectorAll('.card')), g='all', s='';
+  function apply(){
+    var t=(q.value||'').trim().toLowerCase(), n=0;
+    cards.forEach(function(c){
+      var okG = g==='all' || c.dataset.group===g;
+      var okS = !s || c.dataset.status===s;
+      var okT = !t || c.dataset.text.indexOf(t)>-1;
+      var v = okG&&okS&&okT;
+      c.classList.toggle('hidden', !v); if(v) n++;
+    });
+    empty.style.display = n ? 'none' : 'block';
+  }
+  q.addEventListener('input', apply);
+  [].forEach.call(document.querySelectorAll('.f'), function(b){
+    b.addEventListener('click', function(){
+      if(b.dataset.g){ g=b.dataset.g; s=''; } else { s=(s===b.dataset.s?'':b.dataset.s); g='all'; }
+      [].forEach.call(document.querySelectorAll('.f'), function(o){
+        var on = (o.dataset.g&&o.dataset.g===g&&!s) || (o.dataset.s&&o.dataset.s===s);
+        o.setAttribute('aria-pressed', String(!!on));
+      });
+      apply();
+    });
+  });
+  grid.addEventListener('click', function(e){
+    var z=e.target.closest('[data-big]');
+    if(z){ var d=document.getElementById(z.getAttribute('data-big'));
+            if(d&&d.showModal) d.showModal(); return; }
+    var c=e.target.closest('[data-copy]');
+    if(c){
+      var text=c.getAttribute('data-copy');
+      var ok=function(){ var w=c.textContent; c.textContent='Copied';
+        setTimeout(function(){c.textContent=w;},1400); };
+      var fb=function(){ var ta=document.createElement('textarea'); ta.value=text;
+        ta.style.cssText='position:fixed;left:-9999px'; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); ok(); }catch(e2){ c.textContent='Select and copy'; }
+        document.body.removeChild(ta); };
+      try{ if(navigator.clipboard&&navigator.clipboard.writeText)
+              navigator.clipboard.writeText(text).then(ok,fb); else fb(); }catch(err){ fb(); }
+    }
+  });
+  var KEY='wm-hub-scheduled';
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } }
+  var st=read();
+  [].forEach.call(document.querySelectorAll('[data-done]'), function(cb){
+    var id=cb.getAttribute('data-done');
+    if(st[id]){ cb.checked=true; cb.closest('.card').classList.add('done'); }
+    cb.addEventListener('change', function(){
+      cb.closest('.card').classList.toggle('done', cb.checked);
+      st[id]=cb.checked;
+      try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){}
+    });
+  });
+})();
+</script>
+
+<a class="backlink" href="../">&larr; All approval pages</a>
