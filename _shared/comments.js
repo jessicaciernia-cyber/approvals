@@ -22,8 +22,10 @@
   }
 
   /* A card's id must survive re-ordering and re-numbering, so it comes from the title
-     rather than the card's position. */
+     rather than the card's position. A standalone thread names its own id, which is how
+     the open questions at the top of a page keep a stable thread of their own. */
   function idFor(card) {
+    if (card.dataset.thread) return card.dataset.thread;
     if (card.dataset.cid) return card.dataset.cid;
     var h = card.querySelector("h2, h3");
     var t = (h ? h.textContent : "").toLowerCase()
@@ -143,7 +145,8 @@
   }
 
   function start() {
-    cards = [].slice.call(document.querySelectorAll("article.deck, article.post"));
+    cards = [].slice.call(
+      document.querySelectorAll("article.deck, article.post, [data-thread]"));
     if (!cards.length) return;
     cards.forEach(attach);
     load();

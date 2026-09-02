@@ -32,3 +32,24 @@
 .cmt-say{font:400 12px/1.4 var(--body-f,system-ui,sans-serif);color:var(--muted,#77776F);
   min-height:1em}
 .cmt-say.bad{color:var(--coral,#C0392B)}
+
+/* Approval status: the tick and the dropdown are two views of one value. */
+.st{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin:10px 0 2px}
+.st-sel{font-family:var(--mono,ui-monospace,monospace);font-size:11px;letter-spacing:.07em;
+  text-transform:uppercase;padding:7px 9px;border:1px solid var(--line,#DEDEDA);
+  background:var(--surface,#fff);color:var(--ink,#0A0A0A);cursor:pointer}
+.st-sel.st-approved{background:#D8F0E2;color:#155D3A;border-color:transparent}
+.st-sel.st-edits-sent{background:#E2E6FA;color:#2B357A;border-color:transparent}
+.st-sel.st-pending-edits{background:#FFF3D1;color:#8A5B00;border-color:transparent}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .st-sel.st-approved{background:#12301F;color:#7BD9A6}
+  :root:not([data-theme="light"]) .st-sel.st-edits-sent{background:#161B3A;color:#A9B4F0}
+  :root:not([data-theme="light"]) .st-sel.st-pending-edits{background:#33280A;color:#F0C55A}
+}
+.st-tick{display:flex;align-items:center;gap:6px;font-family:var(--mono,ui-monospace,monospace);
+  font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted,#77776F);
+  cursor:pointer}
+.st-tick input{width:15px;height:15px;accent-color:#155D3A;cursor:pointer}
+.st-who,.st-say{font-family:var(--mono,ui-monospace,monospace);font-size:10.5px;
+  letter-spacing:.04em;color:var(--muted,#77776F)}
+.st-say{color:var(--coral,#C0392B)}

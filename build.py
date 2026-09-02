@@ -78,7 +78,8 @@ def extract(src, outdir, slug):
     html += ('\n<a class="backlink" href="../">&larr; All approval pages</a>\n'
              '<script>window.APPROVAL_COMMENTS=' + json.dumps(
                  dict(url=SUPA_URL, key=SUPA_KEY, site=slug)) + ';</script>\n'
-             '<script src="../_shared/comments.js"></script>\n')
+             '<script src="../_shared/comments.js"></script>\n'
+             '<script src="../_shared/status.js"></script>\n')
     io.open(os.path.join(outdir, "index.html"), "w", encoding="utf-8").write(html)
     mb = sum(os.path.getsize(os.path.join(imgdir, f))
              for f in os.listdir(imgdir)) / 1024 / 1024

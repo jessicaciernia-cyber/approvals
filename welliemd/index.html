@@ -119,6 +119,12 @@ header p{max-width:64ch;margin:0;color:var(--header-dim)}
   text-transform:uppercase;color:var(--muted)}
 .f.wk i{display:block;font-style:normal;font-size:9.5px;opacity:.62;
   margin-top:3px;letter-spacing:.06em}
+.qhead{padding:30px 0 4px}
+.qhead h2{font-family:var(--disp);font-size:24px;text-transform:uppercase;
+  letter-spacing:-.015em;margin:0 0 7px}
+.qhead p{margin:0;max-width:74ch;font-size:14.5px;color:var(--body)}
+.panel.wide{grid-column:1/-1}
+.panel .cmt{margin-top:13px}
 #empty{display:none;padding:44px 0;color:var(--muted)}
 footer{border-top:2px solid var(--ink);padding:22px 0 70px;color:var(--muted);font-size:13.5px}
 footer p{max-width:76ch;margin:0 0 9px}
@@ -149,8 +155,14 @@ footer p{max-width:76ch;margin:0 0 9px}
 </div></header>
 
 <div class="wrap">
+  <div class="qhead">
+    <h2>Open questions</h2>
+    <p>Four things need a decision before the run can go out. Answer them here and the
+    answer stays with the question. Anyone on the page sees it within about twenty
+    seconds.</p>
+  </div>
   <section class="panels">
-    <div class="panel">
+    <div class="panel" data-thread="q-timeline">
       <h3>The twelve weeks question</h3>
       <p><b>C13</b> is a launch timeline end to end and <b>C16 slide 3</b> and <b>C12 slide
       5</b> say the same thing. The brief bars launch timeframes outright.</p>
@@ -158,14 +170,14 @@ footer p{max-width:76ch;margin:0 0 9px}
       rule may be stricter than the client is. If the timeline is approved, approve it once
       and all three stop being flags. If it is not, C13 has to go rather than be edited.</p>
     </div>
-    <div class="panel">
+    <div class="panel" data-thread="q-legitscript">
       <h3>The LegitScript claim is back</h3>
       <p><b>C16 slide 4</b> says <b>"100% LegitScript pass rate."</b> That is an approval
       rate and it implies WellieMD obtains a client's certification. The brief bars both.</p>
       <p>It is the same claim that stopped founder post 05. One frame, and the deck works
       without it.</p>
     </div>
-    <div class="panel">
+    <div class="panel" data-thread="q-peptides">
       <h3>C14 needs a compliance yes</h3>
       <p>It names <b>BPC-157, TB-500, DSIP, GHK-Cu, Semax, NAD+, epitalon and MOTS-c</b> as
       product lines. Every frame hedges with "being studied for", which is the right
@@ -174,13 +186,18 @@ footer p{max-width:76ch;margin:0 0 9px}
       This is the highest exposure in anything sent so far and it needs a real yes from
       whoever owns compliance, not a copy edit.</p>
     </div>
-    <div class="panel">
+    <div class="panel" data-thread="q-numbers">
       <h3>Numbers, and the canvas</h3>
       <p><b>C15</b> carries a shortage claim and two figures that will go stale, <b>C14</b>
       two market sizes, and <b>C17</b> a borrowed thousand-true-fans formula. None are
       sourced on the frame.</p>
       <p>The canvas is right. All 67 slides arrived at <b>1080&times;1350</b>, so nothing
       crops in the feed.</p>
+    </div>
+    <div class="panel wide" data-thread="q-general">
+      <h3>Anything else</h3>
+      <p>Notes that do not belong to one deck. Scheduling, tone, what to run first, a
+      claim nobody has raised yet.</p>
     </div>
   </section>
 </div>
@@ -544,3 +561,4 @@ Turn trust into a brand.">Copy caption</button></div></details></div>
 <a class="backlink" href="../">&larr; All approval pages</a>
 <script>window.APPROVAL_COMMENTS={"url": "https://bsgygerfgyztkrrjdqlg.supabase.co", "key": "sb_publishable_xkgImZlt7Sbn76ot7fEz6g_8pe68mPy", "site": "welliemd"};</script>
 <script src="../_shared/comments.js"></script>
+<script src="../_shared/status.js"></script>

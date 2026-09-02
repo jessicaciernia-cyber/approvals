@@ -58,3 +58,23 @@ disabled rather than breaking, and the build prints `notes backend: NOT CONFIGUR
 A card's note thread is keyed on a slug made from its title, not its position, so
 re-ordering or re-numbering the month does not move notes onto the wrong post. Renaming a
 post's title does orphan its notes.
+
+## Approval status
+
+Every card carries a status and an Approved tick. The tick and the dropdown are two views
+of one value, not two things to keep in sync: ticking sets `approved`, unticking returns it
+to `pending`. Four states, `pending`, `edits-sent`, `pending-edits`, `approved`.
+
+`_shared/status-schema.sql` is the table. It is append-only for the same reason the notes
+table is: anon may read and insert, never update or delete. A change is a new row and the
+newest row for a card wins, so what is left behind is a record of who moved it and when,
+and an approval cannot be quietly rewritten. The allowed values are enforced in the policy,
+not only in the page, so a hand-made request cannot invent a state the page cannot display.
+
+## Open questions
+
+The WellieMD carousel page opens with the flags that need a decision, and each one carries
+its own thread. They are keyed `q-timeline`, `q-legitscript`, `q-peptides`, `q-numbers` and
+`q-general` rather than by their heading, so rewording a panel does not orphan its answers.
+
+Any element with a `data-thread` attribute gets a thread, on any page.
