@@ -15,9 +15,9 @@ DL = os.path.dirname(HERE)
 
 SITES = [
     dict(slug="welliemd", title="WellieMD carousels",
-         src=os.path.join(DL, "welliemd-carousels", "hub.html"),
-         blurb="September 2026. Twenty carousels, one a day Monday to Friday, "
-               "grouped by week with captions and DM keywords."),
+         src=os.path.join(DL, "welliemd-carousels-new", "hub.html"),
+         blurb="Four carousels, seven slides each, checked against the content rules. "
+               "One slide carries a blocker."),
     dict(slug="welliemd-posts", title="WellieMD single posts",
          src=os.path.join(DL, "welliemd-posts", "hub.html"),
          blurb="Forty single statics, thirty topical and ten founder. Each one marked "
