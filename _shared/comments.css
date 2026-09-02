@@ -1,0 +1,34 @@
+/* Per-card edit notes. Appended to every approval card by comments.js. */
+.cmt{border-top:1px dashed var(--line,#DEDEDA);margin-top:14px;padding-top:12px}
+.cmt-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.cmt-h b{font:500 11px/1 var(--mono,ui-monospace,monospace);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted,#77776F)}
+.cmt-n{font:500 11px/1 var(--mono,ui-monospace,monospace);background:var(--ink,#0A0A0A);
+  color:var(--ground,#fff);border-radius:999px;padding:4px 7px}
+.cmt-n[hidden]{display:none}
+.cmt-list{display:flex;flex-direction:column;gap:9px;margin-bottom:10px}
+.cmt-list:empty{display:none}
+.cmt-i{background:var(--ground,#F3F3F0);border-left:3px solid var(--accent,#EC0F7E);
+  padding:9px 11px}
+.cmt-i .who{font:600 12px/1.3 var(--body-f,system-ui,sans-serif);margin-bottom:3px}
+.cmt-i .who span{font:400 11px/1 var(--mono,ui-monospace,monospace);
+  color:var(--muted,#77776F);margin-left:7px;letter-spacing:.04em}
+.cmt-i p{margin:0;font:400 14px/1.5 var(--body-f,system-ui,sans-serif);
+  color:var(--body,#3E3E3C);white-space:pre-wrap;overflow-wrap:anywhere}
+.cmt-f{display:flex;flex-direction:column;gap:7px}
+.cmt-f textarea,.cmt-f input{font:400 14px/1.45 var(--body-f,system-ui,sans-serif);
+  color:var(--ink,#0A0A0A);background:var(--surface,#fff);
+  border:1px solid var(--line,#DEDEDA);padding:9px 11px;width:100%;border-radius:0}
+.cmt-f textarea{min-height:62px;resize:vertical}
+.cmt-f textarea:focus,.cmt-f input:focus{outline:2px solid var(--ink,#0A0A0A);
+  outline-offset:-1px;border-color:transparent}
+.cmt-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.cmt-row input{flex:1 1 150px;min-width:0}
+.cmt-post{font:500 11px/1 var(--mono,ui-monospace,monospace);letter-spacing:.1em;
+  text-transform:uppercase;padding:11px 15px;border:1px solid var(--ink,#0A0A0A);
+  background:var(--ink,#0A0A0A);color:var(--ground,#F3F3F0);cursor:pointer;white-space:nowrap}
+.cmt-post:hover:not(:disabled){background:var(--accent,#EC0F7E);border-color:var(--accent,#EC0F7E)}
+.cmt-post:disabled{opacity:.45;cursor:default}
+.cmt-say{font:400 12px/1.4 var(--body-f,system-ui,sans-serif);color:var(--muted,#77776F);
+  min-height:1em}
+.cmt-say.bad{color:var(--coral,#C0392B)}

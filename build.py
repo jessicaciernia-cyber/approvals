@@ -7,7 +7,7 @@ so the whole thing is one repo, one Pages toggle, one page per batch.
 
 Run from anywhere:  python build.py
 """
-import base64, hashlib, io, os, re, shutil, sys
+import base64, hashlib, io, json, os, re, shutil, sys
 
 sys.stdout.reconfigure(encoding="utf-8")
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -24,7 +24,24 @@ SITES = [
                "and hashtags, in posting order."),
 ]
 
-def extract(src, outdir):
+# The anon key is public by design; what guards the table is its RLS policy set, not
+# secrecy. It still comes from .env rather than being pasted in here, so there is one
+# place to change it and it never lands in a commit by hand.
+def _env(name):
+    for path in (os.path.join(DL, "claude", ".env"), os.path.join(DL, ".env")):
+        if not os.path.exists(path):
+            continue
+        for line in io.open(path, encoding="utf-8", errors="ignore"):
+            if line.startswith(name + "="):
+                return line.split("=", 1)[1].strip()
+    return ""
+
+
+SUPA_URL = _env("APPROVALS_SUPABASE_URL")
+SUPA_KEY = _env("APPROVALS_SUPABASE_ANON_KEY")
+
+
+def extract(src, outdir, slug):
     """Pull every base64 data URI out to a file and rewrite the reference."""
     html = io.open(src, encoding="utf-8").read()
     imgdir = os.path.join(outdir, "img")
@@ -45,12 +62,19 @@ def extract(src, outdir):
 
     html = re.sub(r"data:(image/[a-z]+);base64,([A-Za-z0-9+/=]+)", swap, html)
     # These pages carry unapproved client creative: reachable by link, not by search.
+    # These files were authored as artifacts, where the harness supplies the charset.
+    # Standalone they must declare it themselves, or a server that omits it mojibakes
+    # every em dash and middot in the captions.
     html = html.replace("<title>",
+        '<meta charset="utf-8">\n'
         '<meta name="robots" content="noindex,nofollow,noarchive">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
-        '<link rel="stylesheet" href="../_shared/backlink.css">\n<title>', 1)
-    html = html.replace("<body>", "<body>", 1)
-    html += ('\n<a class="backlink" href="../">&larr; All approval pages</a>\n')
+        '<link rel="stylesheet" href="../_shared/backlink.css">\n'
+        '<link rel="stylesheet" href="../_shared/comments.css">\n<title>', 1)
+    html += ('\n<a class="backlink" href="../">&larr; All approval pages</a>\n'
+             '<script>window.APPROVAL_COMMENTS=' + json.dumps(
+                 dict(url=SUPA_URL, key=SUPA_KEY, site=slug)) + ';</script>\n'
+             '<script src="../_shared/comments.js"></script>\n')
     io.open(os.path.join(outdir, "index.html"), "w", encoding="utf-8").write(html)
     mb = sum(os.path.getsize(os.path.join(imgdir, f))
              for f in os.listdir(imgdir)) / 1024 / 1024
@@ -63,7 +87,7 @@ for s in SITES:
         continue
     out = os.path.join(HERE, s["slug"])
     os.makedirs(out, exist_ok=True)
-    n, kb, mb = extract(s["src"], out)
+    n, kb, mb = extract(s["src"], out, s["slug"])
     built.append(s)
     print(f"{s['slug']:<18} {kb:>6.0f} KB html   {n:>3} images  {mb:>5.1f} MB")
 
@@ -143,3 +167,6 @@ for root, _, files in os.walk(HERE):
         continue
     total += sum(os.path.getsize(os.path.join(root, f)) for f in files)
 print(f"\nindex.html + {len(built)} pages, {total/1024/1024:.1f} MB total")
+print("notes backend: " + (SUPA_URL if SUPA_URL and SUPA_KEY
+      else "NOT CONFIGURED - set APPROVALS_SUPABASE_URL and "
+           "APPROVALS_SUPABASE_ANON_KEY in .env"))
