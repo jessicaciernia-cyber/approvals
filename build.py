@@ -3,7 +3,7 @@
 Each hub is authored as a single self-contained HTML with its slides inlined as base64.
 That is right for an artifact and wrong for a website: one 6MB file the browser cannot
 cache. This pulls the images out to per-site folders and writes a small index over the top,
-so the whole thing is one repo, one Pages toggle, three pages.
+so the whole thing is one repo, one Pages toggle, one page per batch.
 
 Run from anywhere:  python build.py
 """
@@ -18,10 +18,6 @@ SITES = [
          src=os.path.join(DL, "welliemd-carousels", "hub.html"),
          blurb="September 2026. Twenty carousels, one a day Monday to Friday, "
                "grouped by week with captions and DM keywords."),
-    dict(slug="welliemd-statics", title="WellieMD post library",
-         src=os.path.join(DL, "welliemd-hub", "hub.html"),
-         blurb="Forty single static posts with captions, DM keywords and compliance "
-               "status, including the three that must not ship."),
     dict(slug="zenjessica", title="Zen Jessica carousels",
          src=os.path.join(DL, "zenjessica-hub", "hub.html"),
          blurb="September and October 2026. Twenty-four story carousels with captions "
