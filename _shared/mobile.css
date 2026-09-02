@@ -24,15 +24,17 @@
 
   /* --- the sticky filter bar: one scrolling row, not five stacked ------------- */
   .bar { padding: 10px 0; }
-  .bar .in {
+  /* two pages, two containers: the WellieMD hubs use .bar .in and the Zen Jessica hub
+     uses .bar .wrap. Both are the flex row that was wrapping. */
+  .bar .in, .bar .wrap {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 2px;
   }
-  .bar .in::-webkit-scrollbar { display: none; }
-  .bar .in > * { flex: 0 0 auto; }
+  .bar .in::-webkit-scrollbar, .bar .wrap::-webkit-scrollbar { display: none; }
+  .bar .in > *, .bar .wrap > * { flex: 0 0 auto; }
   /* the search box keeps a usable width and the chips scroll past it */
   #q { flex: 0 0 190px; width: 190px; font-size: 16px; padding: 12px 13px; }
   .f { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; }

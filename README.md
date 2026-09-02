@@ -73,11 +73,19 @@ not only in the page, so a hand-made request cannot invent a state the page cann
 
 ## Open questions
 
-The WellieMD carousel page opens with the flags that need a decision, and each one carries
-its own thread. They are keyed `q-timeline`, `q-legitscript`, `q-peptides`, `q-numbers` and
-`q-general` rather than by their heading, so rewording a panel does not orphan its answers.
+Both content pages open with the things that need a decision, and each one carries its own
+thread. WellieMD uses `q-timeline`, `q-legitscript`, `q-peptides`, `q-numbers`, `q-general`;
+Zen Jessica uses `z-waiting`, `z-keywords`, `z-november`, `z-general`. They are keyed rather
+than titled, so rewording a panel does not orphan its answers.
 
 Any element with a `data-thread` attribute gets a thread, on any page.
+
+## Cache busting
+
+Every shared stylesheet and script is linked with a content hash, `?v=` plus the first eight
+characters of its sha1. Without it a browser keeps the copy it already has, which is how a
+phone sits on an old layout after a fix has shipped. It also cost a debugging round here: a
+CSS change read as "not applied" until the URL changed.
 
 ## Phone layout
 

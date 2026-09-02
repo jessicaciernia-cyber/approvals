@@ -45,6 +45,18 @@ SUPA_URL = _env("APPROVALS_SUPABASE_URL")
 SUPA_KEY = _env("APPROVALS_SUPABASE_ANON_KEY")
 
 
+def _v(name):
+    """A content hash on every shared asset URL.
+
+    Without one a browser keeps the stylesheet it already has, which is how a phone can
+    sit on an old layout after a fix has shipped. The hash changes only when the file
+    does, so the cache still does its job the rest of the time.
+    """
+    path = os.path.join(HERE, "_shared", name)
+    h = hashlib.sha1(io.open(path, "rb").read()).hexdigest()[:8]
+    return "../_shared/%s?v=%s" % (name, h)
+
+
 def extract(src, outdir, slug):
     """Pull every base64 data URI out to a file and rewrite the reference."""
     html = io.open(src, encoding="utf-8").read()
@@ -73,14 +85,14 @@ def extract(src, outdir, slug):
         '<meta charset="utf-8">\n'
         '<meta name="robots" content="noindex,nofollow,noarchive">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
-        '<link rel="stylesheet" href="../_shared/backlink.css">\n'
-        '<link rel="stylesheet" href="../_shared/comments.css">\n<title>', 1)
-    html += ('\n<link rel="stylesheet" href="../_shared/mobile.css">\n'
+        '<link rel="stylesheet" href="' + _v("backlink.css") + '">\n'
+        '<link rel="stylesheet" href="' + _v("comments.css") + '">\n<title>', 1)
+    html += ('\n<link rel="stylesheet" href="' + _v("mobile.css") + '">\n'
              '\n<a class="backlink" href="../">&larr; All approval pages</a>\n'
              '<script>window.APPROVAL_COMMENTS=' + json.dumps(
                  dict(url=SUPA_URL, key=SUPA_KEY, site=slug)) + ';</script>\n'
-             '<script src="../_shared/comments.js"></script>\n'
-             '<script src="../_shared/status.js"></script>\n')
+             '<script src="' + _v("comments.js") + '"></script>\n'
+             '<script src="' + _v("status.js") + '"></script>\n')
     io.open(os.path.join(outdir, "index.html"), "w", encoding="utf-8").write(html)
     mb = sum(os.path.getsize(os.path.join(imgdir, f))
              for f in os.listdir(imgdir)) / 1024 / 1024
