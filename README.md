@@ -10,6 +10,10 @@ Three review pages for Kickstart Social clients, served as one GitHub Pages site
 Reachable by link only: every page carries `noindex,nofollow,noarchive` and `robots.txt`
 disallows crawling. It is a review surface, not a publication.
 
+## Adding a batch
+
+See [ADD-A-BATCH.md](ADD-A-BATCH.md). Read it before touching anything here.
+
 ## Rebuilding
 
 Everything here is generated. Do not hand-edit `index.html` or the per-site folders.
