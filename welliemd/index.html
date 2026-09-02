@@ -88,6 +88,18 @@ header p{max-width:64ch;margin:0;color:var(--header-dim)}
 .fl.stop{border-left-color:var(--no-fg)}
 .fl b{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--muted);margin-right:7px}
+.cap2{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.cap2 summary{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);cursor:pointer;list-style:none}
+.cap2 summary::-webkit-details-marker{display:none}
+.cap2 summary::before{content:"+ ";font-weight:700}
+.cap2[open] summary::before{content:"- "}
+.capin{padding-top:12px;max-width:76ch}
+.capin p{margin:0 0 11px;font-size:15px;line-height:1.55;color:var(--body)}
+.copy{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 13px;border:1px solid var(--ink);background:var(--ink);color:var(--ground);
+  cursor:pointer}
+.copy:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 #empty{display:none;padding:44px 0;color:var(--muted)}
 footer{border-top:2px solid var(--ink);padding:22px 0 70px;color:var(--muted);font-size:13.5px}
 footer p{max-width:76ch;margin:0 0 9px}
@@ -105,13 +117,13 @@ footer p{max-width:76ch;margin:0 0 9px}
 </style>
 <header><div class="wrap">
   <div class="kick">@joinwelliemd &nbsp;·&nbsp; carousels &nbsp;·&nbsp; for Jessica's approval</div>
-  <h1>Four <mark>carousels</mark></h1>
-  <p>Seven slides each, delivered as artwork with no captions and no posting dates. Every
-  slide is checked against the content rules in the WellieMD brief. Tap any slide to page
-  through a deck full size.</p>
+  <h1>Ten <mark>carousels</mark></h1>
+  <p>Seven slides each. C9 to C12 were delivered as artwork; C13 to C18 were built here in
+  the same system, at the right canvas, with captions written to go with them. Every slide
+  is checked against the content rules in the WellieMD brief.</p>
   <div class="nums">
-    <div><b>4</b><span>carousels</span></div>
-    <div><b>28</b><span>slides</span></div>
+    <div><b>10</b><span>carousels</span></div>
+    <div><b>70</b><span>slides</span></div>
     <div><b>5</b><span>slides flagged</span></div>
     <div><b>1</b><span>deck with a blocker</span></div>
   </div>
@@ -134,16 +146,17 @@ footer p{max-width:76ch;margin:0 0 9px}
       one place. One number, used everywhere.</p>
     </div>
     <div class="panel">
-      <h3>The canvas is still 3:4</h3>
-      <p>All 28 slides are <b>1744&times;2336</b>. Instagram's tallest feed post is 4:5, so
-      as delivered these crop or letterbox.</p>
-      <p>They want re-exporting at <b>1080&times;1350</b>, same as the forty single posts.</p>
+      <h3>Two canvases here</h3>
+      <p>C9 to C12 are <b>1744&times;2336</b>, which is 3:4. Instagram's tallest feed post is
+      4:5, so as delivered those four crop or letterbox and want re-exporting.</p>
+      <p>C13 to C18 are already <b>1080&times;1350</b>.</p>
     </div>
     <div class="panel">
-      <h3>What changed here</h3>
-      <p>These four replace the twenty September carousels entirely. The old set is off this
-      page.</p>
-      <p>No captions came with them, so nothing is scheduled and no dates are assigned.</p>
+      <h3>Six built in this style</h3>
+      <p><b>C13 to C18</b> are new, made to match C9 to C12: the same palette sampled off
+      those files, the same structure, and the real wordmark rather than type.</p>
+      <p>They carry no flags because the rules were checked in code before anything was
+      rendered. Captions are written and sit under each deck.</p>
     </div>
   </section>
 </div>
@@ -154,12 +167,14 @@ footer p{max-width:76ch;margin:0 0 9px}
   <button class="f" data-f="stop" aria-pressed="false">Has a blocker</button>
   <button class="f" data-f="check" aria-pressed="false">Check a claim</button>
   <button class="f" data-f="ok" aria-pressed="false">Ready</button>
+  <button class="f" data-f="new" aria-pressed="false">The six new ones</button>
   <a class="f" href="../welliemd-posts/">The 40 single posts</a>
 </div></div>
 
 <main class="wrap">
   <div class="decks" id="decks">
 <article class="deck" style="--accent:#FF4F3D" data-status="check"
+  data-fresh="n"
   data-text="every telehealth brand you admire runs on the same four systems intake, providers, pharmacy, compliance, walked one at a time and closed on the stack being the brand.">
   <div class="head">
     <div class="num">C9<span class="dt">7 slides</span></div>
@@ -175,6 +190,7 @@ footer p{max-width:76ch;margin:0 0 9px}
   </div>
 </article>
 <article class="deck" style="--accent:#FF4F3D" data-status="ok"
+  data-fresh="n"
   data-text="5 signs you&#x27;re ready to launch a telehealth brand a readiness checklist aimed at practitioners with an audience. no numbers, no timeframes, nothing to source.">
   <div class="head">
     <div class="num">C10<span class="dt">7 slides</span></div>
@@ -190,6 +206,7 @@ footer p{max-width:76ch;margin:0 0 9px}
   </div>
 </article>
 <article class="deck" style="--accent:#FFE800" data-status="check"
+  data-fresh="n"
   data-text="why one-drug brands die: the retention math weight-loss-only against multi-protocol, argued on lifetime value rather than on clinical claims.">
   <div class="head">
     <div class="num">C11<span class="dt">7 slides</span></div>
@@ -205,6 +222,7 @@ footer p{max-width:76ch;margin:0 0 9px}
   </div>
 </article>
 <article class="deck" style="--accent:#FF4F3D" data-status="stop"
+  data-fresh="n"
   data-text="you&#x27;ve made healthcare money for everyone but yourself aimed at nurses, pts, pas and health coaches. the strongest deck of the four and the one carrying the blocker.">
   <div class="head">
     <div class="num">C12<span class="dt">7 slides</span></div>
@@ -217,6 +235,162 @@ footer p{max-width:76ch;margin:0 0 9px}
   <div class="strip"><button class="fr" data-d="3" data-i="0" aria-label="Slide 1"><img src="img/88b23d29a248f834.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="3" data-i="1" aria-label="Slide 2"><img src="img/9fcd7b3ad397949c.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="3" data-i="2" aria-label="Slide 3"><img src="img/1ad640cd45d8ff55.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="3" data-i="3" aria-label="Slide 4"><img src="img/d1f28a08deda43d9.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr flag bad" data-d="3" data-i="4" aria-label="Slide 5"><img src="img/5c841dabcc4c7b5a.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="3" data-i="5" aria-label="Slide 6"><img src="img/7e2b5aa3bd2ee2e5.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="3" data-i="6" aria-label="Slide 7"><img src="img/305a5e4a6c320c80.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
   <div class="cap">
     <div class="capbody"><p>Aimed at nurses, PTs, PAs and health coaches. The strongest deck of the four and the one carrying the blocker.</p><div class="fl stop"><b>Slide 5</b> &#x27;10 to 12 weeks. Your name on the brand.&#x27; The brief bars launch timeframes outright, days, weeks and months to launch. This is the same rule that stopped founder post 06.</div><div class="fl check"><b>Slide 5</b> &#x27;100% yours&#x27; sits directly under the timeframe. Read together it is a promise about both speed and ownership.</div></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#F7503D" data-status="ok"
+  data-fresh="y"
+  data-text="your intake is not a form. it is the product. it is the first thing a patient meets and the last thing a reviewer reads. most brands treat it as paperwork and hand it to whoever built the site.">
+  <div class="head">
+    <div class="num">C13<span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>Your intake is not a form. It is the product.</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">paper</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="4" data-i="0" aria-label="Slide 1"><img src="img/7b9e526597a88135.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="4" data-i="1" aria-label="Slide 2"><img src="img/1e8ea11a05e7b8ec.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="4" data-i="2" aria-label="Slide 3"><img src="img/19e9f37876b96466.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="4" data-i="3" aria-label="Slide 4"><img src="img/9529af29861abaf3.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="4" data-i="4" aria-label="Slide 5"><img src="img/279c9ba8e05269e9.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="4" data-i="5" aria-label="Slide 6"><img src="img/8a6d71afbd063f70.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="4" data-i="6" aria-label="Slide 7"><img src="img/e46ede806169df4f.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>It is the first thing a patient meets and the last thing a reviewer reads. Most brands treat it as paperwork and hand it to whoever built the site.</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>Your intake is not a form. It is the product.</p><p>It is the first thing a patient meets and the last thing a reviewer reads. Most brands treat it as paperwork and hand it to whoever built the site.</p><p>It decides three things at once. Whether the patient finishes. Whether the provider can act without a second round of questions. Whether the record holds up when someone asks how the decision was made.</p><p>A form asks questions. An intake carries a decision, and it has to carry it all the way to the prescription without anyone retyping it.</p><p>Build it once and every category after the first one gets cheaper.</p><button class="copy" type="button" data-copy="Your intake is not a form. It is the product.
+
+It is the first thing a patient meets and the last thing a reviewer reads. Most brands treat it as paperwork and hand it to whoever built the site.
+
+It decides three things at once. Whether the patient finishes. Whether the provider can act without a second round of questions. Whether the record holds up when someone asks how the decision was made.
+
+A form asks questions. An intake carries a decision, and it has to carry it all the way to the prescription without anyone retyping it.
+
+Build it once and every category after the first one gets cheaper.">Copy caption</button></div></details></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#F7503D" data-status="ok"
+  data-fresh="y"
+  data-text="four questions to ask a pharmacy partner before you sign founders price pharmacy as a line item. it behaves like a dependency, and you find that out on the first bad week rather than the first good one.">
+  <div class="head">
+    <div class="num">C14<span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>Four questions to ask a pharmacy partner before you sign</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">coral</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="5" data-i="0" aria-label="Slide 1"><img src="img/56d11491376d4aa6.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="5" data-i="1" aria-label="Slide 2"><img src="img/93d59382a5dddaea.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="5" data-i="2" aria-label="Slide 3"><img src="img/a5c52ffa79193318.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="5" data-i="3" aria-label="Slide 4"><img src="img/a1bb6834642f69a2.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="5" data-i="4" aria-label="Slide 5"><img src="img/1da76da6aecf83e8.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="5" data-i="5" aria-label="Slide 6"><img src="img/5fb24579ee3b9bc3.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="5" data-i="6" aria-label="Slide 7"><img src="img/ed4ff06c234f6b70.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>Founders price pharmacy as a line item. It behaves like a dependency, and you find that out on the first bad week rather than the first good one.</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>Four questions to ask a pharmacy partner before you sign.</p><p>Founders price pharmacy as a line item. It behaves like a dependency, and you find that out on the first bad week rather than the first good one.</p><p>One. What can actually be dispensed, in what forms.</p><p>Two. Which states are covered, and which ones lapse first.</p><p>Three. What turnaround looks like when the queue is full, not when it is empty.</p><p>Four. What happens when something is out of stock.</p><p>The last one is the real test. Every pharmacy looks the same until something is unavailable. Ask it before you sign, because after you sign it stops being a question and starts being your problem.</p><button class="copy" type="button" data-copy="Four questions to ask a pharmacy partner before you sign.
+
+Founders price pharmacy as a line item. It behaves like a dependency, and you find that out on the first bad week rather than the first good one.
+
+One. What can actually be dispensed, in what forms.
+
+Two. Which states are covered, and which ones lapse first.
+
+Three. What turnaround looks like when the queue is full, not when it is empty.
+
+Four. What happens when something is out of stock.
+
+The last one is the real test. Every pharmacy looks the same until something is unavailable. Ask it before you sign, because after you sign it stops being a question and starts being your problem.">Copy caption</button></div></details></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#FEE800" data-status="ok"
+  data-fresh="y"
+  data-text="one patient, four handoffs, three systems the patient does not see three systems. they see one brand that keeps asking them the same questions.">
+  <div class="head">
+    <div class="num">C15<span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>One patient, four handoffs, three systems</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">night</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="6" data-i="0" aria-label="Slide 1"><img src="img/7d5e914bf3967ddd.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="6" data-i="1" aria-label="Slide 2"><img src="img/9afbb0f46583ac8f.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="6" data-i="2" aria-label="Slide 3"><img src="img/87e1fde926483ec4.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="6" data-i="3" aria-label="Slide 4"><img src="img/5cd62deb4287a9b1.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="6" data-i="4" aria-label="Slide 5"><img src="img/37af2c42e9421d47.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="6" data-i="5" aria-label="Slide 6"><img src="img/ef14b2f5d9f19217.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="6" data-i="6" aria-label="Slide 7"><img src="img/0957609ae1d03754.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>The patient does not see three systems. They see one brand that keeps asking them the same questions.</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>One patient, four handoffs, three systems.</p><p>The patient does not see three systems. They see one brand that keeps asking them the same questions.</p><p>Intake to provider. Provider to pharmacy. Pharmacy to fulfilment. Fulfilment back to refill.</p><p>Every handoff is a place to lose them, and a place to lose the record.</p><p>The last one decides retention. If the refill is manual, the relationship is manual, and manual relationships end quietly.</p><p>One record, or four versions of a person.</p><button class="copy" type="button" data-copy="One patient, four handoffs, three systems.
+
+The patient does not see three systems. They see one brand that keeps asking them the same questions.
+
+Intake to provider. Provider to pharmacy. Pharmacy to fulfilment. Fulfilment back to refill.
+
+Every handoff is a place to lose them, and a place to lose the record.
+
+The last one decides retention. If the refill is manual, the relationship is manual, and manual relationships end quietly.
+
+One record, or four versions of a person.">Copy caption</button></div></details></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#F7503D" data-status="ok"
+  data-fresh="y"
+  data-text="why founders rebuild in month nine nothing broke. the thing they built simply ran out of room.">
+  <div class="head">
+    <div class="num">C16<span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>Why founders rebuild in month nine</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">paper</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="7" data-i="0" aria-label="Slide 1"><img src="img/dde8ab37c045fbe6.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="7" data-i="1" aria-label="Slide 2"><img src="img/0e7997d14624dc04.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="7" data-i="2" aria-label="Slide 3"><img src="img/cdb8131cdc57fd70.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="7" data-i="3" aria-label="Slide 4"><img src="img/6500971f96a19926.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="7" data-i="4" aria-label="Slide 5"><img src="img/bd0e0ae93c7a1c35.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="7" data-i="5" aria-label="Slide 6"><img src="img/967927202fbe7d37.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="7" data-i="6" aria-label="Slide 7"><img src="img/83d744a08af9f375.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>Nothing broke. The thing they built simply ran out of room.</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>Why founders rebuild in month nine.</p><p>Nothing broke. The thing they built simply ran out of room.</p><p>Month one is one category and one state and one flow. Month nine is three categories, a dozen states, a compliance question nobody owns and a refill nobody automated.</p><p>The rebuild is not a mistake. It is a deadline, and it arrives on schedule for anybody who launched narrow.</p><p>You cannot add a second protocol to a platform that was designed around the first one. You can only rebuild around both.</p><p>Build for the second protocol on day one, and month nine is a launch instead of a rescue.</p><button class="copy" type="button" data-copy="Why founders rebuild in month nine.
+
+Nothing broke. The thing they built simply ran out of room.
+
+Month one is one category and one state and one flow. Month nine is three categories, a dozen states, a compliance question nobody owns and a refill nobody automated.
+
+The rebuild is not a mistake. It is a deadline, and it arrives on schedule for anybody who launched narrow.
+
+You cannot add a second protocol to a platform that was designed around the first one. You can only rebuild around both.
+
+Build for the second protocol on day one, and month nine is a launch instead of a rescue.">Copy caption</button></div></details></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#F7503D" data-status="ok"
+  data-fresh="y"
+  data-text="fifty states is not a marketing problem it is a licensing one, and it does not respond to budget.">
+  <div class="head">
+    <div class="num">C17<span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>Fifty states is not a marketing problem</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">coral</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="8" data-i="0" aria-label="Slide 1"><img src="img/2d6572b1489248be.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="8" data-i="1" aria-label="Slide 2"><img src="img/73a5e11441673be2.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="8" data-i="2" aria-label="Slide 3"><img src="img/010657205704b22b.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="8" data-i="3" aria-label="Slide 4"><img src="img/663e0c544d6ce9cc.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="8" data-i="4" aria-label="Slide 5"><img src="img/82c890bf2e1ced2b.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="8" data-i="5" aria-label="Slide 6"><img src="img/24697bd23fbc4634.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="8" data-i="6" aria-label="Slide 7"><img src="img/a0a11b4c47635435.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>It is a licensing one, and it does not respond to budget.</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>Fifty states is not a marketing problem.</p><p>It is a licensing one, and it does not respond to budget.</p><p>You can run ads into a state you cannot serve. The traffic arrives either way. The prescription does not.</p><p>Coverage takes four things, and every one of them has its own clock. A licensed provider in that state. Credentialing on file. Malpractice that travels. A pharmacy that ships there.</p><p>None of that speeds up because the campaign is live.</p><p>Coverage gets built before it gets advertised. Otherwise the media buy is a tour of places you cannot fill.</p><button class="copy" type="button" data-copy="Fifty states is not a marketing problem.
+
+It is a licensing one, and it does not respond to budget.
+
+You can run ads into a state you cannot serve. The traffic arrives either way. The prescription does not.
+
+Coverage takes four things, and every one of them has its own clock. A licensed provider in that state. Credentialing on file. Malpractice that travels. A pharmacy that ships there.
+
+None of that speeds up because the campaign is live.
+
+Coverage gets built before it gets advertised. Otherwise the media buy is a tour of places you cannot fill.">Copy caption</button></div></details></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#FEE800" data-status="ok"
+  data-fresh="y"
+  data-text="compliance is the moat, not the cost founders budget for it the way they budget for insurance. something you pay for and hope never matters.">
+  <div class="head">
+    <div class="num">C18<span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>Compliance is the moat, not the cost</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">night</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="9" data-i="0" aria-label="Slide 1"><img src="img/48315cdb9def5ab1.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="9" data-i="1" aria-label="Slide 2"><img src="img/22993c66bbf15c9c.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="9" data-i="2" aria-label="Slide 3"><img src="img/dcec650e2f378070.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="9" data-i="3" aria-label="Slide 4"><img src="img/a1b7566b2ac82339.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="9" data-i="4" aria-label="Slide 5"><img src="img/b450f2ba487fe19f.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="9" data-i="5" aria-label="Slide 6"><img src="img/93b87731c11508bd.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="9" data-i="6" aria-label="Slide 7"><img src="img/811e8c1dbf04da5a.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>Founders budget for it the way they budget for insurance. Something you pay for and hope never matters.</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>Compliance is the moat, not the cost.</p><p>Founders budget for it the way they budget for insurance. Something you pay for and hope never matters.</p><p>It is the opposite. It is the reason a competitor with more money still cannot enter your category next quarter.</p><p>The pharmacy relationship, the provider network, the state coverage, the ad account that stays open. Every one of those is slow to earn and instant to lose, which is exactly what a moat is.</p><p>Nobody loses an account for one caption. They lose it for a pattern the caption finally made visible.</p><p>Built in, it is a barrier to entry. Bolted on, it is a bill.</p><button class="copy" type="button" data-copy="Compliance is the moat, not the cost.
+
+Founders budget for it the way they budget for insurance. Something you pay for and hope never matters.
+
+It is the opposite. It is the reason a competitor with more money still cannot enter your category next quarter.
+
+The pharmacy relationship, the provider network, the state coverage, the ad account that stays open. Every one of those is slow to earn and instant to lose, which is exactly what a moat is.
+
+Nobody loses an account for one caption. They lose it for a pattern the caption finally made visible.
+
+Built in, it is a barrier to entry. Bolted on, it is a bill.">Copy caption</button></div></details></div>
   </div>
 </article></div>
   <p id="empty">Nothing matches that.</p>
@@ -239,7 +413,7 @@ footer p{max-width:76ch;margin:0 0 9px}
 
 <script>
 (function(){
-  var BIG = [[{"src": "img/890a6a53ac5a35d9.jpg", "cap": "C9  \u00b7  slide 1 of 7"}, {"src": "img/6269750f1d7e7950.jpg", "cap": "C9  \u00b7  slide 2 of 7"}, {"src": "img/42c41083c73c4e22.jpg", "cap": "C9  \u00b7  slide 3 of 7"}, {"src": "img/2e0bb3b5a8bbe3b1.jpg", "cap": "C9  \u00b7  slide 4 of 7"}, {"src": "img/ad3cb83c26ad4dc4.jpg", "cap": "C9  \u00b7  slide 5 of 7"}, {"src": "img/395fd381e9661659.jpg", "cap": "C9  \u00b7  slide 6 of 7"}, {"src": "img/a67dfec66e09e4dd.jpg", "cap": "C9  \u00b7  slide 7 of 7"}], [{"src": "img/341d844ace9b5f31.jpg", "cap": "C10  \u00b7  slide 1 of 7"}, {"src": "img/3027ba2c12a32266.jpg", "cap": "C10  \u00b7  slide 2 of 7"}, {"src": "img/34dd7eb7e7f2ac5b.jpg", "cap": "C10  \u00b7  slide 3 of 7"}, {"src": "img/8d655d365a68f3dc.jpg", "cap": "C10  \u00b7  slide 4 of 7"}, {"src": "img/ad843d87a1fa4486.jpg", "cap": "C10  \u00b7  slide 5 of 7"}, {"src": "img/e7db8bc0cfc924fd.jpg", "cap": "C10  \u00b7  slide 6 of 7"}, {"src": "img/5e8aa25974d023e2.jpg", "cap": "C10  \u00b7  slide 7 of 7"}], [{"src": "img/622c106cd32545f7.jpg", "cap": "C11  \u00b7  slide 1 of 7"}, {"src": "img/f6ee7679c3fe4af9.jpg", "cap": "C11  \u00b7  slide 2 of 7"}, {"src": "img/e0b8d0728296bc8f.jpg", "cap": "C11  \u00b7  slide 3 of 7"}, {"src": "img/bc453d76d29e9423.jpg", "cap": "C11  \u00b7  slide 4 of 7"}, {"src": "img/0aafa8b8bcabb39f.jpg", "cap": "C11  \u00b7  slide 5 of 7"}, {"src": "img/ee9572a5db89585d.jpg", "cap": "C11  \u00b7  slide 6 of 7"}, {"src": "img/8b78335acade1c51.jpg", "cap": "C11  \u00b7  slide 7 of 7"}], [{"src": "img/055cc96cbe02e9c8.jpg", "cap": "C12  \u00b7  slide 1 of 7"}, {"src": "img/a2a4c6c4d66fb69b.jpg", "cap": "C12  \u00b7  slide 2 of 7"}, {"src": "img/77e5405771806859.jpg", "cap": "C12  \u00b7  slide 3 of 7"}, {"src": "img/4737226a268cc250.jpg", "cap": "C12  \u00b7  slide 4 of 7"}, {"src": "img/7e060fab6d948b1b.jpg", "cap": "C12  \u00b7  slide 5 of 7"}, {"src": "img/98da3a166ea36d2c.jpg", "cap": "C12  \u00b7  slide 6 of 7"}, {"src": "img/c0e88bb2623acec5.jpg", "cap": "C12  \u00b7  slide 7 of 7"}]];
+  var BIG = [[{"src": "img/890a6a53ac5a35d9.jpg", "cap": "C9  \u00b7  slide 1 of 7"}, {"src": "img/6269750f1d7e7950.jpg", "cap": "C9  \u00b7  slide 2 of 7"}, {"src": "img/42c41083c73c4e22.jpg", "cap": "C9  \u00b7  slide 3 of 7"}, {"src": "img/2e0bb3b5a8bbe3b1.jpg", "cap": "C9  \u00b7  slide 4 of 7"}, {"src": "img/ad3cb83c26ad4dc4.jpg", "cap": "C9  \u00b7  slide 5 of 7"}, {"src": "img/395fd381e9661659.jpg", "cap": "C9  \u00b7  slide 6 of 7"}, {"src": "img/a67dfec66e09e4dd.jpg", "cap": "C9  \u00b7  slide 7 of 7"}], [{"src": "img/341d844ace9b5f31.jpg", "cap": "C10  \u00b7  slide 1 of 7"}, {"src": "img/3027ba2c12a32266.jpg", "cap": "C10  \u00b7  slide 2 of 7"}, {"src": "img/34dd7eb7e7f2ac5b.jpg", "cap": "C10  \u00b7  slide 3 of 7"}, {"src": "img/8d655d365a68f3dc.jpg", "cap": "C10  \u00b7  slide 4 of 7"}, {"src": "img/ad843d87a1fa4486.jpg", "cap": "C10  \u00b7  slide 5 of 7"}, {"src": "img/e7db8bc0cfc924fd.jpg", "cap": "C10  \u00b7  slide 6 of 7"}, {"src": "img/5e8aa25974d023e2.jpg", "cap": "C10  \u00b7  slide 7 of 7"}], [{"src": "img/622c106cd32545f7.jpg", "cap": "C11  \u00b7  slide 1 of 7"}, {"src": "img/f6ee7679c3fe4af9.jpg", "cap": "C11  \u00b7  slide 2 of 7"}, {"src": "img/e0b8d0728296bc8f.jpg", "cap": "C11  \u00b7  slide 3 of 7"}, {"src": "img/bc453d76d29e9423.jpg", "cap": "C11  \u00b7  slide 4 of 7"}, {"src": "img/0aafa8b8bcabb39f.jpg", "cap": "C11  \u00b7  slide 5 of 7"}, {"src": "img/ee9572a5db89585d.jpg", "cap": "C11  \u00b7  slide 6 of 7"}, {"src": "img/8b78335acade1c51.jpg", "cap": "C11  \u00b7  slide 7 of 7"}], [{"src": "img/055cc96cbe02e9c8.jpg", "cap": "C12  \u00b7  slide 1 of 7"}, {"src": "img/a2a4c6c4d66fb69b.jpg", "cap": "C12  \u00b7  slide 2 of 7"}, {"src": "img/77e5405771806859.jpg", "cap": "C12  \u00b7  slide 3 of 7"}, {"src": "img/4737226a268cc250.jpg", "cap": "C12  \u00b7  slide 4 of 7"}, {"src": "img/7e060fab6d948b1b.jpg", "cap": "C12  \u00b7  slide 5 of 7"}, {"src": "img/98da3a166ea36d2c.jpg", "cap": "C12  \u00b7  slide 6 of 7"}, {"src": "img/c0e88bb2623acec5.jpg", "cap": "C12  \u00b7  slide 7 of 7"}], [{"src": "img/1b21e5172e4e5390.jpg", "cap": "C13  \u00b7  slide 1 of 7"}, {"src": "img/3d29cd7cadd9e387.jpg", "cap": "C13  \u00b7  slide 2 of 7"}, {"src": "img/3885ad9cda923693.jpg", "cap": "C13  \u00b7  slide 3 of 7"}, {"src": "img/e0441dfd2b7e62cd.jpg", "cap": "C13  \u00b7  slide 4 of 7"}, {"src": "img/1a67e2780cb05954.jpg", "cap": "C13  \u00b7  slide 5 of 7"}, {"src": "img/e7b07a555b623cc4.jpg", "cap": "C13  \u00b7  slide 6 of 7"}, {"src": "img/dcfd0bb649686eae.jpg", "cap": "C13  \u00b7  slide 7 of 7"}], [{"src": "img/b56eab6123a1f441.jpg", "cap": "C14  \u00b7  slide 1 of 7"}, {"src": "img/aaab20d28f142d9c.jpg", "cap": "C14  \u00b7  slide 2 of 7"}, {"src": "img/cc62eb7263365e5a.jpg", "cap": "C14  \u00b7  slide 3 of 7"}, {"src": "img/b383ecc363343d12.jpg", "cap": "C14  \u00b7  slide 4 of 7"}, {"src": "img/829929d39774e0a3.jpg", "cap": "C14  \u00b7  slide 5 of 7"}, {"src": "img/86382c7ead5b5421.jpg", "cap": "C14  \u00b7  slide 6 of 7"}, {"src": "img/74829635e408ff39.jpg", "cap": "C14  \u00b7  slide 7 of 7"}], [{"src": "img/056daefff0c44bb4.jpg", "cap": "C15  \u00b7  slide 1 of 7"}, {"src": "img/87b5c2cfb2e3a3e3.jpg", "cap": "C15  \u00b7  slide 2 of 7"}, {"src": "img/76e48871a17783dc.jpg", "cap": "C15  \u00b7  slide 3 of 7"}, {"src": "img/1dc5f2b44bf1f26d.jpg", "cap": "C15  \u00b7  slide 4 of 7"}, {"src": "img/88c8319e39b6f131.jpg", "cap": "C15  \u00b7  slide 5 of 7"}, {"src": "img/5d3c5a94fd29ec30.jpg", "cap": "C15  \u00b7  slide 6 of 7"}, {"src": "img/5e8301c182bd6039.jpg", "cap": "C15  \u00b7  slide 7 of 7"}], [{"src": "img/30b7554f4e364bfc.jpg", "cap": "C16  \u00b7  slide 1 of 7"}, {"src": "img/26f9578e9173af17.jpg", "cap": "C16  \u00b7  slide 2 of 7"}, {"src": "img/488d5d00ea776a3d.jpg", "cap": "C16  \u00b7  slide 3 of 7"}, {"src": "img/f13e911ac9ad9c5a.jpg", "cap": "C16  \u00b7  slide 4 of 7"}, {"src": "img/a64dbd2b962340a4.jpg", "cap": "C16  \u00b7  slide 5 of 7"}, {"src": "img/9a38268760419f9e.jpg", "cap": "C16  \u00b7  slide 6 of 7"}, {"src": "img/b744455ee88f59b8.jpg", "cap": "C16  \u00b7  slide 7 of 7"}], [{"src": "img/3b1748a68016b6a5.jpg", "cap": "C17  \u00b7  slide 1 of 7"}, {"src": "img/38d641a45332ca94.jpg", "cap": "C17  \u00b7  slide 2 of 7"}, {"src": "img/7f8979c8572c681b.jpg", "cap": "C17  \u00b7  slide 3 of 7"}, {"src": "img/39b81af0c41bd03d.jpg", "cap": "C17  \u00b7  slide 4 of 7"}, {"src": "img/c8545216e8454a2e.jpg", "cap": "C17  \u00b7  slide 5 of 7"}, {"src": "img/9e42030dad459170.jpg", "cap": "C17  \u00b7  slide 6 of 7"}, {"src": "img/8bc96521b5f70607.jpg", "cap": "C17  \u00b7  slide 7 of 7"}], [{"src": "img/87f6279f62ed999a.jpg", "cap": "C18  \u00b7  slide 1 of 7"}, {"src": "img/b11fd09d0fb1c415.jpg", "cap": "C18  \u00b7  slide 2 of 7"}, {"src": "img/693b2086daf6a257.jpg", "cap": "C18  \u00b7  slide 3 of 7"}, {"src": "img/e2d0a2633a674c46.jpg", "cap": "C18  \u00b7  slide 4 of 7"}, {"src": "img/af52776d4cb2cba8.jpg", "cap": "C18  \u00b7  slide 5 of 7"}, {"src": "img/9756be8f9ae2d912.jpg", "cap": "C18  \u00b7  slide 6 of 7"}, {"src": "img/1a0d4444e69981d6.jpg", "cap": "C18  \u00b7  slide 7 of 7"}]];
   var wrapEl=document.getElementById('decks'), q=document.getElementById('q'),
       empty=document.getElementById('empty'),
       decks=[].slice.call(wrapEl.querySelectorAll('.deck')),
@@ -249,7 +423,8 @@ footer p{max-width:76ch;margin:0 0 9px}
   function apply(){
     var term=q.value.trim().toLowerCase(), shown=0;
     decks.forEach(function(d){
-      var okS = filter==='all' || d.dataset.status===filter;
+      var okS = filter==='all' || d.dataset.status===filter ||
+                (filter==='new' && d.dataset.fresh==='y');
       var okT = !term || d.dataset.text.indexOf(term)>-1;
       var on = okS && okT;
       d.style.display = on ? '' : 'none';
@@ -274,6 +449,14 @@ footer p{max-width:76ch;margin:0 0 9px}
     lbi.src=deck[i].src; lbc.textContent=deck[i].cap; lb.classList.add('on');
   }
   wrapEl.addEventListener('click', function(e){
+    var c=e.target.closest('.copy');
+    if(c){
+      navigator.clipboard.writeText(c.dataset.copy).then(function(){
+        var t=c.textContent; c.textContent='Copied';
+        setTimeout(function(){ c.textContent=t; }, 1600);
+      });
+      return;
+    }
     var b=e.target.closest('.fr'); if(!b) return;
     show(+b.dataset.d, +b.dataset.i);
   });
