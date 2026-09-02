@@ -1,0 +1,93 @@
+/* Phone layout for every approval page.
+ *
+ * Jessica reviews these on a phone, and three things were wrong at 375px. The filter bar
+ * wrapped to five rows and held 27% of the screen permanently, since it is sticky. The
+ * header ran 497px, so 61% of the viewport was spent before the first carousel. And the
+ * lightbox arrows sat over the middle of the artwork rather than beside it.
+ *
+ * Two smaller ones that matter more than they look. Every input was under 16px, which
+ * makes iOS Safari zoom the page the moment you tap into one, and it does not zoom back.
+ * And most controls were 32 to 39px tall against a 44px target.
+ *
+ * This loads after each page's own <style>, so it wins without needing !important.
+ */
+@media (max-width: 600px) {
+
+  /* --- the header, which was taking most of the first screen ------------------- */
+  header { padding: 28px 0 22px; }
+  header h1 { font-size: 30px; margin: 8px 0 8px; }
+  header p { font-size: 14px; }
+  .nums { gap: 18px 22px; margin-top: 16px; padding-top: 14px; }
+  .nums b { font-size: 20px; }
+  .nums span { font-size: 9px; letter-spacing: .07em; }
+  .wrap { padding: 0 16px; }
+
+  /* --- the sticky filter bar: one scrolling row, not five stacked ------------- */
+  .bar { padding: 10px 0; }
+  .bar .in {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .bar .in::-webkit-scrollbar { display: none; }
+  .bar .in > * { flex: 0 0 auto; }
+  /* the search box keeps a usable width and the chips scroll past it */
+  #q { flex: 0 0 190px; width: 190px; font-size: 16px; padding: 12px 13px; }
+  .f { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; }
+  .f.wk { flex-direction: column; justify-content: center; padding: 6px 13px; }
+  .f.wk i { margin-top: 2px; }
+
+  /* --- anything typed into, at 16px so iOS does not zoom on focus ------------- */
+  .cmt-f textarea, .cmt-f input, .st-sel, select, input[type="search"], input[type="text"] {
+    font-size: 16px;
+  }
+  .cmt-f textarea { min-height: 76px; padding: 11px 12px; }
+  .cmt-f input { padding: 12px 12px; }
+  /* every button that gets tapped, including the Zen Jessica page's own .btn */
+  .cmt-post, .copy, .btn { min-height: 44px; padding: 0 16px; font-size: 11px;
+    display: inline-flex; align-items: center; }
+  .cmt-row { gap: 8px; }
+  .cmt-row input { flex: 1 1 130px; }
+
+  /* --- status: a real tap target, and room to wrap --------------------------- */
+  .st { gap: 9px 12px; }
+  .st-sel { min-height: 44px; padding: 0 10px; }
+  .st-tick { min-height: 44px; }
+  .st-tick input { width: 22px; height: 22px; }
+  .st-who, .st-say { flex-basis: 100%; }
+
+  /* --- cards ----------------------------------------------------------------- */
+  .head { flex-direction: column; gap: 8px; padding: 16px 16px 12px; }
+  .num { min-width: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .num .dt { margin-top: 0; }
+  .hgroup h2 { font-size: 18px; }
+  .strip { padding: 0 16px 14px; gap: 8px; }
+  .fr img { width: 132px; }
+  .cap { padding: 14px 16px 16px; }
+  .capbody p, .fl, .capin p { max-width: none; }
+  .meat { padding: 12px 14px 14px; }
+  .grid { grid-template-columns: 1fr; gap: 16px; }
+  .panels { grid-template-columns: 1fr; padding: 20px 0 2px; }
+  .panel { padding: 15px 16px; }
+  .qhead { padding: 22px 0 2px; }
+  .qhead h2 { font-size: 20px; }
+  /* a disclosure is a tap target too, and it was 16px tall */
+  .cap2 summary { padding: 12px 0; }
+  .decks { gap: 18px; padding: 20px 0 60px; }
+  .wkhead h3 { font-size: 16px; }
+
+  /* --- lightbox: arrows below the artwork, not across it --------------------- */
+  .lb { padding: 56px 10px 84px; }
+  .lb img { max-height: 74vh; }
+  .lb button { min-height: 46px; padding: 0 18px; }
+  #lbp { left: 14px; top: auto; bottom: 18px; transform: none; }
+  #lbn { right: 14px; top: auto; bottom: 18px; transform: none; }
+  #lbx { top: 12px; right: 12px; }
+  .lb .cap, .lb .cap2 { bottom: 76px; font-size: 11px; padding: 0 14px; }
+
+  /* the back-link sits over the last card on a short screen */
+  .backlink { left: 10px; bottom: 10px; padding: 12px 14px; }
+  footer { padding-bottom: 84px; }
+}

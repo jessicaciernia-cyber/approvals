@@ -78,3 +78,22 @@ its own thread. They are keyed `q-timeline`, `q-legitscript`, `q-peptides`, `q-n
 `q-general` rather than by their heading, so rewording a panel does not orphan its answers.
 
 Any element with a `data-thread` attribute gets a thread, on any page.
+
+## Phone layout
+
+`_shared/mobile.css` holds everything under 600px, for every page. It is linked from the
+body rather than the head, because each page carries its own `<style>` and a stylesheet in
+the head would lose to it on equal specificity.
+
+What it fixes, all measured at 375px rather than guessed:
+
+- the sticky filter bar wrapped to five rows and held 27% of the screen; it is now one
+  horizontally scrolling row at 9%
+- the header ran 61% of the viewport before the first carousel, now 44%
+- the lightbox arrows sat over the middle of the artwork; they are a bottom bar now
+- every text input was under 16px, which makes iOS Safari zoom the page on focus and never
+  zoom back
+- controls ran 32 to 39px against a 44px tap target
+
+When changing it, re-measure rather than eyeballing: horizontal overflow, the sticky bar as
+a percentage of the viewport, the smallest control height, and the smallest input font.

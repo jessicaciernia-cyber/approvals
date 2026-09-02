@@ -75,7 +75,8 @@ def extract(src, outdir, slug):
         '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
         '<link rel="stylesheet" href="../_shared/backlink.css">\n'
         '<link rel="stylesheet" href="../_shared/comments.css">\n<title>', 1)
-    html += ('\n<a class="backlink" href="../">&larr; All approval pages</a>\n'
+    html += ('\n<link rel="stylesheet" href="../_shared/mobile.css">\n'
+             '\n<a class="backlink" href="../">&larr; All approval pages</a>\n'
              '<script>window.APPROVAL_COMMENTS=' + json.dumps(
                  dict(url=SUPA_URL, key=SUPA_KEY, site=slug)) + ';</script>\n'
              '<script src="../_shared/comments.js"></script>\n'
