@@ -18,6 +18,10 @@ SITES = [
          src=os.path.join(DL, "welliemd-carousels", "hub.html"),
          blurb="September 2026. Twenty carousels, one a day Monday to Friday, "
                "grouped by week with captions and DM keywords."),
+    dict(slug="welliemd-posts", title="WellieMD single posts",
+         src=os.path.join(DL, "welliemd-posts", "hub.html"),
+         blurb="Forty single statics, thirty topical and ten founder. Each one marked "
+               "against the content rules, with four that cannot ship as they are."),
     dict(slug="zenjessica", title="Zen Jessica carousels",
          src=os.path.join(DL, "zenjessica-hub", "hub.html"),
          blurb="September and October 2026. Twenty-four story carousels with captions "

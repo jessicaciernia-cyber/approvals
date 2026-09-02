@@ -1,0 +1,813 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../_shared/backlink.css">
+<link rel="stylesheet" href="../_shared/comments.css">
+<title>WellieMD Single Posts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F3F3F0; --surface:#FFFFFF; --ink:#0A0A0A; --body:#3E3E3C; --muted:#6E6E67;
+  --line:#DEDEDA; --magenta:#EC0F7E; --coral:#FF4F3D; --yellow:#FFE800;
+  --header-bg:#0D0D0D; --header-fg:#F3F3F0; --header-dim:#C9C9C2;
+  --ok-fg:#155D3A; --ok-bg:#D8F0E2; --ck-fg:#8A5B00; --ck-bg:#FFF3D1;
+  --no-fg:#8C1420; --no-bg:#FBDDE0;
+  --disp:"Archivo Black",Impact,sans-serif; --body-f:"Archivo",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0B0B0B; --surface:#151515; --ink:#F3F3F0; --body:#C2C2BC; --muted:#8F8F88;
+  --line:#2A2A28;
+  --ok-fg:#7BD9A6; --ok-bg:#12301F; --ck-fg:#F0C55A; --ck-bg:#33280A;
+  --no-fg:#F5A0A8; --no-bg:#3A1116;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body-f);
+  font-size:16px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+header{background:var(--header-bg);color:var(--header-fg);padding:52px 0 40px}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--magenta)}
+h1{font-family:var(--disp);font-size:clamp(30px,5.4vw,52px);line-height:.98;margin:12px 0 10px;
+  text-transform:uppercase;letter-spacing:-.02em}
+h1 mark{background:var(--magenta);color:#fff;padding:0 .12em}
+header p{max-width:62ch;margin:0;color:var(--header-dim)}
+.nums{display:flex;gap:34px;flex-wrap:wrap;margin-top:26px;padding-top:22px;
+  border-top:1px solid #2A2A28}
+.nums b{display:block;font-family:var(--disp);font-size:26px;line-height:1}
+.nums span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--header-dim)}
+.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;
+  padding:30px 0 6px}
+.panel{background:var(--surface);border:2px solid var(--ink);padding:18px 20px}
+.panel h3{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  margin:0 0 9px;color:var(--muted)}
+.panel p{margin:0 0 9px;font-size:14.5px;color:var(--body)}
+.panel p:last-child{margin-bottom:0}
+.bar{position:sticky;top:0;z-index:20;background:var(--ground);
+  border-bottom:2px solid var(--ink);padding:14px 0;margin-top:24px}
+.bar .in{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#q{flex:1 1 240px;min-width:0;font:400 14px/1.4 var(--body-f);color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);padding:10px 13px}
+.f{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  padding:10px 13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  cursor:pointer;text-decoration:none;display:inline-block}
+.f[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:20px;
+  padding:26px 0 70px}
+.post{background:var(--surface);border:2px solid var(--ink);display:flex;
+  flex-direction:column}
+.post[data-status="stop"]{border-color:var(--no-fg)}
+.shot{padding:0;border:0;background:none;cursor:zoom-in;display:block;line-height:0}
+.shot img{width:100%;height:auto;display:block;border-bottom:2px solid var(--ink)}
+.post[data-status="stop"] .shot img{border-bottom-color:var(--no-fg)}
+.meat{padding:14px 16px 16px}
+.topline{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 8px}
+.chip.ok{background:var(--ok-bg);color:var(--ok-fg)}
+.chip.check{background:var(--ck-bg);color:var(--ck-fg)}
+.chip.stop{background:var(--no-bg);color:var(--no-fg);font-weight:500}
+.kind,.dim{font-family:var(--mono);font-size:10px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--muted)}
+.post h3{font-family:var(--body-f);font-weight:700;font-size:16px;line-height:1.28;
+  margin:0 0 8px;letter-spacing:-.01em}
+.note{margin:0;font-size:13.5px;line-height:1.45;color:var(--body);
+  padding-left:11px;border-left:3px solid var(--line)}
+.post[data-status="stop"] .note{border-left-color:var(--no-fg)}
+.post[data-status="check"] .note{border-left-color:var(--ck-fg)}
+#empty{display:none;padding:44px 0;color:var(--muted)}
+footer{border-top:2px solid var(--ink);padding:22px 0 70px;color:var(--muted);font-size:13.5px}
+footer p{max-width:76ch;margin:0 0 9px}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;z-index:60;
+  align-items:center;justify-content:center;padding:24px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:88vh;object-fit:contain}
+.lb .x{position:absolute;top:16px;right:20px;font-family:var(--mono);font-size:12px;
+  letter-spacing:.1em;color:#fff;background:none;border:1px solid #555;padding:9px 13px;
+  cursor:pointer}
+.lb .cap{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#eee;
+  font-size:13px;font-family:var(--mono)}
+</style>
+<header><div class="wrap">
+  <div class="kick">@joinwelliemd &nbsp;·&nbsp; single posts &nbsp;·&nbsp; for Jessica's approval</div>
+  <h1>Forty <mark>posts</mark></h1>
+  <p>Thirty topical statics and ten founder posts, delivered as artwork with no captions.
+  Each one is marked against the content rules in the WellieMD revision brief. Tap any post
+  to see it full size.</p>
+  <div class="nums">
+    <div><b>40</b><span>posts</span></div>
+    <div><b>20</b><span>ready</span></div>
+    <div><b>16</b><span>need a source</span></div>
+    <div><b>4</b><span>do not post</span></div>
+  </div>
+</div></header>
+
+<div class="wrap">
+  <section class="panels">
+    <div class="panel">
+      <h3>Four cannot ship as they are</h3>
+      <p><b>Founder 05</b> claims a 100% LegitScript approval rate. The brief bars approval
+      rates and anything implying WellieMD obtains a client's certification.</p>
+      <p><b>Founder 06</b> says launches take weeks. The brief bars launch timeframes.</p>
+      <p><b>Post 16</b> names thyroid, which the platform does not support. <b>Post 20</b>
+      spells telehealth as two words.</p>
+    </div>
+    <div class="panel">
+      <h3>Sixteen carry an unsourced number</h3>
+      <p>$294B, 9.65%, 90%, $5-10B, fifty million, $65B, $6T, tripled, most searched. The
+      brief's rule is no new statistics, percentages or third-party data.</p>
+      <p>They are not necessarily wrong. They just have nothing attached, and this is a
+      regulated category where a number on a frame is the thing that gets read closely.</p>
+    </div>
+    <div class="panel">
+      <h3>Two things about the files</h3>
+      <p>The canvas is <b>1744&times;2336</b> and <b>1792&times;2400</b>, which is 3:4.
+      Instagram's tallest feed post is 4:5. As delivered these get cropped or letterboxed.
+      They want re-exporting at <b>1080&times;1350</b>.</p>
+      <p><b>No captions came with them.</b> The artwork carries the whole message.</p>
+    </div>
+    <div class="panel">
+      <h3>Two open questions</h3>
+      <p>Is it <b>80+ brands or 100+</b>? Both numbers appear across these forty.</p>
+      <p>Are the <b>founder photographs</b> approved images of Jessica? They should be
+      confirmed as real photography before anything runs in her voice and likeness.</p>
+    </div>
+  </section>
+</div>
+
+<div class="bar"><div class="wrap in">
+  <input type="search" id="q" placeholder="Search posts and notes" aria-label="Search">
+  <button class="f" data-f="all" aria-pressed="true">All 40</button>
+  <button class="f" data-f="topical" aria-pressed="false">Topical</button>
+  <button class="f" data-f="founder" aria-pressed="false">Founder</button>
+  <button class="f" data-f="ok" aria-pressed="false">Ready</button>
+  <button class="f" data-f="check" aria-pressed="false">Needs a source</button>
+  <button class="f" data-f="stop" aria-pressed="false">Do not post</button>
+  <a class="f" href="../welliemd/">The carousels</a>
+</div></div>
+
+<main class="wrap">
+  <div class="grid" id="grid">
+<article class="post" data-kind="topical" data-status="check"
+  data-text="the peptide market will hit $294b by 2033 two unsourced figures, $294b and 9.65% a year. the brief bars new statistics and third-party data.">
+  <button class="shot" data-i="0" aria-label="Open The peptide market will hit $294B by 2033 full size">
+    <img src="img/9d6226ab8ed7056e.jpg" alt="The peptide market will hit $294B by 2033" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>The peptide market will hit $294B by 2033</h3>
+    <p class="note">Two unsourced figures, $294B and 9.65% a year. The brief bars new statistics and third-party data.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="glp-1 searches are down 90% from peak a 90% drop is a strong claim with no source on the frame.">
+  <button class="shot" data-i="1" aria-label="Open GLP-1 searches are down 90% from peak full size">
+    <img src="img/107976e1401635ec.jpg" alt="GLP-1 searches are down 90% from peak" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>GLP-1 searches are down 90% from peak</h3>
+    <p class="note">A 90% drop is a strong claim with no source on the frame.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="the hrt black-box warning is gone a regulatory claim dated to november 2025. it needs a citation before it runs, and &#x27;gone&#x27; is stronger than a label revision usually supports.">
+  <button class="shot" data-i="2" aria-label="Open The HRT black-box warning is gone full size">
+    <img src="img/d5a6b02354ee0417.jpg" alt="The HRT black-box warning is gone" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>The HRT black-box warning is gone</h3>
+    <p class="note">A regulatory claim dated to November 2025. It needs a citation before it runs, and &#x27;gone&#x27; is stronger than a label revision usually supports.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="low-t isn&#x27;t a punchline anymore ">
+  <button class="shot" data-i="3" aria-label="Open Low-T isn&#x27;t a punchline anymore full size">
+    <img src="img/a734cab35d4989c4.jpg" alt="Low-T isn&#x27;t a punchline anymore" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Low-T isn&#x27;t a punchline anymore</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="$5-10b of peptides sell on the gray market unsourced market figure, and it frames the category around an illicit channel.">
+  <button class="shot" data-i="4" aria-label="Open $5-10B of peptides sell on the gray market full size">
+    <img src="img/428ea19220382827.jpg" alt="$5-10B of peptides sell on the gray market" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>$5-10B of peptides sell on the gray market</h3>
+    <p class="note">Unsourced market figure, and it frames the category around an illicit channel.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="the fda just put peptides on the record carries the fda seal. a federal seal on a commercial post reads as endorsement.">
+  <button class="shot" data-i="5" aria-label="Open The FDA just put peptides on the record full size">
+    <img src="img/28ad46411fa6fbe2.jpg" alt="The FDA just put peptides on the record" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>The FDA just put peptides on the record</h3>
+    <p class="note">Carries the FDA seal. A federal seal on a commercial post reads as endorsement.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="glp-1-only brands have a retention problem ">
+  <button class="shot" data-i="6" aria-label="Open GLP-1-only brands have a retention problem full size">
+    <img src="img/b52037f897193a7e.jpg" alt="GLP-1-only brands have a retention problem" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>GLP-1-only brands have a retention problem</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="menopause care is medicine&#x27;s biggest blind spot &#x27;fifty million us women&#x27; is an unsourced figure.">
+  <button class="shot" data-i="7" aria-label="Open Menopause care is medicine&#x27;s biggest blind spot full size">
+    <img src="img/05ce00c6c845c6b9.jpg" alt="Menopause care is medicine&#x27;s biggest blind spot" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Menopause care is medicine&#x27;s biggest blind spot</h3>
+    <p class="note">&#x27;Fifty million US women&#x27; is an unsourced figure.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="trt patients stay for years, not months ">
+  <button class="shot" data-i="8" aria-label="Open TRT patients stay for years, not months full size">
+    <img src="img/36177420371e7ff4.jpg" alt="TRT patients stay for years, not months" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>TRT patients stay for years, not months</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="the women&#x27;s peptide market will outgrow men&#x27;s a market forecast stated as fact, sourced to &#x27;the biggest podcasts in health&#x27;.">
+  <button class="shot" data-i="9" aria-label="Open The women&#x27;s peptide market will outgrow men&#x27;s full size">
+    <img src="img/0cbb797e3c3bd9c3.jpg" alt="The women&#x27;s peptide market will outgrow men&#x27;s" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>The women&#x27;s peptide market will outgrow men&#x27;s</h3>
+    <p class="note">A market forecast stated as fact, sourced to &#x27;the biggest podcasts in health&#x27;.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="peptides aren&#x27;t one product. they&#x27;re a whole menu ">
+  <button class="shot" data-i="10" aria-label="Open Peptides aren&#x27;t one product. They&#x27;re a whole menu full size">
+    <img src="img/edc42469a83e565d.jpg" alt="Peptides aren&#x27;t one product. They&#x27;re a whole menu" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Peptides aren&#x27;t one product. They&#x27;re a whole menu</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="bpc-157 is the most searched peptide in america a superlative search claim with no source. also shows a vial.">
+  <button class="shot" data-i="11" aria-label="Open BPC-157 is the most searched peptide in America full size">
+    <img src="img/0f13bb188e4ffa5f.jpg" alt="BPC-157 is the most searched peptide in America" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>BPC-157 is the most searched peptide in America</h3>
+    <p class="note">A superlative search claim with no source. Also shows a vial.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="she&#x27;s 52 and done being dismissed ">
+  <button class="shot" data-i="12" aria-label="Open She&#x27;s 52 and done being dismissed full size">
+    <img src="img/ada71d0d31b1bf80.jpg" alt="She&#x27;s 52 and done being dismissed" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>She&#x27;s 52 and done being dismissed</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="glp-1 got them in the door. hormones keep them same line as carousel 01. fine as a single, worth spacing them apart.">
+  <button class="shot" data-i="13" aria-label="Open GLP-1 got them in the door. Hormones keep them full size">
+    <img src="img/6593ec0d5813fbce.jpg" alt="GLP-1 got them in the door. Hormones keep them" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>GLP-1 got them in the door. Hormones keep them</h3>
+    <p class="note">Same line as carousel 01. Fine as a single, worth spacing them apart.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="the biggest podcast in health called peptides the next ai attributes a claim to an unnamed podcast.">
+  <button class="shot" data-i="14" aria-label="Open The biggest podcast in health called peptides the next AI full size">
+    <img src="img/96658f683f8f9afe.jpg" alt="The biggest podcast in health called peptides the next AI" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>The biggest podcast in health called peptides the next AI</h3>
+    <p class="note">Attributes a claim to an unnamed podcast.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="stop"
+  data-text="estrogen. testosterone. thyroid. one intake flow thyroid again. the platform does not support it, and this is the third place it has turned up. it was cut from carousel 19 and carousel 01 for exactly this reason.">
+  <button class="shot" data-i="15" aria-label="Open Estrogen. Testosterone. Thyroid. One intake flow full size">
+    <img src="img/c379396f71a8c7b4.jpg" alt="Estrogen. Testosterone. Thyroid. One intake flow" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip stop">Do not post</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Estrogen. Testosterone. Thyroid. One intake flow</h3>
+    <p class="note">Thyroid again. The platform does not support it, and this is the third place it has turned up. It was cut from carousel 19 and carousel 01 for exactly this reason.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="compounded semaglutide was chapter one prescription bottles shown with dose labels. compounded semaglutide is the most scrutinised imagery in this category.">
+  <button class="shot" data-i="16" aria-label="Open Compounded semaglutide was chapter one full size">
+    <img src="img/06e67ef6c4fa4a5e.jpg" alt="Compounded semaglutide was chapter one" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Compounded semaglutide was chapter one</h3>
+    <p class="note">Prescription bottles shown with dose labels. Compounded semaglutide is the most scrutinised imagery in this category.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="perimenopause searches tripled in two years unsourced trend figure.">
+  <button class="shot" data-i="17" aria-label="Open Perimenopause searches tripled in two years full size">
+    <img src="img/76be06c326f1185a.jpg" alt="Perimenopause searches tripled in two years" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Perimenopause searches tripled in two years</h3>
+    <p class="note">Unsourced trend figure.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="your glp-1 patient is asking about nad+ and sermorelin ">
+  <button class="shot" data-i="18" aria-label="Open Your GLP-1 patient is asking about NAD+ and sermorelin full size">
+    <img src="img/8818c08efcbf80f8.jpg" alt="Your GLP-1 patient is asking about NAD+ and sermorelin" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Your GLP-1 patient is asking about NAD+ and sermorelin</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="stop"
+  data-text="telehealth brands don&#x27;t fail on demand. they fail on backend the artwork reads &#x27;tele health&#x27; as two words. typo on the brand&#x27;s own category.">
+  <button class="shot" data-i="19" aria-label="Open Telehealth brands don&#x27;t fail on demand. They fail on backend full size">
+    <img src="img/c669f5ff60cc6aac.jpg" alt="Telehealth brands don&#x27;t fail on demand. They fail on backend" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip stop">Do not post</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Telehealth brands don&#x27;t fail on demand. They fail on backend</h3>
+    <p class="note">The artwork reads &#x27;Tele health&#x27; as two words. Typo on the brand&#x27;s own category.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="ghk-cu built a skincare cult. now it&#x27;s clinical ">
+  <button class="shot" data-i="20" aria-label="Open GHK-Cu built a skincare cult. Now it&#x27;s clinical full size">
+    <img src="img/b3c83270547c4990.jpg" alt="GHK-Cu built a skincare cult. Now it&#x27;s clinical" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>GHK-Cu built a skincare cult. Now it&#x27;s clinical</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="america spends $65b fighting bad sleep unsourced spending figure.">
+  <button class="shot" data-i="21" aria-label="Open America spends $65B fighting bad sleep full size">
+    <img src="img/cecd2e702e54f9e2.jpg" alt="America spends $65B fighting bad sleep" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>America spends $65B fighting bad sleep</h3>
+    <p class="note">Unsourced spending figure.</p>
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="recovery is the new performance ">
+  <button class="shot" data-i="22" aria-label="Open Recovery is the new performance full size">
+    <img src="img/def8e259b94e9df0.jpg" alt="Recovery is the new performance" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Recovery is the new performance</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="longevity isn&#x27;t sci-fi. it&#x27;s a product line ">
+  <button class="shot" data-i="23" aria-label="Open Longevity isn&#x27;t sci-fi. It&#x27;s a product line full size">
+    <img src="img/6d78599ebfbfe87e.jpg" alt="Longevity isn&#x27;t sci-fi. It&#x27;s a product line" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Longevity isn&#x27;t sci-fi. It&#x27;s a product line</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="weight loss was the hook. hormone health is the business ">
+  <button class="shot" data-i="24" aria-label="Open Weight loss was the hook. Hormone health is the business full size">
+    <img src="img/5951fa5f149553db.jpg" alt="Weight loss was the hook. Hormone health is the business" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Weight loss was the hook. Hormone health is the business</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="everyone sells semaglutide. almost no one sells what comes next ">
+  <button class="shot" data-i="25" aria-label="Open Everyone sells semaglutide. Almost no one sells what comes next full size">
+    <img src="img/c3d3f8dfd5e4700c.jpg" alt="Everyone sells semaglutide. Almost no one sells what comes next" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Everyone sells semaglutide. Almost no one sells what comes next</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="he googled trt at 11pm. who answers? ">
+  <button class="shot" data-i="26" aria-label="Open He Googled TRT at 11pm. Who answers? full size">
+    <img src="img/d9044bfe7fd37c82.jpg" alt="He Googled TRT at 11pm. Who answers?" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>He Googled TRT at 11pm. Who answers?</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="semax and the rise of cognitive care ">
+  <button class="shot" data-i="27" aria-label="Open Semax and the rise of cognitive care full size">
+    <img src="img/580f4d3811a0916c.jpg" alt="Semax and the rise of cognitive care" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Semax and the rise of cognitive care</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="ok"
+  data-text="compliance isn&#x27;t the cost of telehealth. it&#x27;s the moat ">
+  <button class="shot" data-i="28" aria-label="Open Compliance isn&#x27;t the cost of telehealth. It&#x27;s the moat full size">
+    <img src="img/e86b5f0a38af0b75.jpg" alt="Compliance isn&#x27;t the cost of telehealth. It&#x27;s the moat" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Compliance isn&#x27;t the cost of telehealth. It&#x27;s the moat</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="topical" data-status="check"
+  data-text="hormones. peptides. glp-1s. one brand can own all three says 100+ healthcare brands. founder post 01 says 80+. one of the two is wrong.">
+  <button class="shot" data-i="29" aria-label="Open Hormones. Peptides. GLP-1s. One brand can own all three full size">
+    <img src="img/170d6256ea5b92ec.jpg" alt="Hormones. Peptides. GLP-1s. One brand can own all three" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Topical</span>
+      <span class="dim">1744&times;2336</span>
+    </div>
+    <h3>Hormones. Peptides. GLP-1s. One brand can own all three</h3>
+    <p class="note">Says 100+ healthcare brands. Founder post 01 says 80+. One of the two is wrong.</p>
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="check"
+  data-text="i&#x27;ve launched 80+ healthcare brands says 80+. post 30 says 100+. pick one number and use it everywhere.">
+  <button class="shot" data-i="30" aria-label="Open I&#x27;ve launched 80+ healthcare brands full size">
+    <img src="img/4145a182ac1822e0.jpg" alt="I&#x27;ve launched 80+ healthcare brands" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>I&#x27;ve launched 80+ healthcare brands</h3>
+    <p class="note">Says 80+. Post 30 says 100+. Pick one number and use it everywhere.</p>
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="ok"
+  data-text="i was a physical therapist. now i build healthcare infrastructure ">
+  <button class="shot" data-i="31" aria-label="Open I was a physical therapist. Now I build healthcare infrastructure full size">
+    <img src="img/510f7f325d049b5f.jpg" alt="I was a physical therapist. Now I build healthcare infrastructure" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>I was a physical therapist. Now I build healthcare infrastructure</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="ok"
+  data-text="the glp-1 gold rush is over. the hormone era is just beginning ">
+  <button class="shot" data-i="32" aria-label="Open The GLP-1 gold rush is over. The hormone era is just beginning full size">
+    <img src="img/e529f65a223eb4db.jpg" alt="The GLP-1 gold rush is over. The hormone era is just beginning" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>The GLP-1 gold rush is over. The hormone era is just beginning</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="ok"
+  data-text="your telehealth brand doesn&#x27;t need more ads. it needs infrastructure ">
+  <button class="shot" data-i="33" aria-label="Open Your telehealth brand doesn&#x27;t need more ads. It needs infrastructure full size">
+    <img src="img/c5ca474fb19bc5ec.jpg" alt="Your telehealth brand doesn&#x27;t need more ads. It needs infrastructure" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>Your telehealth brand doesn&#x27;t need more ads. It needs infrastructure</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="stop"
+  data-text="100% legitscript approval rate. zero shortcuts breaks two rules at once: no approval rates or certification-success claims, and nothing that implies welliemd obtains a client&#x27;s legitscript certification.">
+  <button class="shot" data-i="34" aria-label="Open 100% LegitScript approval rate. Zero shortcuts full size">
+    <img src="img/25c85dc6bcfe9bb2.jpg" alt="100% LegitScript approval rate. Zero shortcuts" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip stop">Do not post</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>100% LegitScript approval rate. Zero shortcuts</h3>
+    <p class="note">Breaks two rules at once: no approval rates or certification-success claims, and nothing that implies WellieMD obtains a client&#x27;s LegitScript certification.</p>
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="stop"
+  data-text="launching a telehealth brand takes years. mine take weeks the brief bars launch timeframes outright, days, weeks and months to launch.">
+  <button class="shot" data-i="35" aria-label="Open Launching a telehealth brand takes years. Mine take weeks full size">
+    <img src="img/a43c68a74ee47788.jpg" alt="Launching a telehealth brand takes years. Mine take weeks" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip stop">Do not post</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>Launching a telehealth brand takes years. Mine take weeks</h3>
+    <p class="note">The brief bars launch timeframes outright, days, weeks and months to launch.</p>
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="ok"
+  data-text="compliance isn&#x27;t my bottleneck. it&#x27;s my moat ">
+  <button class="shot" data-i="36" aria-label="Open Compliance isn&#x27;t my bottleneck. It&#x27;s my moat full size">
+    <img src="img/5fdc7b797fb3a12c.jpg" alt="Compliance isn&#x27;t my bottleneck. It&#x27;s my moat" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>Compliance isn&#x27;t my bottleneck. It&#x27;s my moat</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="ok"
+  data-text="you don&#x27;t need to recruit providers. i already did ">
+  <button class="shot" data-i="37" aria-label="Open You don&#x27;t need to recruit providers. I already did full size">
+    <img src="img/7315c1a0aeb9b01c.jpg" alt="You don&#x27;t need to recruit providers. I already did" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip ok">Ready</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>You don&#x27;t need to recruit providers. I already did</h3>
+    
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="check"
+  data-text="the wellness industry is a $6t market unsourced market size.">
+  <button class="shot" data-i="38" aria-label="Open The wellness industry is a $6T market full size">
+    <img src="img/1026e98e979bde52.jpg" alt="The wellness industry is a $6T market" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>The wellness industry is a $6T market</h3>
+    <p class="note">Unsourced market size.</p>
+  </div>
+</article>
+<article class="post" data-kind="founder" data-status="check"
+  data-text="behind every &#x27;overnight&#x27; telehealth brand is a stack like mine says 80+ brands. same number question as founder 01 and post 30.">
+  <button class="shot" data-i="39" aria-label="Open Behind every &#x27;overnight&#x27; telehealth brand is a stack like mine full size">
+    <img src="img/69997ea63863dcc9.jpg" alt="Behind every &#x27;overnight&#x27; telehealth brand is a stack like mine" loading="lazy">
+  </button>
+  <div class="meat">
+    <div class="topline">
+      <span class="chip check">Needs a source</span>
+      <span class="kind">Founder</span>
+      <span class="dim">1792&times;2400</span>
+    </div>
+    <h3>Behind every &#x27;overnight&#x27; telehealth brand is a stack like mine</h3>
+    <p class="note">Says 80+ brands. Same number question as founder 01 and post 30.</p>
+  </div>
+</article></div>
+  <p id="empty">Nothing matches that.</p>
+</main>
+
+<footer class="wrap">
+  <p><b>Where these came from.</b> Delivered as a folder of forty PNGs. Statuses here were
+  set by reading every frame against the WellieMD revision brief, not by taste.</p>
+  <p>Nothing on this page is approved or scheduled until you say so.</p>
+</footer>
+
+<div class="lb" id="lb">
+  <button class="x" id="lbx">Close &nbsp;Esc</button>
+  <img id="lbi" alt="">
+  <div class="cap" id="lbc"></div>
+</div>
+
+<script>
+(function(){
+  var BIG = [{"src": "img/bb4fe834996fbe9b.jpg", "head": "The peptide market will hit $294B by 2033"}, {"src": "img/8f8322063656258c.jpg", "head": "GLP-1 searches are down 90% from peak"}, {"src": "img/25a69786b2d264f9.jpg", "head": "The HRT black-box warning is gone"}, {"src": "img/fb0aab2f5a7fe2bd.jpg", "head": "Low-T isn't a punchline anymore"}, {"src": "img/56a0dcc3f427c986.jpg", "head": "$5-10B of peptides sell on the gray market"}, {"src": "img/9a050ef4d6fd1cb8.jpg", "head": "The FDA just put peptides on the record"}, {"src": "img/6f82a2a2c531b65d.jpg", "head": "GLP-1-only brands have a retention problem"}, {"src": "img/c8fbc04072420745.jpg", "head": "Menopause care is medicine's biggest blind spot"}, {"src": "img/ff94ecfbd57e1623.jpg", "head": "TRT patients stay for years, not months"}, {"src": "img/ac4fd793b49ed009.jpg", "head": "The women's peptide market will outgrow men's"}, {"src": "img/e0c30b2c91b5d1ea.jpg", "head": "Peptides aren't one product. They're a whole menu"}, {"src": "img/1da5f8f593c6e68b.jpg", "head": "BPC-157 is the most searched peptide in America"}, {"src": "img/c6d2cb23602e5503.jpg", "head": "She's 52 and done being dismissed"}, {"src": "img/8ce19159f4edd695.jpg", "head": "GLP-1 got them in the door. Hormones keep them"}, {"src": "img/fdb8b7558f532396.jpg", "head": "The biggest podcast in health called peptides the next AI"}, {"src": "img/03110a48272cb691.jpg", "head": "Estrogen. Testosterone. Thyroid. One intake flow"}, {"src": "img/a4fa4c0100f7c8e3.jpg", "head": "Compounded semaglutide was chapter one"}, {"src": "img/2bcb940c551a255f.jpg", "head": "Perimenopause searches tripled in two years"}, {"src": "img/3adaf9ce24301c44.jpg", "head": "Your GLP-1 patient is asking about NAD+ and sermorelin"}, {"src": "img/a9a9c2bafac04b5d.jpg", "head": "Telehealth brands don't fail on demand. They fail on backend"}, {"src": "img/6edaf073f58c016f.jpg", "head": "GHK-Cu built a skincare cult. Now it's clinical"}, {"src": "img/abd6ae173bcbd389.jpg", "head": "America spends $65B fighting bad sleep"}, {"src": "img/aa4a4690cf8aa3a7.jpg", "head": "Recovery is the new performance"}, {"src": "img/e4b268cfef34cbc5.jpg", "head": "Longevity isn't sci-fi. It's a product line"}, {"src": "img/850ca36c3ee989fc.jpg", "head": "Weight loss was the hook. Hormone health is the business"}, {"src": "img/cd1bad12480b818b.jpg", "head": "Everyone sells semaglutide. Almost no one sells what comes next"}, {"src": "img/66cb8d5cc994b1b2.jpg", "head": "He Googled TRT at 11pm. Who answers?"}, {"src": "img/daef110b5c23cd3f.jpg", "head": "Semax and the rise of cognitive care"}, {"src": "img/ac8d08b4eefed05e.jpg", "head": "Compliance isn't the cost of telehealth. It's the moat"}, {"src": "img/a25ba245d17b6fbf.jpg", "head": "Hormones. Peptides. GLP-1s. One brand can own all three"}, {"src": "img/7c49b999765a3cfa.jpg", "head": "I've launched 80+ healthcare brands"}, {"src": "img/1237af5a510c4599.jpg", "head": "I was a physical therapist. Now I build healthcare infrastructure"}, {"src": "img/6961a7c01261fc78.jpg", "head": "The GLP-1 gold rush is over. The hormone era is just beginning"}, {"src": "img/29f46895d6079caf.jpg", "head": "Your telehealth brand doesn't need more ads. It needs infrastructure"}, {"src": "img/beebb42e8d27e0e0.jpg", "head": "100% LegitScript approval rate. Zero shortcuts"}, {"src": "img/8dfb9618c01f16f0.jpg", "head": "Launching a telehealth brand takes years. Mine take weeks"}, {"src": "img/620a670383691449.jpg", "head": "Compliance isn't my bottleneck. It's my moat"}, {"src": "img/c3729f98f55128a7.jpg", "head": "You don't need to recruit providers. I already did"}, {"src": "img/b39e7c69ba8896b5.jpg", "head": "The wellness industry is a $6T market"}, {"src": "img/8bbc52398880f6da.jpg", "head": "Behind every 'overnight' telehealth brand is a stack like mine"}];
+  var grid=document.getElementById('grid'), q=document.getElementById('q'),
+      empty=document.getElementById('empty'),
+      posts=[].slice.call(grid.querySelectorAll('.post')),
+      btns=[].slice.call(document.querySelectorAll('.f[data-f]'));
+  var filter='all';
+
+  function apply(){
+    var term=q.value.trim().toLowerCase(), shown=0;
+    posts.forEach(function(p){
+      var okKind = filter==='all' || p.dataset.kind===filter || p.dataset.status===filter;
+      var okTerm = !term || p.dataset.text.indexOf(term)>-1;
+      var on = okKind && okTerm;
+      p.style.display = on ? '' : 'none';
+      if(on) shown++;
+    });
+    empty.style.display = shown ? 'none' : 'block';
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      filter=b.dataset.f;
+      btns.forEach(function(o){ o.setAttribute('aria-pressed', String(o===b)); });
+      apply();
+    });
+  });
+  q.addEventListener('input', apply);
+
+  var lb=document.getElementById('lb'), lbi=document.getElementById('lbi'),
+      lbc=document.getElementById('lbc');
+  grid.addEventListener('click', function(e){
+    var b=e.target.closest('.shot'); if(!b) return;
+    var d=BIG[+b.dataset.i]; lbi.src=d.src; lbi.alt=d.head; lbc.textContent=d.head;
+    lb.classList.add('on');
+  });
+  function close(){ lb.classList.remove('on'); lbi.src=''; }
+  document.getElementById('lbx').addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+<a class="backlink" href="../">&larr; All approval pages</a>
+<script>window.APPROVAL_COMMENTS={"url": "https://bsgygerfgyztkrrjdqlg.supabase.co", "key": "sb_publishable_xkgImZlt7Sbn76ot7fEz6g_8pe68mPy", "site": "welliemd-posts"};</script>
+<script src="../_shared/comments.js"></script>
