@@ -10,15 +10,10 @@
 // Secrets: ANTHROPIC_API_KEY, UPLOADER_ID (her auth user id), optional CAPTION_MODEL.
 import { VOICE } from "./voice.ts";
 
-/* The SDK loads only when a draft is actually requested, so the tests, which stub the
-   model, run offline with nothing to resolve. */
-// deno-lint-ignore no-explicit-any
-async function sdk(): Promise<any> {
-  const spec = "npm:@anthropic-ai/sdk@0";
-  const mod = await import(spec);
-  return mod.default;
-}
+/* No SDK: one POST to the Messages API over fetch. The edge bundler has nothing to
+   resolve, and the tests, which stub the model, run offline. */
 type Block = Record<string, unknown>;
+const API = "https://api.anthropic.com/v1/messages";
 
 const ORIGINS = new Set([
   "https://jessicaciernia-cyber.github.io",
@@ -74,20 +69,31 @@ hashtags: one line of three to five hashtags starting with #, space separated. F
 flags: every claim, number, quote, timeframe, or promise on the slides that the rules bar or that needs a source, one entry each, quoting the words on the slide. Slide numbers are 1-based in the order given. Empty array if nothing needs a look. Do not flag the caption you wrote; flag the slides.`;
 
 async function anthropicDraft(site: string, title: string, images: Img[]): Promise<Draft> {
-  const Client = await sdk();
-  const client = new Client({ apiKey: Deno.env.get("ANTHROPIC_API_KEY") });
   const content: Block[] = images.map((im, i) => ([
     { type: "text", text: `Slide ${i + 1}:` },
     { type: "image", source: { type: "base64", media_type: im.media_type, data: im.data } },
   ])).flat();
   content.push({ type: "text", text: `Working title from the owner: "${title}".\n\n${INSTRUCTION}` });
-  const res = await client.messages.create({
-    model: MODEL,
-    max_tokens: 4000,
-    system: [{ type: "text", text: VOICE[site], cache_control: { type: "ephemeral" } }],
-    messages: [{ role: "user", content }],
-    output_config: { effort: "medium" },
+  const r = await fetch(API, {
+    method: "POST",
+    headers: {
+      "x-api-key": Deno.env.get("ANTHROPIC_API_KEY") || "",
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: 4000,
+      system: [{ type: "text", text: VOICE[site], cache_control: { type: "ephemeral" } }],
+      messages: [{ role: "user", content }],
+      output_config: { effort: "medium" },
+    }),
   });
+  if (!r.ok) {
+    const err = await r.text();
+    throw new Error(`Model API ${r.status}: ${err.slice(0, 160)}`);
+  }
+  const res = await r.json();
   if (res.stop_reason === "refusal") throw new Error("The model declined this request");
   const text = (res.content as Block[]).filter((b) => b.type === "text").map((b) => String(b.text)).join("\n").trim();
   const json = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
