@@ -66,7 +66,7 @@ Return ONLY a JSON object, no prose and no code fence, with exactly these keys:
 
 caption: the full caption in the client's voice, paragraphs separated by a blank line, no hashtags inside it, no emoji unless the real captions use them.
 hashtags: one line of three to five hashtags starting with #, space separated. For Zen Jessica use exactly "#welliemd #therealzenjessica #growpro".
-flags: every claim, number, quote, timeframe, or promise on the slides that the rules bar or that needs a source, one entry each, quoting the words on the slide. Slide numbers are 1-based in the order given. Empty array if nothing needs a look. Do not flag the caption you wrote; flag the slides.`;
+flags: every claim, number, quote, timeframe, or promise on the slides that the rules bar or that needs a source, one entry each, quoting the words on the slide. Slide numbers are 1-based in the order given. Empty array if nothing needs a look. Flag the slides, not your caption, and never carry a flagged or unsourced claim into the caption; write around it.`;
 
 async function anthropicDraft(site: string, title: string, images: Img[]): Promise<Draft> {
   const content: Block[] = images.map((im, i) => ([

@@ -8,6 +8,11 @@ The brief bars: no launch timeframes, no new statistics or third-party data, no 
 
 ## How the captions read
 
+**The caption is the one part that must be clean.** If a slide carries a statistic, a ranking, a growth claim, a timeframe, an approval rate, or anything else the brief bars or that would need a source, the caption does not repeat it, even softened. Flag it on the slide and write the caption around it. A caption that opens with an unsourced number fails no matter how good the rest is.
+
+No labeled sections. None of the real captions below say "What it is:" or "Why now:"; they state the mechanism in a sentence and move on.
+
+
 Founder-to-founder, plain, declarative. Short paragraphs, one idea each. No emoji. No hashtags on the existing captions; a draft ends with three to five proposed tags the owner can delete. No questions stacked at the end. A caption states the mechanism, then the consequence, then the point.
 
 ## Real captions
