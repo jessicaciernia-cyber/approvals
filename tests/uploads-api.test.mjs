@@ -212,3 +212,27 @@ test("draftCaption: validates, requires a session, posts to the function with th
   assert.equal(d.echo.title.length, 120, "title capped at 120");
   assert.deepEqual(d.echo.images, [{ media_type: "image/jpeg", data: "abc" }]);
 });
+
+test("createUpload: hashes ride along when given, are validated, and are omitted when empty", async () => {
+  const H = "0".repeat(64);
+  const { api, calls } = load({
+    session: live,
+    routes: {
+      "/storage/v1/object/approvals-uploads/": { status: 200, body: {} },
+      "/rest/v1/approval_uploads": ({ opts }) => ({ status: 201, body: [JSON.parse(opts.body)] })
+    }
+  });
+  await assert.rejects(api.createUpload({ site: "welliemd", title: "t", files: [png(), png()], hashes: [H] }), /hashes do not match/);
+  await assert.rejects(api.createUpload({ site: "welliemd", title: "t", files: [png()], hashes: ["nothex"] }), /hashes do not match/);
+  assert.equal(calls.length, 0);
+  const row = await api.createUpload({ site: "welliemd", title: "t", files: [png(), png()], hashes: [H, H] });
+  assert.deepEqual(row.hashes, [H, H]);
+  const plain = await api.createUpload({ site: "welliemd", title: "t", files: [png()] });
+  assert.equal("hashes" in plain, false, "no hashes key when none were computed");
+});
+
+test("listUploads asks for the hashes column", async () => {
+  const a = load();
+  await a.api.listUploads("welliemd");
+  assert.ok(a.calls[0].url.includes("hashes"));
+});

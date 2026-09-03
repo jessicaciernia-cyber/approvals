@@ -148,6 +148,23 @@ Adding a client to the picker is four edits: the `site` check in the schema (a n
 policy, not an `alter`), the `SITES` list in `uploads-api.js`, an `UPLOADS` entry in
 `build.py`, and the `<option>` in `upload-page.html`.
 
+## The duplicate check
+
+When Jess picks slides on `upload.html`, each one becomes a 16x16 average hash in the
+browser (`_shared/dupes.js`) and is compared against every post already on that client's
+page: the uploads, whose hashes live in the `hashes` column, and the built decks, whose
+hashes `build.py` writes to `_shared/built-hashes.json` from each hub's `_data.json`. A
+match on the cover or on half the slides shows "Looks like a duplicate of ..." and the
+button reads **Add anyway**. It flags; it does not block.
+
+- Threshold: 14 differing bits of 256. The same recipe runs in Python at build time and
+  in the browser; measured on the same slide the two land about 5 bits apart, and
+  different artwork lands 60 or more apart.
+- The column came after the first uploads. `_shared/uploads-hashes.sql` adds it and
+  backfills the rows that predate it; run once in the SQL editor. Rows added since carry
+  their hashes from the page.
+- Tests: `node --test tests/dupes.test.mjs`.
+
 ## The caption button
 
 On `upload.html`, once slides are picked, **Draft a caption from the slides** reads them and

@@ -13,6 +13,9 @@
   var site = $("site"), title = $("title"), caption = $("caption"), capCount = $("cap-count");
   var pick = $("pick"), files = $("files"), go = $("go"), say = $("say"), out = $("out");
   var draft = $("draft"), draftSay = $("draft-say"), flagsBox = $("flags");
+  var dupeBox = $("dupe");
+  var hashes = [];          // one per file in list, same order
+  var builtHashes = null;   // {site: [{num, title, hashes}]} written at build time
   var list = [];   // File objects, in slide order
   var MAX = 10, MAX_CAPTION = 2200;
 
@@ -47,9 +50,9 @@
       dn.setAttribute("aria-label", "Move slide " + (i + 1) + " later");
       var x = el("button", "x", "✕"); x.type = "button";
       x.setAttribute("aria-label", "Remove slide " + (i + 1));
-      up.addEventListener("click", function () { list.splice(i - 1, 0, list.splice(i, 1)[0]); paintFiles(); });
-      dn.addEventListener("click", function () { list.splice(i + 1, 0, list.splice(i, 1)[0]); paintFiles(); });
-      x.addEventListener("click", function () { list.splice(i, 1); paintFiles(); });
+      up.addEventListener("click", function () { list.splice(i - 1, 0, list.splice(i, 1)[0]); paintFiles(); checkDupes(); });
+      dn.addEventListener("click", function () { list.splice(i + 1, 0, list.splice(i, 1)[0]); paintFiles(); checkDupes(); });
+      x.addEventListener("click", function () { list.splice(i, 1); paintFiles(); checkDupes(); });
       ctl.appendChild(up); ctl.appendChild(dn); ctl.appendChild(x);
       box.appendChild(ctl);
       files.appendChild(box);
@@ -111,6 +114,48 @@
 
   function tell(msg, cls) { say.className = "say " + (cls || ""); say.textContent = msg; }
 
+  /* Duplicate check: hash every picked slide, then compare against what is already on
+     the chosen client's page, uploaded and built. Runs on pick and on client change. */
+  function loadBuilt() {
+    if (builtHashes) return Promise.resolve(builtHashes);
+    if (!window.APPROVAL_BUILT_HASHES_URL) return Promise.resolve({});
+    return fetch(window.APPROVAL_BUILT_HASHES_URL).then(function (r) { return r.ok ? r.json() : {}; })
+      .then(function (j) { builtHashes = j || {}; return builtHashes; }).catch(function () { return {}; });
+  }
+  function checkDupes() {
+    dupeBox.textContent = "";
+    go.textContent = "Add to approval page";
+    if (!list.length || !window.ApprovalDupes) return Promise.resolve();
+    var D = window.ApprovalDupes, chosen = site.value;
+    return Promise.all(list.map(D.hashFile)).then(function (hs) {
+      hashes = hs;
+      return Promise.all([API.listUploads(chosen).catch(function () { return []; }), loadBuilt()]);
+    }).then(function (both) {
+      var existing = (both[0] || []).map(function (r) {
+        return { title: r.title, when: "added " + new Date(r.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" }), hashes: r.hashes || [] };
+      }).concat(((both[1] || {})[chosen] || []).map(function (b) {
+        return { title: b.title, when: "already on the page as " + b.num, hashes: b.hashes || [] };
+      }));
+      var hit = D.findDuplicates(hashes, existing);
+      if (!hit) return;
+      var row = el("p", "flag stop");
+      row.appendChild(el("b", null, "Looks like a duplicate"));
+      var parts = [];
+      if (hit.cover) parts.push("same cover");
+      if (!hit.cover || hit.matched > 1) parts.push(hit.matched + " of " + hit.of + " slides match");
+      row.appendChild(document.createTextNode(" of \u201c" + hit.title + "\u201d (" + hit.when + "): " + parts.join(", ") + "."));
+      dupeBox.appendChild(row);
+      go.textContent = "Add anyway";
+    }).catch(function (e) {
+      hashes = [];
+      var row = el("p", "flag check");
+      row.appendChild(el("b", null, "Duplicate check skipped"));
+      row.appendChild(document.createTextNode(" " + e.message));
+      dupeBox.appendChild(row);
+    });
+  }
+  site.addEventListener("change", checkDupes);
+
   function paintCaption() {
     var n = caption.value.length;
     capCount.textContent = n + " / " + MAX_CAPTION;
@@ -158,6 +203,7 @@
       });
       paintFiles();
       if (dropped) tell("Only the first " + MAX + " were kept, " + dropped + " left out.", "bad");
+      checkDupes();
     }).catch(function (e) {
       paintFiles();
       tell("Could not read that. " + e.message, "bad");
@@ -173,9 +219,11 @@
     var chosen = site.value;
     API.createUpload({
       site: chosen, title: title.value, caption: caption.value, files: list,
+      hashes: hashes.length === list.length ? hashes : [],
       onProgress: function (i, n) { tell("Uploaded " + i + " of " + n + "…", ""); }
     }).then(function (row) {
-      list = []; paintFiles(); title.value = ""; caption.value = ""; paintCaption();
+      list = []; hashes = []; dupeBox.textContent = ""; go.textContent = "Add to approval page";
+      paintFiles(); title.value = ""; caption.value = ""; paintCaption();
       tell("Added to the approval page.", "ok");
       var a = el("a", "btn", "Open the " + site.options[site.selectedIndex].text + " page →");
       a.href = chosen + "/#" + encodeURIComponent(row.id);

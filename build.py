@@ -131,6 +131,38 @@ def _fill(tpl, values):
     return tpl
 
 
+def write_built_hashes():
+    """A 16x16 average hash of every built slide, per site, so upload.html can warn when
+    a picked deck is already on the page. Same recipe as _shared/dupes.js."""
+    from PIL import Image
+    def ahash(im):
+        im = im.convert("RGB").resize((16, 16), Image.BOX)
+        g = [0.299 * r + 0.587 * gg + 0.114 * b for r, gg, b in im.getdata()]
+        m = sum(g) / len(g)
+        bits = "".join("1" if v > m else "0" for v in g)
+        return "".join("%x" % int(bits[i:i + 4], 2) for i in range(0, 256, 4))
+    out = {}
+    for s in SITES:
+        up = UPLOADS.get(s["slug"])
+        if not up:
+            continue
+        data = os.path.join(os.path.dirname(s["src"]), "_data.json")
+        if not os.path.exists(data):
+            continue
+        rows = []
+        for it in json.load(io.open(data, encoding="utf-8")):
+            thumbs = it.get("thumbs") or ([it["cover"]] if it.get("cover") else [])
+            hs = []
+            for t in thumbs:
+                raw = base64.b64decode(t.split(",", 1)[1])
+                hs.append(ahash(Image.open(io.BytesIO(raw))))
+            rows.append(dict(num=it.get("num", ""), title=it.get("topic") or it.get("title") or "", hashes=hs))
+        out[up["site"]] = rows
+    path = os.path.join(HERE, "_shared", "built-hashes.json")
+    io.open(path, "w", encoding="utf-8").write(json.dumps(out, separators=(",", ":")))
+    return sum(len(v) for v in out.values()), os.path.getsize(path) / 1024
+
+
 def write_upload_form():
     """upload.html sits at the root, so its shared-asset links drop the ../ prefix."""
     cfg = dict(url=SUPA_URL, key=SUPA_KEY)
@@ -139,6 +171,7 @@ def write_upload_form():
         UPLOADS_CSS=root("uploads.css"), BACKLINK_CSS=root("backlink.css"),
         MOBILE_CSS=root("mobile.css"), CFG=json.dumps(cfg),
         API_JS=root("uploads-api.js"), UNZIP_JS=root("unzip.js"),
+        DUPES_JS=root("dupes.js"), HASHES_URL=json.dumps(root("built-hashes.json")),
         FORM_JS=root("upload-form.js")))
     io.open(os.path.join(HERE, "upload.html"), "w", encoding="utf-8").write(html)
     return os.path.getsize(os.path.join(HERE, "upload.html")) / 1024
@@ -155,6 +188,8 @@ for s in SITES:
     built.append(s)
     print(f"{s['slug']:<18} {kb:>6.0f} KB html   {n:>3} images  {mb:>5.1f} MB")
 
+n_h, kb_h = write_built_hashes()
+print(f"{'built-hashes.json':<18} {kb_h:>6.0f} KB      {n_h:>3} built decks hashed")
 kb = write_upload_form()
 print(f"{'upload.html':<18} {kb:>6.0f} KB html   owner form")
 

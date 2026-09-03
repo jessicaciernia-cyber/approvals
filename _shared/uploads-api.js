@@ -113,7 +113,7 @@
     var m = need(); if (m) return m;
     var s = session();
     return fetch(CFG.url + "/rest/v1/approval_uploads?site=eq." + encodeURIComponent(site) +
-      "&select=id,site,title,caption,slides,created_at&order=created_at.desc",
+      "&select=id,site,title,caption,slides,hashes,created_at&order=created_at.desc",
       { headers: authHeaders(s ? s.access_token : CFG.key) }).then(json);
   }
 
@@ -141,7 +141,11 @@
       if (!f || !TYPES[f.type]) throw fail("Image " + (i + 1) + " must be a PNG or JPEG");
       if (typeof f.size !== "number" || f.size > MAX_BYTES) throw fail("Image " + (i + 1) + " must be 8 MB or smaller");
     }
-    return { site: o.site, title: title, caption: caption, files: files };
+    var hashes = o.hashes ? [].slice.call(o.hashes) : [];
+    if (hashes.length && (hashes.length !== files.length || !hashes.every(function (h) { return /^[0-9a-f]{64}$/.test(h); }))) {
+      throw fail("Slide hashes do not match the slides");
+    }
+    return { site: o.site, title: title, caption: caption, files: files, hashes: hashes };
   }
 
   function removeObjects(paths, token) {
@@ -198,7 +202,7 @@
           return fetch(CFG.url + "/rest/v1/approval_uploads", {
             method: "POST",
             headers: authHeaders(token, { "Content-Type": "application/json", Prefer: "return=representation" }),
-            body: JSON.stringify({ id: id, site: v.site, title: v.title, caption: v.caption, slides: done })
+            body: JSON.stringify(v.hashes.length ? { id: id, site: v.site, title: v.title, caption: v.caption, slides: done, hashes: v.hashes } : { id: id, site: v.site, title: v.title, caption: v.caption, slides: done })
           }).then(json).then(function (rows) {
             if (!rows || rows.length !== 1) throw fail("Upload row was not returned");
             return rows[0];
