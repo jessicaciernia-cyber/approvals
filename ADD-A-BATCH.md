@@ -124,8 +124,12 @@ read their cards from Supabase when the page opens, and Jess puts cards there fr
   A card uploaded while the page is open gets its thread on the next reload.
 - **Storage.** Bucket `approvals-uploads`, public read, 8 MB per file, PNG and JPEG only,
   paths `<site>/<uuid>/01.png`. Free tier is 1 GB, which is a few hundred carousels.
+- **Zips.** The form takes the zip Canva exports. `_shared/unzip.js` reads it in the browser
+  with no library, keeps only PNG and JPEG, drops `__MACOSX` and dotfiles, and orders the
+  images naturally so `10.png` follows `9.png`. Stored and deflated entries only.
 - **Files.** `_shared/uploads-schema.sql` (run once, already run), `uploads-api.js` (all
   the network calls), `uploads-render.js` (a live page), `upload-form.js` (the form),
+  `unzip.js` (zip expansion),
   `uploads-page.html` and `upload-page.html` (templates `build.py` fills), `uploads.css`.
   `tests/uploads-api.test.mjs` exercises the API helper against a stubbed fetch:
 

@@ -35,8 +35,8 @@
     </label>
     <label>Title<input id="title" type="text" maxlength="120" required placeholder="What Jessica will see on the card"></label>
     <label>Slides
-      <input id="pick" type="file" accept="image/png,image/jpeg" multiple>
-      <span class="hint">PNG or JPEG, up to 10, 8 MB each. Pick them in order or reorder below. The first one is the cover.</span>
+      <input id="pick" type="file" accept="image/png,image/jpeg,.zip,application/zip" multiple>
+      <span class="hint">PNG or JPEG, up to 10, 8 MB each, or the zip Canva gives you. Pick them in order or reorder below. The first one is the cover.</span>
     </label>
     <div id="files" class="files"></div>
     <label>Caption<textarea id="caption" placeholder="The caption Jessica should approve"></textarea><span id="cap-count" class="count"></span></label>
@@ -50,5 +50,6 @@
 <a class="backlink" href="./">&larr; All approval pages</a>
 <script>window.APPROVAL_COMMENTS={"url": "https://bsgygerfgyztkrrjdqlg.supabase.co", "key": "sb_publishable_xkgImZlt7Sbn76ot7fEz6g_8pe68mPy"};</script>
 <script src="_shared/uploads-api.js?v=d256d7ba"></script>
-<script src="_shared/upload-form.js?v=5e4f9630"></script>
+<script src="_shared/unzip.js?v=4ccdef33"></script>
+<script src="_shared/upload-form.js?v=2eb75dab"></script>
 </body></html>

@@ -80,15 +80,36 @@
     API.signOut().then(paintAuth);
   });
 
+  function isZip(f) {
+    return /\.zip$/i.test(f.name) || f.type === "application/zip" || f.type === "application/x-zip-compressed";
+  }
+
+  /* A zip (Canva's carousel export) expands into its images, in natural order, and
+     lands in the list exactly as if each image had been picked by hand. */
   pick.addEventListener("change", function () {
-    var added = [].slice.call(pick.files || []);
-    added.forEach(function (f) {
-      if (list.length >= MAX) return;
-      list.push(f);
-    });
-    if (added.length + list.length > MAX + added.length) tell("Only the first " + MAX + " were kept.", "bad");
+    var picked = [].slice.call(pick.files || []);
     pick.value = "";
-    paintFiles();
+    tell("Reading…", "");
+    var expand = picked.map(function (f) {
+      if (!isZip(f)) return Promise.resolve([f]);
+      if (!window.ApprovalUnzip) return Promise.reject(new Error("Zip support did not load"));
+      return window.ApprovalUnzip.unzip(f).then(function (imgs) {
+        if (!imgs.length) throw new Error(f.name + " has no PNG or JPEG inside");
+        return imgs;
+      });
+    });
+    Promise.all(expand).then(function (groups) {
+      var added = [].concat.apply([], groups), dropped = 0;
+      added.forEach(function (f) {
+        if (list.length >= MAX) { dropped++; return; }
+        list.push(f);
+      });
+      paintFiles();
+      if (dropped) tell("Only the first " + MAX + " were kept, " + dropped + " left out.", "bad");
+    }).catch(function (e) {
+      paintFiles();
+      tell("Could not read that. " + e.message, "bad");
+    });
   });
 
   caption.addEventListener("input", paintCaption);

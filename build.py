@@ -146,7 +146,8 @@ def write_upload_form():
     html = _fill(_read("upload-page.html"), dict(
         UPLOADS_CSS=root("uploads.css"), BACKLINK_CSS=root("backlink.css"),
         MOBILE_CSS=root("mobile.css"), CFG=json.dumps(cfg),
-        API_JS=root("uploads-api.js"), FORM_JS=root("upload-form.js")))
+        API_JS=root("uploads-api.js"), UNZIP_JS=root("unzip.js"),
+        FORM_JS=root("upload-form.js")))
     io.open(os.path.join(HERE, "upload.html"), "w", encoding="utf-8").write(html)
     return os.path.getsize(os.path.join(HERE, "upload.html")) / 1024
 
