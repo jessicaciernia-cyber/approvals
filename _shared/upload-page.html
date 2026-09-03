@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Add to the approval page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="{{UPLOADS_CSS}}">
+<link rel="stylesheet" href="{{BACKLINK_CSS}}">
+</head><body>
+<header><div class="wrap">
+  <div class="kick">Kickstart Social &nbsp;·&nbsp; owner only</div>
+  <h1>Add to the approval page</h1>
+  <p>Slides in order, one for a static, then the caption. It goes onto that client's approval page for Jessica to review, with a notes thread and an approval status. Nothing here publishes anywhere.</p>
+  <div class="tools"><span id="who" class="kick" hidden></span><button id="logout" class="btn" type="button">Sign out</button></div>
+</div></header>
+<main class="wrap">
+
+  <section id="login" class="login" hidden>
+    <form id="login-form" class="up" autocomplete="on">
+      <label>Email<input id="email" type="email" required autocomplete="username"></label>
+      <label>Password<input id="pass" type="password" required autocomplete="current-password"></label>
+      <div class="row"><button id="login-btn" class="btn" type="submit">Sign in</button><span id="login-say" class="say"></span></div>
+      <p class="hint">One account, yours. There is no sign-up.</p>
+    </form>
+  </section>
+
+  <form id="up" class="up" hidden>
+    <label>Client
+      <select id="site" required>
+        <option value="welliemd">WellieMD</option>
+        <option value="zenjessica">Zen Jessica</option>
+      </select>
+    </label>
+    <label>Title<input id="title" type="text" maxlength="120" required placeholder="What Jessica will see on the card"></label>
+    <label>Slides
+      <input id="pick" type="file" accept="image/png,image/jpeg" multiple>
+      <span class="hint">PNG or JPEG, up to 10, 8 MB each. Pick them in order or reorder below. The first one is the cover.</span>
+    </label>
+    <div id="files" class="files"></div>
+    <label>Caption<textarea id="caption" placeholder="The caption Jessica should approve"></textarea><span id="cap-count" class="count"></span></label>
+    <div class="row"><button id="go" class="btn" type="submit" disabled>Add to approval page</button><span id="say" class="say"></span></div>
+    <div id="out"></div>
+  </form>
+
+</main>
+<footer class="wrap"><p>Writes need your sign-in. Everyone else, including anyone holding the link, can only look.</p></footer>
+<link rel="stylesheet" href="{{MOBILE_CSS}}">
+<a class="backlink" href="./">&larr; All approval pages</a>
+<script>window.APPROVAL_COMMENTS={{CFG}};</script>
+<script src="{{API_JS}}"></script>
+<script src="{{FORM_JS}}"></script>
+</body></html>

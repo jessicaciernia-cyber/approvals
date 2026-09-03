@@ -6,6 +6,8 @@ Three review pages for Kickstart Social clients, served as one GitHub Pages site
 |---|---|
 | `/welliemd/` | WellieMD carousels, September 2026 |
 | `/zenjessica/` | Zen Jessica story carousels, September and October |
+| `/welliemd-uploads/`, `/zenjessica-uploads/` | Posts Jess uploads herself, read live from Supabase |
+| `/upload.html` | The upload form. One login, hers |
 
 Reachable by link only: every page carries `noindex,nofollow,noarchive` and `robots.txt`
 disallows crawling. It is a review surface, not a publication.
@@ -70,6 +72,14 @@ table is: anon may read and insert, never update or delete. A change is a new ro
 newest row for a card wins, so what is left behind is a record of who moved it and when,
 and an approval cannot be quietly rewritten. The allowed values are enforced in the policy,
 not only in the page, so a hand-made request cannot invent a state the page cannot display.
+
+## Uploads
+
+Jess posts carousels and statics directly from `upload.html`. They land on the two
+`-uploads` pages, which fetch from Supabase at view time, so nothing here needs a rebuild
+for them. Same notes thread and approval status as every other card. Only her login can
+write or delete; the page holds only the public key, and the policies name her user id.
+See ADD-A-BATCH.md for the shape and the traps.
 
 ## Open questions
 

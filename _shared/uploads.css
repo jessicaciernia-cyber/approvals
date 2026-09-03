@@ -1,0 +1,120 @@
+/* Shared look for the two live upload pages and the upload form. Same tokens the index
+   and the WellieMD hubs use, so a card Jess uploads sits next to a built one without a seam. */
+:root{--ground:#F3F3F0;--surface:#fff;--ink:#0A0A0A;--body:#3E3E3C;--muted:#6E6E67;
+  --line:#DEDEDA;--accent:#EC0F7E;--coral:#C0392B;--ok-fg:#155D3A;--ok-bg:#D8F0E2;
+  --disp:"Archivo Black",Impact,sans-serif;--body-f:"Archivo",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0B0B0B;--surface:#151515;--ink:#F3F3F0;--body:#C2C2BC;--muted:#8F8F88;
+  --line:#2A2A28;--ok-fg:#7BD9A6;--ok-bg:#12301F}}
+*{box-sizing:border-box}
+/* An author display rule beats the browser's [hidden]; this puts hidden back on top. */
+[hidden]{display:none!important}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.55 var(--body-f)}
+.wrap{max-width:900px;margin:0 auto;padding:0 26px}
+header{background:#0A0A0A;color:#F3F3F0;padding:48px 0 36px}
+.kick{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+header h1{font-family:var(--disp);font-size:clamp(30px,6vw,52px);line-height:.98;margin:14px 0 10px;
+  text-transform:uppercase;letter-spacing:-.02em}
+header p{max-width:58ch;margin:0;color:#C9C9C2}
+header .tools{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;
+  border:1px solid var(--ink);background:var(--ink);color:var(--ground);cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;min-height:40px}
+.btn:hover:not(:disabled){background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn.danger{background:transparent;color:var(--coral);border-color:var(--coral)}
+.btn.danger:hover:not(:disabled){background:var(--coral);color:#fff;border-color:var(--coral)}
+header .btn{color:#F3F3F0;border-color:#F3F3F0;background:transparent}
+header .btn:hover{background:var(--accent);border-color:var(--accent)}
+main{padding:34px 0 70px}
+.empty{border:2px dashed var(--line);padding:34px 26px;color:var(--muted);text-align:center;
+  font-size:15px}
+.grid{display:grid;gap:22px}
+
+/* --- one uploaded post; the same bones as a built card so notes and status land where
+       comments.js and status.js expect them --- */
+article.post{background:var(--surface);border:2px solid var(--ink);display:grid;
+  grid-template-columns:minmax(0,220px) minmax(0,1fr)}
+article.post .shot{display:block;padding:0;margin:0;border:0;background:#000;cursor:zoom-in;
+  aspect-ratio:4/5;overflow:hidden}
+article.post .shot img{display:block;width:100%;height:100%;object-fit:cover}
+.meat{padding:16px 18px 18px;min-width:0}
+.topline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.topline h3{font-family:var(--disp);font-size:19px;line-height:1.15;margin:0;letter-spacing:-.01em;
+  flex:1 1 200px;min-width:0;overflow-wrap:anywhere}
+.chip{font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 8px;border-radius:999px;background:var(--ground);color:var(--muted);white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--ok-fg)}
+.when{font:400 11px/1 var(--mono);letter-spacing:.04em;color:var(--muted)}
+.strip{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px}
+.strip button{padding:0;border:1px solid var(--line);background:#000;cursor:zoom-in;width:56px;
+  aspect-ratio:4/5;overflow:hidden}
+.strip button.on{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:-2px}
+.strip img{display:block;width:100%;height:100%;object-fit:cover}
+.caption{margin:12px 0 0;color:var(--body);font-size:14.5px;white-space:pre-wrap;overflow-wrap:anywhere;
+  max-width:62ch}
+.caption:empty{display:none}
+.cap{margin-top:4px}
+.acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.acts .say{font:400 12px/1.4 var(--body-f);color:var(--muted)}
+.acts .say.bad{color:var(--coral)}
+.acts[hidden]{display:none}
+
+/* --- lightbox; ids match the built pages so mobile.css moves the arrows the same way --- */
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;
+  justify-content:center;padding:56px 70px;z-index:50}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:86vh;object-fit:contain;box-shadow:0 10px 50px rgba(0,0,0,.6)}
+.lb button{position:absolute;font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  padding:12px 16px;border:1px solid #fff;background:#000;color:#fff;cursor:pointer;min-height:44px}
+.lb button:hover{background:var(--accent);border-color:var(--accent)}
+#lbp{left:16px;top:50%;transform:translateY(-50%)}
+#lbn{right:16px;top:50%;transform:translateY(-50%)}
+#lbx{top:14px;right:16px}
+.lb .cap2{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#C9C9C2;
+  font:500 12px/1 var(--mono);letter-spacing:.08em}
+
+/* --- the upload form --- */
+form.up{display:grid;gap:16px;background:var(--surface);border:2px solid var(--ink);padding:22px 24px}
+form.up label{display:grid;gap:6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted)}
+form.up input,form.up select,form.up textarea{font:400 16px/1.45 var(--body-f);color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);padding:11px 12px;width:100%;border-radius:0;
+  min-height:44px}
+form.up textarea{min-height:140px;resize:vertical}
+form.up input:focus,form.up select:focus,form.up textarea:focus{outline:2px solid var(--ink);
+  outline-offset:-1px;border-color:transparent}
+.count{font:400 11px/1 var(--mono);color:var(--muted);text-align:right}
+.count.bad{color:var(--coral)}
+.files{display:flex;gap:10px;flex-wrap:wrap}
+.files:empty{display:none}
+.file{border:1px solid var(--line);background:var(--ground);width:118px;display:grid;
+  grid-template-rows:auto auto}
+.file img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#000}
+.file .n{font:500 10px/1 var(--mono);letter-spacing:.08em;padding:6px 7px 2px;color:var(--muted)}
+.file .ctl{display:flex}
+.file .ctl button{flex:1;font:500 13px/1 var(--mono);min-height:34px;border:0;background:transparent;
+  color:var(--ink);cursor:pointer;border-top:1px solid var(--line)}
+.file .ctl button:hover:not(:disabled){background:var(--ink);color:var(--ground)}
+.file .ctl button:disabled{opacity:.3;cursor:default}
+.file .ctl .x{color:var(--coral)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.say{font:400 13px/1.45 var(--body-f);color:var(--muted);min-height:1.2em}
+.say.bad{color:var(--coral)}
+.say.ok{color:var(--ok-fg)}
+.login{max-width:420px}
+.hint{font-size:13px;color:var(--muted);margin:0}
+footer{border-top:2px solid var(--ink);padding:22px 0 60px;color:var(--muted);font-size:13px}
+footer p{max-width:70ch;margin:0}
+
+@media (max-width:600px){
+  article.post{grid-template-columns:1fr}
+  article.post .shot{aspect-ratio:auto;max-height:52vh}
+  .meat{padding:14px 14px 16px}
+  .strip button{width:52px}
+  form.up{padding:16px}
+  .file{width:calc(50% - 5px)}
+  .btn{min-height:44px}
+}

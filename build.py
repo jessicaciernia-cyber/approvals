@@ -28,6 +28,17 @@ SITES = [
                "and hashtags, in posting order."),
 ]
 
+# Pages that read their cards from Supabase at view time instead of from a hub build.
+# Jess posts to them from upload.html. Nothing here is authored on this machine.
+LIVE = [
+    dict(slug="welliemd-uploads", site="welliemd", title="WellieMD uploads",
+         blurb="Posts Jess uploaded directly. Same notes thread and approval status "
+               "as the built pages, without waiting for a rebuild."),
+    dict(slug="zenjessica-uploads", site="zenjessica", title="Zen Jessica uploads",
+         blurb="Posts Jess uploaded directly. Same notes thread and approval status "
+               "as the built pages, without waiting for a rebuild."),
+]
+
 # The anon key is public by design; what guards the table is its RLS policy set, not
 # secrecy. It still comes from .env rather than being pasted in here, so there is one
 # place to change it and it never lands in a commit by hand.
@@ -98,6 +109,48 @@ def extract(src, outdir, slug):
              for f in os.listdir(imgdir)) / 1024 / 1024
     return len(seen), os.path.getsize(os.path.join(outdir, "index.html")) / 1024, mb
 
+def _read(name):
+    return io.open(os.path.join(HERE, "_shared", name), encoding="utf-8").read()
+
+
+def _fill(tpl, values):
+    for k, v in values.items():
+        tpl = tpl.replace("{{" + k + "}}", v)
+    left = re.findall(r"{{[A-Z_]+}}", tpl)
+    if left:
+        raise SystemExit("template still has " + ", ".join(left))
+    return tpl
+
+
+def write_live(page):
+    """One live page: the template, this client's config, and the scripts that must
+    load only after the cards exist (see uploads-render.js)."""
+    out = os.path.join(HERE, page["slug"])
+    os.makedirs(out, exist_ok=True)
+    cfg = dict(url=SUPA_URL, key=SUPA_KEY, site=page["site"])
+    live = dict(site=page["site"], after=[_v("comments.js"), _v("status.js")])
+    html = _fill(_read("uploads-page.html"), dict(
+        TITLE=page["title"], BLURB=page["blurb"],
+        UPLOADS_CSS=_v("uploads.css"), COMMENTS_CSS=_v("comments.css"),
+        BACKLINK_CSS=_v("backlink.css"), MOBILE_CSS=_v("mobile.css"),
+        CFG=json.dumps(cfg), LIVE=json.dumps(live),
+        API_JS=_v("uploads-api.js"), RENDER_JS=_v("uploads-render.js")))
+    io.open(os.path.join(out, "index.html"), "w", encoding="utf-8").write(html)
+    return os.path.getsize(os.path.join(out, "index.html")) / 1024
+
+
+def write_upload_form():
+    """upload.html sits at the root, so its shared-asset links drop the ../ prefix."""
+    cfg = dict(url=SUPA_URL, key=SUPA_KEY)
+    root = lambda name: _v(name).replace("../_shared/", "_shared/", 1)
+    html = _fill(_read("upload-page.html"), dict(
+        UPLOADS_CSS=root("uploads.css"), BACKLINK_CSS=root("backlink.css"),
+        MOBILE_CSS=root("mobile.css"), CFG=json.dumps(cfg),
+        API_JS=root("uploads-api.js"), FORM_JS=root("upload-form.js")))
+    io.open(os.path.join(HERE, "upload.html"), "w", encoding="utf-8").write(html)
+    return os.path.getsize(os.path.join(HERE, "upload.html")) / 1024
+
+
 built = []
 for s in SITES:
     if not os.path.exists(s["src"]):
@@ -108,6 +161,13 @@ for s in SITES:
     n, kb, mb = extract(s["src"], out, s["slug"])
     built.append(s)
     print(f"{s['slug']:<18} {kb:>6.0f} KB html   {n:>3} images  {mb:>5.1f} MB")
+
+for page in LIVE:
+    kb = write_live(page)
+    built.append(page)
+    print(f"{page['slug']:<18} {kb:>6.0f} KB html   live from Supabase")
+kb = write_upload_form()
+print(f"{'upload.html':<18} {kb:>6.0f} KB html   owner form")
 
 os.makedirs(os.path.join(HERE, "_shared"), exist_ok=True)
 io.open(os.path.join(HERE, "_shared", "backlink.css"), "w", encoding="utf-8").write(

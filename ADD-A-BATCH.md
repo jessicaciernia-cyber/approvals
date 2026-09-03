@@ -102,6 +102,41 @@ for c in json.load(r): print(f\"[{c['site']}] {c['cid']}\n  {c['author']}: {c['b
 
 ---
 
+## Uploads Jess posts herself
+
+Two pages are not built from a hub at all. `/welliemd-uploads/` and `/zenjessica-uploads/`
+read their cards from Supabase when the page opens, and Jess puts cards there from
+<https://jessicaciernia-cyber.github.io/approvals/upload.html>. No rebuild, no push.
+
+- **One login, hers.** Email and password on the Supabase project, signup closed. The
+  policies in `_shared/uploads-schema.sql` name her user id, not the generic signed-in
+  role, so reopening signup would still not let anyone else write. Password reset is in
+  the Supabase dashboard: Authentication > Users > her row > Reset password.
+- **The page still holds only the anon key.** Reads use it. Writes and deletes carry her
+  access token, and row-level security decides. A copy of the page gives a stranger what
+  the public page already gives them: the ability to look.
+- **Delete is real.** Images leave the bucket, the row goes, and that card's rows in
+  `approval_comments` and `approval_status` stay behind as orphans. She chose that.
+- **Notes and status attach the usual way.** Cards are `article.post` keyed by the title
+  slug, the same id `comments.js` and `status.js` derive. Those two scripts stop if they
+  find no cards at `DOMContentLoaded`, and live cards arrive after a fetch, so
+  `uploads-render.js` loads them itself once the cards exist. Neither file was changed.
+  A card uploaded while the page is open gets its thread on the next reload.
+- **Storage.** Bucket `approvals-uploads`, public read, 8 MB per file, PNG and JPEG only,
+  paths `<site>/<uuid>/01.png`. Free tier is 1 GB, which is a few hundred carousels.
+- **Files.** `_shared/uploads-schema.sql` (run once, already run), `uploads-api.js` (all
+  the network calls), `uploads-render.js` (a live page), `upload-form.js` (the form),
+  `uploads-page.html` and `upload-page.html` (templates `build.py` fills), `uploads.css`.
+  `tests/uploads-api.test.mjs` exercises the API helper against a stubbed fetch:
+
+  ```bash
+  node --test tests/uploads-api.test.mjs
+  ```
+
+Adding a client to the picker is three edits: the `site` check in the schema (a new
+policy, not an `alter`), the `SITES` list in `uploads-api.js`, and a `LIVE` entry in
+`build.py`. Plus the `<option>` in `upload-page.html`.
+
 ## Things that have already gone wrong here
 
 - **The site is public.** GitHub Pages needs a public repo on a free account. Every page
