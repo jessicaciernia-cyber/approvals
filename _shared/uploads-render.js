@@ -109,21 +109,34 @@
 
     meat.appendChild(el("p", "caption", row.caption || ""));
 
-    /* Owner controls. Hidden unless a session exists; the server still has the last word. */
+    /* Owner controls. Hidden unless a session exists; the server still has the last word.
+       The confirm step is in the page, not a native dialog: embedded browsers and some
+       phones swallow window.confirm and the click just dies. */
     var acts = el("div", "acts"); acts.hidden = !API.session();
     var del = el("button", "btn danger", "Delete this post");
+    var yes = el("button", "btn danger", "Yes, delete it for good");
+    var keep = el("button", "btn ghost", "Keep it");
     var say = el("span", "say");
-    acts.appendChild(del); acts.appendChild(say);
+    yes.hidden = keep.hidden = true;
+    acts.appendChild(del); acts.appendChild(yes); acts.appendChild(keep); acts.appendChild(say);
     del.addEventListener("click", function () {
-      if (!window.confirm("Delete “" + row.title + "” for good? The images and the card go away. Notes and approval history on it stay in the database but stop being shown.")) return;
-      del.disabled = true; say.className = "say"; say.textContent = "Deleting…";
+      del.hidden = true; yes.hidden = keep.hidden = false;
+      say.className = "say";
+      say.textContent = "The images and the card go away. Notes and approval history on it stay in the database but stop being shown.";
+      yes.focus();
+    });
+    keep.addEventListener("click", function () {
+      yes.hidden = keep.hidden = true; del.hidden = false; say.textContent = "";
+    });
+    yes.addEventListener("click", function () {
+      yes.disabled = keep.disabled = true; say.className = "say"; say.textContent = "Deleting…";
       API.deleteUpload(row).then(function () {
         a.parentNode.removeChild(a);
         rows = rows.filter(function (r) { return r.id !== row.id; });
         paintCount();
       }).catch(function (e) {
         say.className = "say bad"; say.textContent = "Did not delete. " + e.message;
-        del.disabled = false;
+        yes.disabled = keep.disabled = false;
       });
     });
     meat.appendChild(acts);
