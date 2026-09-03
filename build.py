@@ -28,16 +28,13 @@ SITES = [
                "and hashtags, in posting order."),
 ]
 
-# Pages that read their cards from Supabase at view time instead of from a hub build.
-# Jess posts to them from upload.html. Nothing here is authored on this machine.
-LIVE = [
-    dict(slug="welliemd-uploads", site="welliemd", title="WellieMD uploads",
-         blurb="Posts Jess uploaded directly. Same notes thread and approval status "
-               "as the built pages, without waiting for a rebuild."),
-    dict(slug="zenjessica-uploads", site="zenjessica", title="Zen Jessica uploads",
-         blurb="Posts Jess uploaded directly. Same notes thread and approval status "
-               "as the built pages, without waiting for a rebuild."),
-]
+# Which hubs receive Jess's direct uploads at view time, and which card markup each
+# one uses. uploads-render.js prepends her cards to the built list on that page, so
+# Jessica sees them where she already looks. She adds them from upload.html.
+UPLOADS = {
+    "welliemd":   dict(site="welliemd",   kind="deck"),
+    "zenjessica": dict(site="zenjessica", kind="post"),
+}
 
 # The anon key is public by design; what guards the table is its RLS policy set, not
 # secrecy. It still comes from .env rather than being pasted in here, so there is one
@@ -98,12 +95,24 @@ def extract(src, outdir, slug):
         '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
         '<link rel="stylesheet" href="' + _v("backlink.css") + '">\n'
         '<link rel="stylesheet" href="' + _v("comments.css") + '">\n<title>', 1)
-    html += ('\n<link rel="stylesheet" href="' + _v("mobile.css") + '">\n'
-             '\n<a class="backlink" href="../">&larr; All approval pages</a>\n'
-             '<script>window.APPROVAL_COMMENTS=' + json.dumps(
-                 dict(url=SUPA_URL, key=SUPA_KEY, site=slug)) + ';</script>\n'
-             '<script src="' + _v("comments.js") + '"></script>\n'
-             '<script src="' + _v("status.js") + '"></script>\n')
+    # Notes and status load on every page. Where Jess can upload, uploads-render.js
+    # prepends her cards first and then loads those two scripts itself, so the built
+    # cards and the uploaded ones get their threads in one pass.
+    after = [_v("comments.js"), _v("status.js")]
+    up = UPLOADS.get(slug)
+    tail = ('\n<link rel="stylesheet" href="' + _v("mobile.css") + '">\n'
+            '\n<a class="backlink" href="../">&larr; All approval pages</a>\n'
+            '<script>window.APPROVAL_COMMENTS=' + json.dumps(
+                dict(url=SUPA_URL, key=SUPA_KEY, site=slug)) + ';</script>\n')
+    if up:
+        tail += ('<link rel="stylesheet" href="' + _v("uploads.css") + '">\n'
+                 '<script>window.APPROVAL_LIVE=' + json.dumps(
+                     dict(site=up["site"], kind=up["kind"], after=after)) + ';</script>\n'
+                 '<script src="' + _v("uploads-api.js") + '"></script>\n'
+                 '<script src="' + _v("uploads-render.js") + '"></script>\n')
+    else:
+        tail += "".join('<script src="' + a + '"></script>\n' for a in after)
+    html += tail
     io.open(os.path.join(outdir, "index.html"), "w", encoding="utf-8").write(html)
     mb = sum(os.path.getsize(os.path.join(imgdir, f))
              for f in os.listdir(imgdir)) / 1024 / 1024
@@ -120,23 +129,6 @@ def _fill(tpl, values):
     if left:
         raise SystemExit("template still has " + ", ".join(left))
     return tpl
-
-
-def write_live(page):
-    """One live page: the template, this client's config, and the scripts that must
-    load only after the cards exist (see uploads-render.js)."""
-    out = os.path.join(HERE, page["slug"])
-    os.makedirs(out, exist_ok=True)
-    cfg = dict(url=SUPA_URL, key=SUPA_KEY, site=page["site"])
-    live = dict(site=page["site"], after=[_v("comments.js"), _v("status.js")])
-    html = _fill(_read("uploads-page.html"), dict(
-        TITLE=page["title"], BLURB=page["blurb"],
-        UPLOADS_CSS=_v("uploads.css"), COMMENTS_CSS=_v("comments.css"),
-        BACKLINK_CSS=_v("backlink.css"), MOBILE_CSS=_v("mobile.css"),
-        CFG=json.dumps(cfg), LIVE=json.dumps(live),
-        API_JS=_v("uploads-api.js"), RENDER_JS=_v("uploads-render.js")))
-    io.open(os.path.join(out, "index.html"), "w", encoding="utf-8").write(html)
-    return os.path.getsize(os.path.join(out, "index.html")) / 1024
 
 
 def write_upload_form():
@@ -163,10 +155,6 @@ for s in SITES:
     built.append(s)
     print(f"{s['slug']:<18} {kb:>6.0f} KB html   {n:>3} images  {mb:>5.1f} MB")
 
-for page in LIVE:
-    kb = write_live(page)
-    built.append(page)
-    print(f"{page['slug']:<18} {kb:>6.0f} KB html   live from Supabase")
 kb = write_upload_form()
 print(f"{'upload.html':<18} {kb:>6.0f} KB html   owner form")
 
@@ -224,6 +212,10 @@ header p{{max-width:58ch;margin:0;color:#C9C9C2}}
 footer{{border-top:2px solid var(--ink);padding:22px 0 60px;color:var(--muted);
   font-size:13px}}
 footer p{{max-width:70ch;margin:0}}
+footer .owner{{margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase}}
+footer .owner a{{color:var(--muted);text-decoration:none}}
+footer .owner a:hover{{color:var(--accent)}}
 </style></head><body>
 <header><div class="wrap">
   <div class="kick">Kickstart Social &nbsp;·&nbsp; for review</div>
@@ -233,7 +225,8 @@ footer p{{max-width:70ch;margin:0}}
 </div></header>
 <main class="wrap"><div class="grid">{cards}</div></main>
 <footer class="wrap"><p>These pages are reachable by link only and are excluded from search
-engines. They are a review surface, not a publication.</p></footer>
+engines. They are a review surface, not a publication.</p>
+<p class="owner"><a href="upload.html">Owner: add a post</a></p></footer>
 </body></html>"""
 io.open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(index)
 io.open(os.path.join(HERE, "robots.txt"), "w", encoding="utf-8").write(

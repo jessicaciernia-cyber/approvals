@@ -104,9 +104,11 @@ for c in json.load(r): print(f\"[{c['site']}] {c['cid']}\n  {c['author']}: {c['b
 
 ## Uploads Jess posts herself
 
-Two pages are not built from a hub at all. `/welliemd-uploads/` and `/zenjessica-uploads/`
-read their cards from Supabase when the page opens, and Jess puts cards there from
-<https://jessicaciernia-cyber.github.io/approvals/upload.html>. No rebuild, no push.
+Jess adds carousels and statics from
+<https://jessicaciernia-cyber.github.io/approvals/upload.html>, and they appear at the top of
+that client's own page, `/welliemd/` or `/zenjessica/`, the one Jessica already opens. No
+rebuild, no push. The page fetches them from Supabase when it opens and prepends one card
+per upload in that page's own markup, so an uploaded card and a built card look the same.
 
 - **One login, hers.** Email and password on the Supabase project, signup closed. The
   policies in `_shared/uploads-schema.sql` name her user id, not the generic signed-in
@@ -117,11 +119,16 @@ read their cards from Supabase when the page opens, and Jess puts cards there fr
   the public page already gives them: the ability to look.
 - **Delete is real.** Images leave the bucket, the row goes, and that card's rows in
   `approval_comments` and `approval_status` stay behind as orphans. She chose that.
-- **Notes and status attach the usual way.** Cards are `article.post` keyed by the title
-  slug, the same id `comments.js` and `status.js` derive. Those two scripts stop if they
-  find no cards at `DOMContentLoaded`, and live cards arrive after a fetch, so
-  `uploads-render.js` loads them itself once the cards exist. Neither file was changed.
+- **Notes and status attach the usual way.** Uploaded cards are keyed by the title slug,
+  the same id `comments.js` and `status.js` derive. Those two scripts stop if they find no
+  cards at `DOMContentLoaded`, and uploaded cards arrive after a fetch, so on the two upload
+  pages `build.py` no longer links them directly: `uploads-render.js` prepends the cards and
+  then loads both scripts, and it loads them even if the fetch fails so the built cards
+  never lose their threads. Neither file was changed. `welliemd-posts` keeps the plain pair.
   A card uploaded while the page is open gets its thread on the next reload.
+- **Which hubs.** The `UPLOADS` map in `build.py`: `welliemd` uses the deck card markup,
+  `zenjessica` the post card markup. Adding a hub means adding an entry and, if its card
+  markup is new, a builder in `uploads-render.js`.
 - **Storage.** Bucket `approvals-uploads`, public read, 8 MB per file, PNG and JPEG only,
   paths `<site>/<uuid>/01.png`. Free tier is 1 GB, which is a few hundred carousels.
 - **Zips.** The form takes the zip Canva exports. `_shared/unzip.js` reads it in the browser
@@ -129,17 +136,17 @@ read their cards from Supabase when the page opens, and Jess puts cards there fr
   images naturally so `10.png` follows `9.png`. Stored and deflated entries only.
 - **Files.** `_shared/uploads-schema.sql` (run once, already run), `uploads-api.js` (all
   the network calls), `uploads-render.js` (a live page), `upload-form.js` (the form),
-  `unzip.js` (zip expansion),
-  `uploads-page.html` and `upload-page.html` (templates `build.py` fills), `uploads.css`.
+  `unzip.js` (zip expansion), `upload-page.html` (the form template `build.py` fills),
+  `uploads.css`.
   `tests/uploads-api.test.mjs` exercises the API helper against a stubbed fetch:
 
   ```bash
   node --test tests/uploads-api.test.mjs
   ```
 
-Adding a client to the picker is three edits: the `site` check in the schema (a new
-policy, not an `alter`), the `SITES` list in `uploads-api.js`, and a `LIVE` entry in
-`build.py`. Plus the `<option>` in `upload-page.html`.
+Adding a client to the picker is four edits: the `site` check in the schema (a new
+policy, not an `alter`), the `SITES` list in `uploads-api.js`, an `UPLOADS` entry in
+`build.py`, and the `<option>` in `upload-page.html`.
 
 ## Things that have already gone wrong here
 

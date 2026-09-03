@@ -6,7 +6,6 @@ Three review pages for Kickstart Social clients, served as one GitHub Pages site
 |---|---|
 | `/welliemd/` | WellieMD carousels, September 2026 |
 | `/zenjessica/` | Zen Jessica story carousels, September and October |
-| `/welliemd-uploads/`, `/zenjessica-uploads/` | Posts Jess uploads herself, read live from Supabase |
 | `/upload.html` | The upload form. One login, hers |
 
 Reachable by link only: every page carries `noindex,nofollow,noarchive` and `robots.txt`
@@ -75,10 +74,10 @@ not only in the page, so a hand-made request cannot invent a state the page cann
 
 ## Uploads
 
-Jess posts carousels and statics directly from `upload.html`. They land on the two
-`-uploads` pages, which fetch from Supabase at view time, so nothing here needs a rebuild
-for them. Same notes thread and approval status as every other card. Only her login can
-write or delete; the page holds only the public key, and the policies name her user id.
+Jess adds carousels and statics from `upload.html`. They appear at the top of the WellieMD
+or Zen Jessica page, fetched from Supabase when the page opens, so nothing here needs a
+rebuild for them. Same notes thread and approval status as every other card. Only her login
+can add or delete; the page holds only the public key, and the policies name her user id.
 See ADD-A-BATCH.md for the shape and the traps.
 
 ## Open questions

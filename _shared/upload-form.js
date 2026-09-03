@@ -126,7 +126,7 @@
       list = []; paintFiles(); title.value = ""; caption.value = ""; paintCaption();
       tell("Added to the approval page.", "ok");
       var a = el("a", "btn", "Open the " + site.options[site.selectedIndex].text + " page →");
-      a.href = chosen + "-uploads/#" + encodeURIComponent(row.id);
+      a.href = chosen + "/#" + encodeURIComponent(row.id);
       out.appendChild(a);
     }).catch(function (e) {
       tell("Did not add it. " + e.message, "bad");
