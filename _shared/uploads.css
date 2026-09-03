@@ -118,6 +118,15 @@ form.up input:focus,form.up select:focus,form.up textarea:focus{outline:2px soli
 .say{font:400 13px/1.45 var(--body-f);color:var(--muted);min-height:1.2em}
 .say.bad{color:var(--coral)}
 .say.ok{color:var(--ok-fg)}
+.flags{display:grid;gap:8px}
+.flags:empty{display:none}
+.flag{margin:0;padding:10px 12px;font-size:14px;line-height:1.45;border-left:3px solid var(--line);background:var(--ground)}
+.flag b{font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-right:8px}
+.flag.check{border-color:#8A5B00;background:#FFF3D1;color:#5A3D00}
+.flag.stop{border-color:#8C1420;background:#FBDDE0;color:#5E0E17}
+.flag.ok{border-color:var(--ok-fg);background:var(--ok-bg);color:var(--ok-fg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .flag.check{background:#33280A;color:#F0C55A}
+  :root:not([data-theme="light"]) .flag.stop{background:#3A1216;color:#F2A3AD}}
 .login{max-width:420px}
 .hint{font-size:13px;color:var(--muted);margin:0}
 footer{border-top:2px solid var(--ink);padding:22px 0 60px;color:var(--muted);font-size:13px}

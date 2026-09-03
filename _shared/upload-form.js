@@ -12,6 +12,7 @@
   var email = $("email"), pass = $("pass"), loginSay = $("login-say"), loginBtn = $("login-btn");
   var site = $("site"), title = $("title"), caption = $("caption"), capCount = $("cap-count");
   var pick = $("pick"), files = $("files"), go = $("go"), say = $("say"), out = $("out");
+  var draft = $("draft"), draftSay = $("draft-say"), flagsBox = $("flags");
   var list = [];   // File objects, in slide order
   var MAX = 10, MAX_CAPTION = 2200;
 
@@ -54,8 +55,59 @@
       files.appendChild(box);
     });
     go.disabled = list.length === 0;
+    draft.disabled = list.length === 0;
     tell(list.length ? list.length + " of " + MAX + " slides. First one is the cover." : "", "");
   }
+
+  /* A slide at 1024px on its long side is plenty for reading the words on it, and it
+     keeps ten slides under a few megabytes for the trip to the caption function. */
+  function shrink(file) {
+    return new Promise(function (res, rej) {
+      var img = new Image();
+      var url = URL.createObjectURL(file);
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        var s = Math.min(1, 1024 / Math.max(img.naturalWidth, img.naturalHeight));
+        var c = document.createElement("canvas");
+        c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        var dataUrl = c.toDataURL("image/jpeg", 0.85);
+        res({ media_type: "image/jpeg", data: dataUrl.slice(dataUrl.indexOf(",") + 1) });
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error("Could not read " + file.name)); };
+      img.src = url;
+    });
+  }
+
+  function showFlags(flags) {
+    flagsBox.textContent = "";
+    if (!flags || !flags.length) {
+      flagsBox.appendChild(el("p", "flag ok", "Nothing on the slides needs a source or a legal look."));
+      return;
+    }
+    flags.forEach(function (f) {
+      var row = el("p", "flag " + (f.level === "stop" ? "stop" : "check"));
+      row.appendChild(el("b", null, (f.level === "stop" ? "Cannot ship" : "Check a claim") + " · slide " + f.slide));
+      row.appendChild(document.createTextNode(" " + f.note));
+      flagsBox.appendChild(row);
+    });
+  }
+
+  draft.addEventListener("click", function () {
+    draft.disabled = true; flagsBox.textContent = "";
+    draftSay.className = "say"; draftSay.textContent = "Reading " + list.length + " slide" + (list.length === 1 ? "" : "s") + "…";
+    Promise.all(list.map(shrink)).then(function (images) {
+      draftSay.textContent = "Drafting… about 10 to 20 seconds.";
+      return API.draftCaption({ site: site.value, title: title.value, images: images });
+    }).then(function (d) {
+      caption.value = (d.caption || "").trim() + (d.hashtags ? "\n\n" + d.hashtags.trim() : "");
+      paintCaption();
+      showFlags(d.flags);
+      draftSay.className = "say ok"; draftSay.textContent = "Drafted. Edit anything before you add it.";
+    }).catch(function (e) {
+      draftSay.className = "say bad"; draftSay.textContent = "No draft. " + e.message;
+    }).then(function () { draft.disabled = list.length === 0; });
+  });
 
   function tell(msg, cls) { say.className = "say " + (cls || ""); say.textContent = msg; }
 

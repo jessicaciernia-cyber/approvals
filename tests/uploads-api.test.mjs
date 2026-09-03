@@ -189,3 +189,26 @@ test("signIn stores the session and returns the user", async () => {
   assert.equal(calls[0].headers.Authorization, undefined, "no bearer on sign-in");
   assert.ok(store.has("approval-uploads-session"));
 });
+
+test("draftCaption: validates, requires a session, posts to the function with the user token", async () => {
+  const off = load();
+  await assert.rejects(off.api.draftCaption({ site: "welliemd", images: [{ media_type: "image/jpeg", data: "x" }] }), /Not signed in/);
+  assert.equal(off.calls.length, 0);
+  const { api, calls } = load({
+    session: live,
+    routes: { "/functions/v1/caption": ({ opts }) => ({ status: 200, body: { caption: "C", hashtags: "#a", flags: [], echo: JSON.parse(opts.body) } }) }
+  });
+  await assert.rejects(api.draftCaption({ site: "nope", images: [{ media_type: "image/jpeg", data: "x" }] }), /welliemd or zenjessica/);
+  await assert.rejects(api.draftCaption({ site: "welliemd", images: [] }), /1 to 10/);
+  await assert.rejects(api.draftCaption({ site: "welliemd", images: Array(11).fill({ media_type: "image/jpeg", data: "x" }) }), /1 to 10/);
+  await assert.rejects(api.draftCaption({ site: "welliemd", images: [{ media_type: "image/gif", data: "x" }] }), /not a JPEG or PNG/);
+  assert.equal(calls.length, 0, "validation before any fetch");
+  const d = await api.draftCaption({ site: "zenjessica", title: "T".repeat(200), images: [{ media_type: "image/jpeg", data: "abc" }] });
+  assert.equal(d.caption, "C");
+  assert.equal(calls[0].method, "POST");
+  assert.ok(calls[0].url.endsWith("/functions/v1/caption"));
+  assert.equal(calls[0].headers.Authorization, "Bearer " + TOKEN);
+  assert.equal(d.echo.site, "zenjessica");
+  assert.equal(d.echo.title.length, 120, "title capped at 120");
+  assert.deepEqual(d.echo.images, [{ media_type: "image/jpeg", data: "abc" }]);
+});

@@ -148,6 +148,38 @@ Adding a client to the picker is four edits: the `site` check in the schema (a n
 policy, not an `alter`), the `SITES` list in `uploads-api.js`, an `UPLOADS` entry in
 `build.py`, and the `<option>` in `upload-page.html`.
 
+## The caption button
+
+On `upload.html`, once slides are picked, **Draft a caption from the slides** reads them and
+fills the caption box in that client's voice, then lists anything on the slides that needs a
+source or a legal look, in the two levels the built pages use (`check`, `stop`). Jess edits
+before she adds. Nothing is stored until she adds the post.
+
+- **Where the model key lives.** In the Supabase project's secrets, used only by the edge
+  function `supabase/functions/caption`. The page never sees it. The function asks Supabase
+  Auth who holds the token and refuses everyone but `UPLOADER_ID`, so the public anon key
+  buys nothing here either.
+- **Voice.** `_shared/caption-voice/welliemd.md` and `zenjessica.md`, built by extraction
+  from the WellieMD brief as applied on the hub, the nine real captions and flag notes, the
+  story lane's rules, and real Zen Jessica captions. Edit a pack, then run
+  `python _shared/caption-voice/build-voice.py` to regenerate the function's `voice.ts`,
+  and redeploy.
+- **Model and cost.** `claude-opus-5` by default, roughly ten cents per ten-slide draft.
+  Set the secret `CAPTION_MODEL=claude-sonnet-5` for about four cents. The slides are
+  downsized to 1024px JPEG in the browser before they leave it.
+- **Deploy.** Once: `supabase login` in a terminal (opens a browser). Then from the repo:
+
+  ```bash
+  supabase link --project-ref bsgygerfgyztkrrjdqlg
+  supabase secrets set ANTHROPIC_API_KEY=... UPLOADER_ID=92e12e4e-2792-44b4-a6e5-ecfd582d97f9
+  supabase functions deploy caption
+  ```
+
+  Proof it is up: a call with only the anon key answers 401.
+- **Tests.** `deno test --allow-env --allow-net=jsr.io supabase/functions/caption/` covers the
+  refusal branches with the model stubbed. `node --test tests/uploads-api.test.mjs` covers the
+  page side.
+
 ## Things that have already gone wrong here
 
 - **The site is public.** GitHub Pages needs a public repo on a free account. Every page

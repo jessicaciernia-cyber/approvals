@@ -226,7 +226,30 @@
     });
   }
 
+  /* Ask the caption function for a draft. images are already downsized by the page:
+     [{media_type, data}] with data base64 and no prefix. Owner only, the function checks. */
+  function draftCaption(input) {
+    var o = input || {};
+    if (SITES.indexOf(o.site) < 0) return Promise.reject(fail("Site must be welliemd or zenjessica"));
+    var images = o.images ? [].slice.call(o.images) : [];
+    if (images.length < 1 || images.length > MAX_FILES) return Promise.reject(fail("Send 1 to " + MAX_FILES + " images"));
+    for (var i = 0; i < images.length; i++) {
+      if (!images[i] || !TYPES[images[i].media_type] || typeof images[i].data !== "string") {
+        return Promise.reject(fail("Image " + (i + 1) + " is not a JPEG or PNG"));
+      }
+    }
+    var m = need(); if (m) return m;
+    return ensureSession().then(function (s) {
+      return fetch(CFG.url + "/functions/v1/caption", {
+        method: "POST",
+        headers: authHeaders(s.access_token, { "Content-Type": "application/json" }),
+        body: JSON.stringify({ site: o.site, title: String(o.title || "").slice(0, 120), images: images })
+      }).then(json);
+    });
+  }
+
   window.ApprovalUploads = {
+    draftCaption: draftCaption,
     signIn: signIn,
     session: session,
     ensureSession: ensureSession,
