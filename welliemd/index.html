@@ -71,6 +71,7 @@ header p{max-width:64ch;margin:0;color:var(--header-dim)}
 .tag.check{background:var(--ck-bg);color:var(--ck-fg);border-color:transparent}
 .tag.stop{background:var(--no-bg);color:var(--no-fg);border-color:transparent;font-weight:500}
 .tag.g{color:var(--muted)}
+.tag.src{background:var(--magenta);color:#fff;border-color:transparent}
 .strip{display:flex;gap:9px;overflow-x:auto;padding:0 22px 16px;scrollbar-width:thin}
 .fr{position:relative;flex:0 0 auto;padding:0;border:2px solid var(--line);background:none;
   cursor:zoom-in;line-height:0}
@@ -142,13 +143,13 @@ footer p{max-width:76ch;margin:0 0 9px}
 </style>
 <header><div class="wrap">
   <div class="kick">@joinwelliemd &nbsp;·&nbsp; carousels &nbsp;·&nbsp; for Jessica's approval</div>
-  <h1>Nine <mark>carousels</mark></h1>
+  <h1>Fourteen <mark>carousels</mark></h1>
   <p>Delivered as artwork at 1080&times;1350 with no captions and no posting dates. Captions
   are written here and sit under each deck. Every slide is checked against the content rules
   in the WellieMD brief. Tap any slide to page through a deck full size.</p>
   <div class="nums">
-    <div><b>9</b><span>carousels</span></div>
-    <div><b>67</b><span>slides</span></div>
+    <div><b id="n-all">14</b><span>carousels</span></div>
+    <div><b id="n-slides">102</b><span>slides</span></div>
     <div><b>16</b><span>slides flagged</span></div>
     <div><b>4</b><span>decks with a blocker</span></div>
   </div>
@@ -186,6 +187,14 @@ footer p{max-width:76ch;margin:0 0 9px}
       This is the highest exposure in anything sent so far and it needs a real yes from
       whoever owns compliance, not a copy edit.</p>
     </div>
+    <div class="panel" data-thread="q-objections">
+      <h3>Five decks answering the sales calls</h3>
+      <p><b>C18 to C22</b> answer the five objections that kill this deal, taken from
+      recorded calls rather than guessed. Sources are in OBJECTIONS.md.</p>
+      <p>Two of them could not be answered the way the call answers them. <b>C18</b> does not
+      promise a floor, it describes the review. <b>C20</b> gives the four numbers a buyer can
+      model instead of the revenue projection nobody may give.</p>
+    </div>
     <div class="panel" data-thread="q-numbers">
       <h3>Numbers, and the canvas</h3>
       <p><b>C15</b> carries a shortage claim and two figures that will go stale, <b>C14</b>
@@ -204,11 +213,12 @@ footer p{max-width:76ch;margin:0 0 9px}
 
 <div class="bar"><div class="wrap in">
   <input type="search" id="q" placeholder="Search decks" aria-label="Search">
-  <button class="f" data-f="all" aria-pressed="true">All nine</button>
+  <button class="f" data-f="all" aria-pressed="true">All 14</button>
   <button class="f" data-f="stop" aria-pressed="false">Has a blocker</button>
   <button class="f" data-f="check" aria-pressed="false">Check a claim</button>
   <button class="f" data-f="ok" aria-pressed="false">Ready</button>
-  <button class="f wk" data-f="w1" aria-pressed="false">Week 1<i>Sep 2–4</i></button><button class="f wk" data-f="w2" aria-pressed="false">Week 2<i>Sep 7–11</i></button><button class="f wk" data-f="w3" aria-pressed="false">Week 3<i>Sep 14</i></button>
+  <button class="f" data-f="obj" aria-pressed="false">Objection decks</button><button class="f" data-f="uploaded" aria-pressed="false">Uploaded</button>
+  <button class="f wk" data-f="w1" aria-pressed="false">Week 1<i>Sep 2–4</i></button><button class="f wk" data-f="w2" aria-pressed="false">Week 2<i>Sep 7–11</i></button><button class="f wk" data-f="w3" aria-pressed="false">Week 3<i>Sep 14–18</i></button><button class="f wk" data-f="w4" aria-pressed="false">Week 4<i>Sep 21</i></button>
   <a class="f" href="../welliemd-posts/">The 40 single posts</a>
 </div></div>
 
@@ -216,6 +226,7 @@ footer p{max-width:76ch;margin:0 0 9px}
   <div class="decks" id="decks"><div class="wkhead" data-week="1"><h3>Week 1</h3><span>Sep 2–4</span></div>
 <article class="deck" style="--accent:#FF4F3D" data-status="check"
   data-week="1"
+  data-src="delivered"
   data-text="every telehealth brand you admire runs on the same four systems intake, providers, pharmacy, compliance, walked one at a time and closed on the stack being the brand.">
   <div class="head">
     <div class="num">C9<span class="dt">Wed Sep 2</span>
@@ -241,6 +252,7 @@ The stack is not the thing you sell. It is the thing that lets you sell anything
 </article>
 <article class="deck" style="--accent:#FF4F3D" data-status="ok"
   data-week="1"
+  data-src="delivered"
   data-text="5 signs you&#x27;re ready to launch a telehealth brand a readiness checklist aimed at practitioners with an audience. no numbers, no timeframes, nothing to source.">
   <div class="head">
     <div class="num">C10<span class="dt">Thu Sep 3</span>
@@ -270,6 +282,7 @@ Nobody hands out healthcare brands. Founders take the step.">Copy caption</butto
 </article>
 <article class="deck" style="--accent:#FFE800" data-status="check"
   data-week="1"
+  data-src="delivered"
   data-text="why one-drug brands die: the retention math weight-loss-only against multi-protocol, argued on lifetime value rather than on clinical claims.">
   <div class="head">
     <div class="num">C11<span class="dt">Fri Sep 4</span>
@@ -297,6 +310,7 @@ Retention isn&#x27;t a marketing trick. It&#x27;s an infrastructure choice, made
 </article><div class="wkhead" data-week="2"><h3>Week 2</h3><span>Sep 7–11</span></div>
 <article class="deck" style="--accent:#FF4F3D" data-status="stop"
   data-week="2"
+  data-src="delivered"
   data-text="you&#x27;ve made healthcare money for everyone but yourself aimed at nurses, pts, pas and health coaches. the strongest deck of the four and the one carrying a blocker.">
   <div class="head">
     <div class="num">C12<span class="dt">Mon Sep 7</span>
@@ -324,6 +338,7 @@ The next wave of healthcare brands will be founded by people who&#x27;ve done th
 </article>
 <article class="deck" style="--accent:#FF4F3D" data-status="stop"
   data-week="2"
+  data-src="delivered"
   data-text="from idea to live patients: the actual timeline a week-by-week launch sequence, brand and offer through to first prescriptions. the timeline is the whole deck.">
   <div class="head">
     <div class="num">C13<span class="dt">Tue Sep 8</span>
@@ -353,6 +368,7 @@ Most founders spend a year getting this order wrong before they learn the shortc
 </article>
 <article class="deck" style="--accent:#FFE800" data-status="stop"
   data-week="2"
+  data-src="delivered"
   data-text="peptides 101: one category, five customer types a primer on the peptide categories, each one framed as a product line rather than a treatment claim.">
   <div class="head">
     <div class="num">C14<span class="dt">Wed Sep 9</span>
@@ -384,6 +400,7 @@ Five entry points. One record, one intake, one brand behind all of them. That is
 </article>
 <article class="deck" style="--accent:#FFE800" data-status="check"
   data-week="2"
+  data-src="delivered"
   data-text="pharmacies are running out of estrogen. why that&#x27;s a founder story. supply pressure in menopause care, argued toward direct pharmacy access as the defensible position.">
   <div class="head">
     <div class="num">C15<span class="dt">Thu Sep 10</span>
@@ -409,6 +426,7 @@ Menopause care needs more builders. Not more waiting lists.">Copy caption</butto
 </article>
 <article class="deck" style="--accent:#FF4F3D" data-status="stop"
   data-week="2"
+  data-src="delivered"
   data-text="5 myths keeping smart founders out of telehealth myth-and-answer format aimed at practitioners. two of the five answers restate claims the brief bars.">
   <div class="head">
     <div class="num">C16<span class="dt">Fri Sep 11</span>
@@ -437,9 +455,10 @@ Every myth survives because it used to be true. Infrastructure changed the rules
 
 The only real barrier left is starting.">Copy caption</button></div></details></div>
   </div>
-</article><div class="wkhead" data-week="3"><h3>Week 3</h3><span>Sep 14</span></div>
+</article><div class="wkhead" data-week="3"><h3>Week 3</h3><span>Sep 14–18</span></div>
 <article class="deck" style="--accent:#EC0F7E" data-status="check"
   data-week="3"
+  data-src="delivered"
   data-text="how big an audience do you actually need to launch a health brand? answers the objection that stops most practitioners: that they need reach before they can start. argues trust over size.">
   <div class="head">
     <div class="num">C17<span class="dt">Mon Sep 14</span>
@@ -466,6 +485,166 @@ That audience is the launch asset. The infrastructure is the rest, and it alread
 
 Turn trust into a brand.">Copy caption</button></div></details></div>
   </div>
+</article>
+<article class="deck" style="--accent:#FFE800" data-status="ok"
+  data-week="3"
+  data-src="built"
+  data-text="the question nobody asks out loud: what happens at month six answers the objection: “i&#x27;ll be six figures down at month six with nothing happening”">
+  <div class="head">
+    <div class="num">C18<span class="dt">Tue Sep 15</span>
+      <span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>The question nobody asks out loud: what happens at month six</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">night</span><span class="tag src">Built from the sales calls</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="9" data-i="0" aria-label="Slide 1"><img src="img/2538f507c8024ff7.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="9" data-i="1" aria-label="Slide 2"><img src="img/88c1daea0fe94af6.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="9" data-i="2" aria-label="Slide 3"><img src="img/878b5d9213032420.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="9" data-i="3" aria-label="Slide 4"><img src="img/75e74b966deb8c4a.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="9" data-i="4" aria-label="Slide 5"><img src="img/1eace54e9ec0f8a6.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="9" data-i="5" aria-label="Slide 6"><img src="img/8551f950f7da857c.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="9" data-i="6" aria-label="Slide 7"><img src="img/9b167bc391188553.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>Answers the objection: “I&#x27;ll be six figures down at month six with nothing happening”</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>The question nobody asks out loud on a discovery call: what happens if I&#x27;m six months in and it isn&#x27;t working?</p><p>It is the right question. Ask it early, and ask it of anyone you are considering.</p><p>Nobody can promise you an outcome. Anyone who does is telling you something they cannot know. What you can ask for is the mechanism: what gets looked at, how often, and what changing course actually involves.</p><p>Month one is not a revenue month. It is a data month. What did traffic cost, who filled out the form, where did they stop.</p><p>By month three you are not asking whether it worked. You are asking which part is not working, because the funnel tells you: the ad, the landing page, the intake, or the offer.</p><p>The founders who lose money are not the ones whose first attempt underperformed. They are the ones who kept spending without changing anything, because nobody was reading the numbers with them.</p><p>Ask what the review looks like before you ask what the return looks like.</p><button class="copy" type="button" data-copy="The question nobody asks out loud on a discovery call: what happens if I&#x27;m six months in and it isn&#x27;t working?
+
+It is the right question. Ask it early, and ask it of anyone you are considering.
+
+Nobody can promise you an outcome. Anyone who does is telling you something they cannot know. What you can ask for is the mechanism: what gets looked at, how often, and what changing course actually involves.
+
+Month one is not a revenue month. It is a data month. What did traffic cost, who filled out the form, where did they stop.
+
+By month three you are not asking whether it worked. You are asking which part is not working, because the funnel tells you: the ad, the landing page, the intake, or the offer.
+
+The founders who lose money are not the ones whose first attempt underperformed. They are the ones who kept spending without changing anything, because nobody was reading the numbers with them.
+
+Ask what the review looks like before you ask what the return looks like.">Copy caption</button></div></details></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#FF4F3D" data-status="ok"
+  data-week="3"
+  data-src="built"
+  data-text="the build fee is not the whole number. ask for the rest before you fall in love. answers the objection: “the sticker price isn&#x27;t the price”">
+  <div class="head">
+    <div class="num">C19<span class="dt">Wed Sep 16</span>
+      <span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>The build fee is not the whole number. Ask for the rest before you fall in love.</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">paper</span><span class="tag src">Built from the sales calls</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="10" data-i="0" aria-label="Slide 1"><img src="img/175e21843608996c.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="10" data-i="1" aria-label="Slide 2"><img src="img/63d42301cd83b4b0.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="10" data-i="2" aria-label="Slide 3"><img src="img/4e2a3b8eeb77667a.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="10" data-i="3" aria-label="Slide 4"><img src="img/149f5082a9a57e9e.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="10" data-i="4" aria-label="Slide 5"><img src="img/39e258a5800cc2c8.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="10" data-i="5" aria-label="Slide 6"><img src="img/b3b600fe7d412554.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="10" data-i="6" aria-label="Slide 7"><img src="img/31e18d9c9e74a1bd.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>Answers the objection: “The sticker price isn&#x27;t the price”</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>The build fee is not the whole number, and you should find that out on the first call rather than the fourth.</p><p>There are four separate things you pay for in a telehealth launch, and they start at different times.</p><p>The build. One time. Brand, site, intake, provider and pharmacy connections, compliance work.</p><p>The platform. Recurring, and it usually begins after the build ends rather than on day one. This is what runs orders, records and messaging.</p><p>The CRM. Recurring. What holds the patient list and the follow-up.</p><p>Ad spend. Recurring, and this one is not a fee at all. It goes to Meta or Google, not to the agency. If your quote blurs ad spend and ad management into one line, ask which is which.</p><p>Then the cost of goods on every order, which comes out of revenue rather than out of pocket.</p><p>None of that is hidden. It is just rarely presented in one place before someone has already decided how they feel.</p><button class="copy" type="button" data-copy="The build fee is not the whole number, and you should find that out on the first call rather than the fourth.
+
+There are four separate things you pay for in a telehealth launch, and they start at different times.
+
+The build. One time. Brand, site, intake, provider and pharmacy connections, compliance work.
+
+The platform. Recurring, and it usually begins after the build ends rather than on day one. This is what runs orders, records and messaging.
+
+The CRM. Recurring. What holds the patient list and the follow-up.
+
+Ad spend. Recurring, and this one is not a fee at all. It goes to Meta or Google, not to the agency. If your quote blurs ad spend and ad management into one line, ask which is which.
+
+Then the cost of goods on every order, which comes out of revenue rather than out of pocket.
+
+None of that is hidden. It is just rarely presented in one place before someone has already decided how they feel.">Copy caption</button></div></details></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#FFE800" data-status="ok"
+  data-week="3"
+  data-src="built"
+  data-text="nobody can give you a revenue projection. here is what you can model instead. answers the objection: “show me the numbers”">
+  <div class="head">
+    <div class="num">C20<span class="dt">Thu Sep 17</span>
+      <span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>Nobody can give you a revenue projection. Here is what you can model instead.</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">night</span><span class="tag src">Built from the sales calls</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="11" data-i="0" aria-label="Slide 1"><img src="img/d45576a9e309e8d7.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="11" data-i="1" aria-label="Slide 2"><img src="img/defd6a3558cf8f95.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="11" data-i="2" aria-label="Slide 3"><img src="img/2e2b381fdc4ceb07.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="11" data-i="3" aria-label="Slide 4"><img src="img/623fc96fb4fdb177.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="11" data-i="4" aria-label="Slide 5"><img src="img/6565381d4d9b6a83.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="11" data-i="5" aria-label="Slide 6"><img src="img/360a1c4e5ce9f6c0.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="11" data-i="6" aria-label="Slide 7"><img src="img/4ae2c0182230de4d.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>Answers the objection: “Show me the numbers”</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>If you ask a telehealth vendor what you will make, a good one will decline. That is not evasion. Revenue projections in this category are regulated, and anyone happy to give you one is guessing with your money.</p><p>So here is what you can model yourself, before you sign anything.</p><p>What it costs to get one patient. Ask to see real ad accounts, not a case study slide.</p><p>What you keep on one order. Price, minus the medication, minus the provider fee, minus shipping.</p><p>How long a patient stays. This is the number most founders never ask for, and it is the one that decides whether the business works.</p><p>How many orders you need to cover fixed costs. Divide what you keep per order into what you pay per month.</p><p>Four numbers. Nobody can hand you the fifth one, which is what you will actually make, because it depends on your offer, your niche and what you do in month two.</p><p>If you cannot get those four out of a vendor, that is the answer.</p><button class="copy" type="button" data-copy="If you ask a telehealth vendor what you will make, a good one will decline. That is not evasion. Revenue projections in this category are regulated, and anyone happy to give you one is guessing with your money.
+
+So here is what you can model yourself, before you sign anything.
+
+What it costs to get one patient. Ask to see real ad accounts, not a case study slide.
+
+What you keep on one order. Price, minus the medication, minus the provider fee, minus shipping.
+
+How long a patient stays. This is the number most founders never ask for, and it is the one that decides whether the business works.
+
+How many orders you need to cover fixed costs. Divide what you keep per order into what you pay per month.
+
+Four numbers. Nobody can hand you the fifth one, which is what you will actually make, because it depends on your offer, your niche and what you do in month two.
+
+If you cannot get those four out of a vendor, that is the answer.">Copy caption</button></div></details></div>
+  </div>
+</article>
+<article class="deck" style="--accent:#FF4F3D" data-status="ok"
+  data-week="3"
+  data-src="built"
+  data-text="what a done-for-you build actually leaves you doing answers the objection: “what would i actually be doing all day?”">
+  <div class="head">
+    <div class="num">C21<span class="dt">Fri Sep 18</span>
+      <span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>What a done-for-you build actually leaves you doing</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">coral</span><span class="tag src">Built from the sales calls</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="12" data-i="0" aria-label="Slide 1"><img src="img/733bcfe2b9afd9c1.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="12" data-i="1" aria-label="Slide 2"><img src="img/88881c8be5c65151.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="12" data-i="2" aria-label="Slide 3"><img src="img/ae6c5033be2a9aa1.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="12" data-i="3" aria-label="Slide 4"><img src="img/c5c27a71ca9a859a.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="12" data-i="4" aria-label="Slide 5"><img src="img/9c54864c7c7b6ad7.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="12" data-i="5" aria-label="Slide 6"><img src="img/cfff7a2aa3cfddea.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="12" data-i="6" aria-label="Slide 7"><img src="img/45bdd51452426ec2.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>Answers the objection: “What would I actually be doing all day?”</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>&quot;Done for you&quot; is a phrase that makes people nod on a call and panic afterwards, because nobody has said what is left.</p><p>Here is what is not yours. The provider network. The pharmacy relationships. The platform. The compliance work. The intake logic. The order and refill messaging. Those are built, and they run whether you are watching or not.</p><p>Here is what is yours, and only yours.</p><p>The offer. Which protocols you carry and what you charge.</p><p>The niche. Who this brand is for, said narrowly enough to write an ad about.</p><p>The brand. What it sounds like and who it sounds like it is for.</p><p>The dashboard. Reading it. Which ad worked, where people stopped, who did not refill.</p><p>That is the job. It is not full-time and it is not nothing, and the founders who treat it as nothing are the ones who wonder why month four looks like month one.</p><p>You are not running a pharmacy. You are running a brand that has one behind it.</p><button class="copy" type="button" data-copy="&quot;Done for you&quot; is a phrase that makes people nod on a call and panic afterwards, because nobody has said what is left.
+
+Here is what is not yours. The provider network. The pharmacy relationships. The platform. The compliance work. The intake logic. The order and refill messaging. Those are built, and they run whether you are watching or not.
+
+Here is what is yours, and only yours.
+
+The offer. Which protocols you carry and what you charge.
+
+The niche. Who this brand is for, said narrowly enough to write an ad about.
+
+The brand. What it sounds like and who it sounds like it is for.
+
+The dashboard. Reading it. Which ad worked, where people stopped, who did not refill.
+
+That is the job. It is not full-time and it is not nothing, and the founders who treat it as nothing are the ones who wonder why month four looks like month one.
+
+You are not running a pharmacy. You are running a brand that has one behind it.">Copy caption</button></div></details></div>
+  </div>
+</article><div class="wkhead" data-week="4"><h3>Week 4</h3><span>Sep 21</span></div>
+<article class="deck" style="--accent:#FF4F3D" data-status="ok"
+  data-week="4"
+  data-src="built"
+  data-text="the parts that are genuinely hard, and are not going away answers the objection: “it seems too easy — that&#x27;s what worries me”">
+  <div class="head">
+    <div class="num">C22<span class="dt">Mon Sep 21</span>
+      <span class="dt">7 slides</span></div>
+    <div class="hgroup">
+      <h2>The parts that are genuinely hard, and are not going away</h2>
+      <div class="tags"><span class="tag ok">Ready</span>
+        <span class="tag g">paper</span><span class="tag src">Built from the sales calls</span></div>
+    </div>
+  </div>
+  <div class="strip"><button class="fr" data-d="13" data-i="0" aria-label="Slide 1"><img src="img/02c443607b565f74.jpg" alt="Slide 1" loading="lazy"><span>1</span></button><button class="fr" data-d="13" data-i="1" aria-label="Slide 2"><img src="img/8704d69c44a905aa.jpg" alt="Slide 2" loading="lazy"><span>2</span></button><button class="fr" data-d="13" data-i="2" aria-label="Slide 3"><img src="img/e1bb16463d5ecb22.jpg" alt="Slide 3" loading="lazy"><span>3</span></button><button class="fr" data-d="13" data-i="3" aria-label="Slide 4"><img src="img/7715634aea9e22a0.jpg" alt="Slide 4" loading="lazy"><span>4</span></button><button class="fr" data-d="13" data-i="4" aria-label="Slide 5"><img src="img/847b5d2e1d4a579d.jpg" alt="Slide 5" loading="lazy"><span>5</span></button><button class="fr" data-d="13" data-i="5" aria-label="Slide 6"><img src="img/12c48ad6066aae2f.jpg" alt="Slide 6" loading="lazy"><span>6</span></button><button class="fr" data-d="13" data-i="6" aria-label="Slide 7"><img src="img/a277e2964ebda29b.jpg" alt="Slide 7" loading="lazy"><span>7</span></button></div>
+  <div class="cap">
+    <div class="capbody"><p>Answers the objection: “It seems too easy — that&#x27;s what worries me”</p><details class="cap2"><summary>Caption</summary><div class="capin"><p>If a telehealth pitch sounds easy, your instincts are working. Here is the honest version.</p><p>Compliance is real work. It is done before you can take an order, not after. Buying it done saves you time, not the requirement.</p><p>The provider network takes what it takes. Licensing is slow on purpose and it does not speed up because your campaign is live.</p><p>Your first ads will not be your best ads. Nobody&#x27;s are. The brands that win are the ones that kept changing them.</p><p>Retention is not automatic. A patient who does not refill is a patient you paid for once.</p><p>Someone has to read the numbers. That someone is you, or someone you hire, and it is the part most often skipped.</p><p>What a build removes is the eighteen months of assembling the parts and the money spent learning which vendors were lying. It does not remove the work of running a business.</p><p>Anyone telling you otherwise is selling you the version you want to hear.</p><button class="copy" type="button" data-copy="If a telehealth pitch sounds easy, your instincts are working. Here is the honest version.
+
+Compliance is real work. It is done before you can take an order, not after. Buying it done saves you time, not the requirement.
+
+The provider network takes what it takes. Licensing is slow on purpose and it does not speed up because your campaign is live.
+
+Your first ads will not be your best ads. Nobody&#x27;s are. The brands that win are the ones that kept changing them.
+
+Retention is not automatic. A patient who does not refill is a patient you paid for once.
+
+Someone has to read the numbers. That someone is you, or someone you hire, and it is the part most often skipped.
+
+What a build removes is the eighteen months of assembling the parts and the money spent learning which vendors were lying. It does not remove the work of running a business.
+
+Anyone telling you otherwise is selling you the version you want to hear.">Copy caption</button></div></details></div>
+  </div>
 </article></div>
   <p id="empty">Nothing matches that.</p>
 </main>
@@ -487,17 +666,19 @@ Turn trust into a brand.">Copy caption</button></div></details></div>
 
 <script>
 (function(){
-  var BIG = [[{"src": "img/ee34932f55305811.jpg", "cap": "C9  \u00b7  slide 1 of 7"}, {"src": "img/25226c89969a7e18.jpg", "cap": "C9  \u00b7  slide 2 of 7"}, {"src": "img/d1c39ff1d37d91ac.jpg", "cap": "C9  \u00b7  slide 3 of 7"}, {"src": "img/fba71195e202d341.jpg", "cap": "C9  \u00b7  slide 4 of 7"}, {"src": "img/c206c9f683d87716.jpg", "cap": "C9  \u00b7  slide 5 of 7"}, {"src": "img/cbec11d5ae376c06.jpg", "cap": "C9  \u00b7  slide 6 of 7"}, {"src": "img/afbaa37bc527296d.jpg", "cap": "C9  \u00b7  slide 7 of 7"}], [{"src": "img/44ed745b82cb6e82.jpg", "cap": "C10  \u00b7  slide 1 of 7"}, {"src": "img/6a3fa44ce94cfac3.jpg", "cap": "C10  \u00b7  slide 2 of 7"}, {"src": "img/2b49f53533e4fd5f.jpg", "cap": "C10  \u00b7  slide 3 of 7"}, {"src": "img/cc245c0dc67e6adb.jpg", "cap": "C10  \u00b7  slide 4 of 7"}, {"src": "img/9de3c8872383d78c.jpg", "cap": "C10  \u00b7  slide 5 of 7"}, {"src": "img/bc95bdfb689f263b.jpg", "cap": "C10  \u00b7  slide 6 of 7"}, {"src": "img/d5523e9185350c22.jpg", "cap": "C10  \u00b7  slide 7 of 7"}], [{"src": "img/2254ccb52f8fa1b5.jpg", "cap": "C11  \u00b7  slide 1 of 7"}, {"src": "img/8dbc47384d68ffb9.jpg", "cap": "C11  \u00b7  slide 2 of 7"}, {"src": "img/67384092c6c9a3e2.jpg", "cap": "C11  \u00b7  slide 3 of 7"}, {"src": "img/c1bcf1bfcab82193.jpg", "cap": "C11  \u00b7  slide 4 of 7"}, {"src": "img/aa14ef2261e3ffe8.jpg", "cap": "C11  \u00b7  slide 5 of 7"}, {"src": "img/9b24fedf1d925c61.jpg", "cap": "C11  \u00b7  slide 6 of 7"}, {"src": "img/29f58dfccec71039.jpg", "cap": "C11  \u00b7  slide 7 of 7"}], [{"src": "img/56a4dfdafca554c2.jpg", "cap": "C12  \u00b7  slide 1 of 7"}, {"src": "img/a91795f2fc3ea1a5.jpg", "cap": "C12  \u00b7  slide 2 of 7"}, {"src": "img/e83eeb409c773ce2.jpg", "cap": "C12  \u00b7  slide 3 of 7"}, {"src": "img/c701ae83bc4c3f71.jpg", "cap": "C12  \u00b7  slide 4 of 7"}, {"src": "img/710f0095379ed8e7.jpg", "cap": "C12  \u00b7  slide 5 of 7"}, {"src": "img/a8bca613d423171a.jpg", "cap": "C12  \u00b7  slide 6 of 7"}, {"src": "img/72e378f219b9b22a.jpg", "cap": "C12  \u00b7  slide 7 of 7"}], [{"src": "img/e33334fd0bd12ce7.jpg", "cap": "C13  \u00b7  slide 1 of 8"}, {"src": "img/341972db50d9b9f1.jpg", "cap": "C13  \u00b7  slide 2 of 8"}, {"src": "img/695feebcedbfae2d.jpg", "cap": "C13  \u00b7  slide 3 of 8"}, {"src": "img/45f3b53e2c14814b.jpg", "cap": "C13  \u00b7  slide 4 of 8"}, {"src": "img/773a00f25894ee3f.jpg", "cap": "C13  \u00b7  slide 5 of 8"}, {"src": "img/1ab9b47f3c0427e7.jpg", "cap": "C13  \u00b7  slide 6 of 8"}, {"src": "img/35843daeb9262f61.jpg", "cap": "C13  \u00b7  slide 7 of 8"}, {"src": "img/2aa39fa9ae6b5007.jpg", "cap": "C13  \u00b7  slide 8 of 8"}], [{"src": "img/0bbca1c14ac4657e.jpg", "cap": "C14  \u00b7  slide 1 of 9"}, {"src": "img/d5c9056e890b07bb.jpg", "cap": "C14  \u00b7  slide 2 of 9"}, {"src": "img/b74d4bdb3d81972a.jpg", "cap": "C14  \u00b7  slide 3 of 9"}, {"src": "img/f084584106fa1f3e.jpg", "cap": "C14  \u00b7  slide 4 of 9"}, {"src": "img/2dee54733b99d8c8.jpg", "cap": "C14  \u00b7  slide 5 of 9"}, {"src": "img/0c0e5c6ccfb631d1.jpg", "cap": "C14  \u00b7  slide 6 of 9"}, {"src": "img/e7dabde46c521c08.jpg", "cap": "C14  \u00b7  slide 7 of 9"}, {"src": "img/e11ad2d9c0587975.jpg", "cap": "C14  \u00b7  slide 8 of 9"}, {"src": "img/5a08d2158583bae1.jpg", "cap": "C14  \u00b7  slide 9 of 9"}], [{"src": "img/8fb05e864a1953bc.jpg", "cap": "C15  \u00b7  slide 1 of 7"}, {"src": "img/5f07e21ca4bbc4d3.jpg", "cap": "C15  \u00b7  slide 2 of 7"}, {"src": "img/f7ff883b039b295f.jpg", "cap": "C15  \u00b7  slide 3 of 7"}, {"src": "img/35363957c207d02b.jpg", "cap": "C15  \u00b7  slide 4 of 7"}, {"src": "img/fb04c1e5ec7deabe.jpg", "cap": "C15  \u00b7  slide 5 of 7"}, {"src": "img/159092452f4ed39b.jpg", "cap": "C15  \u00b7  slide 6 of 7"}, {"src": "img/cb7950ce170b19a5.jpg", "cap": "C15  \u00b7  slide 7 of 7"}], [{"src": "img/61790df074e524e1.jpg", "cap": "C16  \u00b7  slide 1 of 8"}, {"src": "img/e049a917ec159e08.jpg", "cap": "C16  \u00b7  slide 2 of 8"}, {"src": "img/a61cef7dedd7b040.jpg", "cap": "C16  \u00b7  slide 3 of 8"}, {"src": "img/cef013cc79f35279.jpg", "cap": "C16  \u00b7  slide 4 of 8"}, {"src": "img/8c8680795be70374.jpg", "cap": "C16  \u00b7  slide 5 of 8"}, {"src": "img/7b73479b599d7a26.jpg", "cap": "C16  \u00b7  slide 6 of 8"}, {"src": "img/48f7bbebab33530c.jpg", "cap": "C16  \u00b7  slide 7 of 8"}, {"src": "img/923e9c6e65c9f111.jpg", "cap": "C16  \u00b7  slide 8 of 8"}], [{"src": "img/d7cb8079f03b1460.jpg", "cap": "C17  \u00b7  slide 1 of 7"}, {"src": "img/e9e46fc66036e7a6.jpg", "cap": "C17  \u00b7  slide 2 of 7"}, {"src": "img/614cc6eb20763087.jpg", "cap": "C17  \u00b7  slide 3 of 7"}, {"src": "img/ad8fd18637fb23d8.jpg", "cap": "C17  \u00b7  slide 4 of 7"}, {"src": "img/8ded20641d7fe552.jpg", "cap": "C17  \u00b7  slide 5 of 7"}, {"src": "img/0c0edfe86eb111a1.jpg", "cap": "C17  \u00b7  slide 6 of 7"}, {"src": "img/309475daad382514.jpg", "cap": "C17  \u00b7  slide 7 of 7"}]];
+  var BIG = [[{"src": "img/ee34932f55305811.jpg", "cap": "C9  \u00b7  slide 1 of 7"}, {"src": "img/25226c89969a7e18.jpg", "cap": "C9  \u00b7  slide 2 of 7"}, {"src": "img/d1c39ff1d37d91ac.jpg", "cap": "C9  \u00b7  slide 3 of 7"}, {"src": "img/fba71195e202d341.jpg", "cap": "C9  \u00b7  slide 4 of 7"}, {"src": "img/c206c9f683d87716.jpg", "cap": "C9  \u00b7  slide 5 of 7"}, {"src": "img/cbec11d5ae376c06.jpg", "cap": "C9  \u00b7  slide 6 of 7"}, {"src": "img/afbaa37bc527296d.jpg", "cap": "C9  \u00b7  slide 7 of 7"}], [{"src": "img/44ed745b82cb6e82.jpg", "cap": "C10  \u00b7  slide 1 of 7"}, {"src": "img/6a3fa44ce94cfac3.jpg", "cap": "C10  \u00b7  slide 2 of 7"}, {"src": "img/2b49f53533e4fd5f.jpg", "cap": "C10  \u00b7  slide 3 of 7"}, {"src": "img/cc245c0dc67e6adb.jpg", "cap": "C10  \u00b7  slide 4 of 7"}, {"src": "img/9de3c8872383d78c.jpg", "cap": "C10  \u00b7  slide 5 of 7"}, {"src": "img/bc95bdfb689f263b.jpg", "cap": "C10  \u00b7  slide 6 of 7"}, {"src": "img/d5523e9185350c22.jpg", "cap": "C10  \u00b7  slide 7 of 7"}], [{"src": "img/2254ccb52f8fa1b5.jpg", "cap": "C11  \u00b7  slide 1 of 7"}, {"src": "img/8dbc47384d68ffb9.jpg", "cap": "C11  \u00b7  slide 2 of 7"}, {"src": "img/67384092c6c9a3e2.jpg", "cap": "C11  \u00b7  slide 3 of 7"}, {"src": "img/c1bcf1bfcab82193.jpg", "cap": "C11  \u00b7  slide 4 of 7"}, {"src": "img/aa14ef2261e3ffe8.jpg", "cap": "C11  \u00b7  slide 5 of 7"}, {"src": "img/9b24fedf1d925c61.jpg", "cap": "C11  \u00b7  slide 6 of 7"}, {"src": "img/29f58dfccec71039.jpg", "cap": "C11  \u00b7  slide 7 of 7"}], [{"src": "img/56a4dfdafca554c2.jpg", "cap": "C12  \u00b7  slide 1 of 7"}, {"src": "img/a91795f2fc3ea1a5.jpg", "cap": "C12  \u00b7  slide 2 of 7"}, {"src": "img/e83eeb409c773ce2.jpg", "cap": "C12  \u00b7  slide 3 of 7"}, {"src": "img/c701ae83bc4c3f71.jpg", "cap": "C12  \u00b7  slide 4 of 7"}, {"src": "img/710f0095379ed8e7.jpg", "cap": "C12  \u00b7  slide 5 of 7"}, {"src": "img/a8bca613d423171a.jpg", "cap": "C12  \u00b7  slide 6 of 7"}, {"src": "img/72e378f219b9b22a.jpg", "cap": "C12  \u00b7  slide 7 of 7"}], [{"src": "img/e33334fd0bd12ce7.jpg", "cap": "C13  \u00b7  slide 1 of 8"}, {"src": "img/341972db50d9b9f1.jpg", "cap": "C13  \u00b7  slide 2 of 8"}, {"src": "img/695feebcedbfae2d.jpg", "cap": "C13  \u00b7  slide 3 of 8"}, {"src": "img/45f3b53e2c14814b.jpg", "cap": "C13  \u00b7  slide 4 of 8"}, {"src": "img/773a00f25894ee3f.jpg", "cap": "C13  \u00b7  slide 5 of 8"}, {"src": "img/1ab9b47f3c0427e7.jpg", "cap": "C13  \u00b7  slide 6 of 8"}, {"src": "img/35843daeb9262f61.jpg", "cap": "C13  \u00b7  slide 7 of 8"}, {"src": "img/2aa39fa9ae6b5007.jpg", "cap": "C13  \u00b7  slide 8 of 8"}], [{"src": "img/0bbca1c14ac4657e.jpg", "cap": "C14  \u00b7  slide 1 of 9"}, {"src": "img/d5c9056e890b07bb.jpg", "cap": "C14  \u00b7  slide 2 of 9"}, {"src": "img/b74d4bdb3d81972a.jpg", "cap": "C14  \u00b7  slide 3 of 9"}, {"src": "img/f084584106fa1f3e.jpg", "cap": "C14  \u00b7  slide 4 of 9"}, {"src": "img/2dee54733b99d8c8.jpg", "cap": "C14  \u00b7  slide 5 of 9"}, {"src": "img/0c0e5c6ccfb631d1.jpg", "cap": "C14  \u00b7  slide 6 of 9"}, {"src": "img/e7dabde46c521c08.jpg", "cap": "C14  \u00b7  slide 7 of 9"}, {"src": "img/e11ad2d9c0587975.jpg", "cap": "C14  \u00b7  slide 8 of 9"}, {"src": "img/5a08d2158583bae1.jpg", "cap": "C14  \u00b7  slide 9 of 9"}], [{"src": "img/8fb05e864a1953bc.jpg", "cap": "C15  \u00b7  slide 1 of 7"}, {"src": "img/5f07e21ca4bbc4d3.jpg", "cap": "C15  \u00b7  slide 2 of 7"}, {"src": "img/f7ff883b039b295f.jpg", "cap": "C15  \u00b7  slide 3 of 7"}, {"src": "img/35363957c207d02b.jpg", "cap": "C15  \u00b7  slide 4 of 7"}, {"src": "img/fb04c1e5ec7deabe.jpg", "cap": "C15  \u00b7  slide 5 of 7"}, {"src": "img/159092452f4ed39b.jpg", "cap": "C15  \u00b7  slide 6 of 7"}, {"src": "img/cb7950ce170b19a5.jpg", "cap": "C15  \u00b7  slide 7 of 7"}], [{"src": "img/61790df074e524e1.jpg", "cap": "C16  \u00b7  slide 1 of 8"}, {"src": "img/e049a917ec159e08.jpg", "cap": "C16  \u00b7  slide 2 of 8"}, {"src": "img/a61cef7dedd7b040.jpg", "cap": "C16  \u00b7  slide 3 of 8"}, {"src": "img/cef013cc79f35279.jpg", "cap": "C16  \u00b7  slide 4 of 8"}, {"src": "img/8c8680795be70374.jpg", "cap": "C16  \u00b7  slide 5 of 8"}, {"src": "img/7b73479b599d7a26.jpg", "cap": "C16  \u00b7  slide 6 of 8"}, {"src": "img/48f7bbebab33530c.jpg", "cap": "C16  \u00b7  slide 7 of 8"}, {"src": "img/923e9c6e65c9f111.jpg", "cap": "C16  \u00b7  slide 8 of 8"}], [{"src": "img/d7cb8079f03b1460.jpg", "cap": "C17  \u00b7  slide 1 of 7"}, {"src": "img/e9e46fc66036e7a6.jpg", "cap": "C17  \u00b7  slide 2 of 7"}, {"src": "img/614cc6eb20763087.jpg", "cap": "C17  \u00b7  slide 3 of 7"}, {"src": "img/ad8fd18637fb23d8.jpg", "cap": "C17  \u00b7  slide 4 of 7"}, {"src": "img/8ded20641d7fe552.jpg", "cap": "C17  \u00b7  slide 5 of 7"}, {"src": "img/0c0edfe86eb111a1.jpg", "cap": "C17  \u00b7  slide 6 of 7"}, {"src": "img/309475daad382514.jpg", "cap": "C17  \u00b7  slide 7 of 7"}], [{"src": "img/a1bf1e9104244482.jpg", "cap": "C18  \u00b7  slide 1 of 7"}, {"src": "img/c807585ed9ebcf74.jpg", "cap": "C18  \u00b7  slide 2 of 7"}, {"src": "img/780023a9aec336e4.jpg", "cap": "C18  \u00b7  slide 3 of 7"}, {"src": "img/6eed551aaa8e5c50.jpg", "cap": "C18  \u00b7  slide 4 of 7"}, {"src": "img/ec88489d6a45c3d1.jpg", "cap": "C18  \u00b7  slide 5 of 7"}, {"src": "img/29b26e7feaeed66f.jpg", "cap": "C18  \u00b7  slide 6 of 7"}, {"src": "img/386a75cbf24e0ec3.jpg", "cap": "C18  \u00b7  slide 7 of 7"}], [{"src": "img/f25f201cd3e080a0.jpg", "cap": "C19  \u00b7  slide 1 of 7"}, {"src": "img/e447e35b8051754e.jpg", "cap": "C19  \u00b7  slide 2 of 7"}, {"src": "img/92de01f480f153ac.jpg", "cap": "C19  \u00b7  slide 3 of 7"}, {"src": "img/a75e3183b958a899.jpg", "cap": "C19  \u00b7  slide 4 of 7"}, {"src": "img/fc2b2a60417dbed9.jpg", "cap": "C19  \u00b7  slide 5 of 7"}, {"src": "img/ebd0b9b0cf9183bd.jpg", "cap": "C19  \u00b7  slide 6 of 7"}, {"src": "img/0f4bbe9788c59b28.jpg", "cap": "C19  \u00b7  slide 7 of 7"}], [{"src": "img/62046bf7be4f22d0.jpg", "cap": "C20  \u00b7  slide 1 of 7"}, {"src": "img/c2be7ba12f5032bd.jpg", "cap": "C20  \u00b7  slide 2 of 7"}, {"src": "img/e7a8bfcc9628b518.jpg", "cap": "C20  \u00b7  slide 3 of 7"}, {"src": "img/34de6aa84ee88719.jpg", "cap": "C20  \u00b7  slide 4 of 7"}, {"src": "img/7b5a2b8ebb6d4d02.jpg", "cap": "C20  \u00b7  slide 5 of 7"}, {"src": "img/4ce6dd8d45bb7765.jpg", "cap": "C20  \u00b7  slide 6 of 7"}, {"src": "img/2fc202b2ec33ef49.jpg", "cap": "C20  \u00b7  slide 7 of 7"}], [{"src": "img/63d2c681b1253e75.jpg", "cap": "C21  \u00b7  slide 1 of 7"}, {"src": "img/a90ef6d5bfd3283c.jpg", "cap": "C21  \u00b7  slide 2 of 7"}, {"src": "img/a83bedbaf923b3b9.jpg", "cap": "C21  \u00b7  slide 3 of 7"}, {"src": "img/5fab18a08f6b8b6b.jpg", "cap": "C21  \u00b7  slide 4 of 7"}, {"src": "img/7b787a267873b747.jpg", "cap": "C21  \u00b7  slide 5 of 7"}, {"src": "img/dfd80bc2fb5fbd2f.jpg", "cap": "C21  \u00b7  slide 6 of 7"}, {"src": "img/7f3ea288998ce3d4.jpg", "cap": "C21  \u00b7  slide 7 of 7"}], [{"src": "img/c295a784352a5850.jpg", "cap": "C22  \u00b7  slide 1 of 7"}, {"src": "img/9c72c90e4542cdc3.jpg", "cap": "C22  \u00b7  slide 2 of 7"}, {"src": "img/a8d9ea25ee4118bb.jpg", "cap": "C22  \u00b7  slide 3 of 7"}, {"src": "img/9fb863f354a2d590.jpg", "cap": "C22  \u00b7  slide 4 of 7"}, {"src": "img/9406e35e24b6581e.jpg", "cap": "C22  \u00b7  slide 5 of 7"}, {"src": "img/bcd597ef62589b90.jpg", "cap": "C22  \u00b7  slide 6 of 7"}, {"src": "img/5dd112f66050b83d.jpg", "cap": "C22  \u00b7  slide 7 of 7"}]];
   var wrapEl=document.getElementById('decks'), q=document.getElementById('q'),
       empty=document.getElementById('empty'),
-      decks=[].slice.call(wrapEl.querySelectorAll('.deck')),
+      allDecks=function(){ return [].slice.call(wrapEl.querySelectorAll('.deck')); },
       btns=[].slice.call(document.querySelectorAll('.f[data-f]'));
   var filter='all';
 
   function apply(){
     var term=q.value.trim().toLowerCase(), shown=0;
-    decks.forEach(function(d){
+    allDecks().forEach(function(d){
       var okS = filter==='all' || d.dataset.status===filter ||
+                (filter==='obj' && d.dataset.src==='built') ||
+                (filter==='uploaded' && !d.dataset.src) ||
                 (filter.charAt(0)==='w' && d.dataset.week===filter.slice(1));
       var okT = !term || d.dataset.text.indexOf(term)>-1;
       var on = okS && okT;
@@ -514,6 +695,7 @@ Turn trust into a brand.">Copy caption</button></div></details></div>
       h.style.display = any ? '' : 'none';
     });
     empty.style.display = shown ? 'none' : 'block';
+    counts();
   }
   btns.forEach(function(b){
     b.addEventListener('click', function(){
@@ -523,6 +705,26 @@ Turn trust into a brand.">Copy caption</button></div></details></div>
     });
   });
   q.addEventListener('input', apply);
+
+  /* The header counted what the build knew about. Uploaded decks are injected after this
+     script runs, so the number has to come from the DOM and be refreshed when one lands. */
+  function counts(){
+    var d = allDecks();
+    var slides = wrapEl.querySelectorAll('.fr').length;
+    var nAll = document.getElementById('n-all');
+    var nSlides = document.getElementById('n-slides');
+    var bAll = btns.filter(function(b){ return b.dataset.f==='all'; })[0];
+    if(nAll) nAll.textContent = d.length;
+    if(nSlides) nSlides.textContent = slides;
+    if(bAll) bAll.textContent = 'All ' + d.length;
+  }
+
+  /* Watch for cards arriving late so they are counted and filtered like the rest. */
+  if (window.MutationObserver) {
+    new MutationObserver(function(){ apply(); })
+      .observe(wrapEl, { childList: true });
+  }
+  counts();
 
   var lb=document.getElementById('lb'), lbi=document.getElementById('lbi'),
       lbc=document.getElementById('lbc'), cur=[0,0];
